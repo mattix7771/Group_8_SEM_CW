@@ -32,4 +32,6 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 
+# configuration file
 .idea/
+/Group_8_SEM_CW.iml
