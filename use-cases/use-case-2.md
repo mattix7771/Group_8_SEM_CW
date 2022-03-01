@@ -1,10 +1,10 @@
-# USE CASE: 2 Produce a Report on all countries in a continent organised by largest population to smallest.
+# USE CASE: 2 Produce Reports on cities based on the population.
 
 ## CHARACTERISTIC INFORMATION
 
 ### Goal in Context
 
-The organisation has asked to produce a report on all countries in the continent organised by largest population to smallest.
+An analyst has asked to produce reports on cities based on the population, including reports where data can be manipulated with user input.
 
 ### Scope
 
@@ -16,11 +16,13 @@ Primary task.
 
 ### Preconditions
 
-Database contains all countries of the world.
+Database contains all cities of the world.
 
 ### Success End Condition
 
-A report is provided with all countries in the continent in descending order by population and grouped by continent.
+The following reports are produced:
+- All the cities in the world, continent, region, country and district organised by largest population to smallest.
+- The top N populated cities in the world, continent, region, country and district.
 
 ### Failed End Condition
 
@@ -28,23 +30,22 @@ No report is produced.
 
 ### Primary Actor
 
-An organisation.
+An analyst.
 
 ### Trigger
 
-A request for countries information is sent to world database.
+A request for cities information is sent to world database.
 
 ## MAIN SUCCESS SCENARIO
 
-1. Request for countries information is sent.
-2. Extracting code, name, continent, region, population, capital from database.
+1. Request for cities information is sent.
+2. Extracting name, country, district, population from database.
 3. Sorting information in descending order by population.
-4. Grouping by continent.
-5. Producing a report.
+4. Producing reports.
 
 ## EXTENSIONS
 
-None.
+User inputs invalid character/number: Error message produced.
 
 ## SUB-VARIATIONS
 

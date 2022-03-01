@@ -1,10 +1,10 @@
-# USE CASE: 4 Produce a Report on the top N populated countries in the world where N is provided by the user.
+# USE CASE: 4 Produce Reports on the population of people.
 
 ## CHARACTERISTIC INFORMATION
 
 ### Goal in Context
 
-The organisation has asked to produce a report on the top N populated countries where N is provided by the user.
+An analyst has asked to produce reports on the population of people who are living and not living in cities.
 
 ### Scope
 
@@ -16,12 +16,12 @@ Primary task.
 
 ### Preconditions
 
-Database contains all countries of the world.  
-User input available.
+Database contains population of the world.
 
 ### Success End Condition
 
-A report is provided with N number of top populated countries. 
+The following reports are produced:
+- The population of people, people living in cities, and people not living in cities in each continent, region and country.
 
 ### Failed End Condition
 
@@ -29,22 +29,23 @@ No report is produced.
 
 ### Primary Actor
 
-An organisation.
+An analyst.
 
 ### Trigger
 
-A user inputs a number then request is sent to database.
+A request for population information is sent to world database.
 
 ## MAIN SUCCESS SCENARIO
 
-1. User input a number.
-2. Request for countries information is sent.
-3. Extracting code, name, continent, region, population, capital from database.
-4. Producing a report.
+1. Request for population information is sent.
+2. Extracting name, total population from database.
+3. Extracting total population(%) of people living in cities.
+4. Extracting total population(%) of people NOT living in cities.
+5. Producing reports.
 
 ## EXTENSIONS
 
-User inputs invalid character/number: Error message produced
+None.
 
 ## SUB-VARIATIONS
 

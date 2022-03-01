@@ -1,10 +1,10 @@
-# USE CASE: 1 Produce a Report on all countries in the world organised by largest population to smallest.
+# USE CASE: 1 Produce Reports on countries based on the population.
 
 ## CHARACTERISTIC INFORMATION
 
 ### Goal in Context
 
-The organisation has asked to produce a report on all countries in the world organised by largest population to smallest.
+An analyst has asked to produce reports on countries based on the population, including reports where data can be manipulated with user input.
 
 ### Scope
 
@@ -20,7 +20,9 @@ Database contains all countries of the world.
 
 ### Success End Condition
 
-A report is provided with all countries in the world in descending order by population.
+The following reports are produced:  
+- All the countries in the world, continent and region organised by largest population to smallest.
+- The top N populated countries in the world, continent and region.
 
 ### Failed End Condition
 
@@ -28,7 +30,7 @@ No report is produced.
 
 ### Primary Actor
 
-An organisation.
+An analyst.
 
 ### Trigger
 
@@ -39,11 +41,11 @@ A request for countries information is sent to world database.
 1. Request for countries information is sent.
 2. Extracting code, name, continent, region, population, capital from database.
 3. Sorting information in descending order by population.
-4. Producing a report.
+4. Producing reports.
 
 ## EXTENSIONS
 
-None.
+User inputs invalid character/number: Error message produced.
 
 ## SUB-VARIATIONS
 
