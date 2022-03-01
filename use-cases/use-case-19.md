@@ -1,0 +1,55 @@
+# USE CASE: 19 Produce a Report on all capital cities in a continent organised by largest population to smallest.
+
+## CHARACTERISTIC INFORMATION
+
+### Goal in Context
+
+The organisation has asked to produce a report on all capital cities in a continent organised by largest population to smallest.
+
+### Scope
+
+Organisation.
+
+### Level
+
+Primary task.
+
+### Preconditions
+
+Database contains all cities in the world.
+
+### Success End Condition
+
+A report is provided with all capital cities in a continent in descending order by population.
+
+### Failed End Condition
+
+No report is produced.
+
+### Primary Actor
+
+An organisation.
+
+### Trigger
+
+A request for cities information is sent to world database.
+
+## MAIN SUCCESS SCENARIO
+
+1. Request for cities information is sent.
+2. Extracting name, country, population.
+3. Sorting in descending order by population.
+4. Grouping by continent.
+5. Producing a report.
+
+## EXTENSIONS
+
+None.
+
+## SUB-VARIATIONS
+
+None.
+
+## SCHEDULE
+
+**DUE DATE**: Release 0.1.0.5
