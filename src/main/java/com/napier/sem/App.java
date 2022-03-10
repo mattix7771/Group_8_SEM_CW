@@ -110,8 +110,8 @@ public class App
             return null;
         }
     }
-
-    public void displayEmployee(City city)
+// displays city records
+    public void displayCity(City city)
     {
         if (city != null)
         {
@@ -130,7 +130,7 @@ public class App
         a.connect();
         City city = a.getCity(1);
         // Display results
-        a.displayEmployee(city);
+        a.displayCity(city);
         // Disconnect from database
         a.disconnect();
     }
