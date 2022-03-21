@@ -113,13 +113,17 @@ public class App
 
     public void displayCity(City city)
     {
-        if (city != null)
+        if (city == null)
         {
+            System.out.println("No valid city");
+            return;
+        }
+
             System.out.println(
                     city.getId() + " "
                             + city.getName() + " "
                             + city.getPopulation() + "\n")   ;
-        }
+
     }
     public static void main(String[] args)
     {
