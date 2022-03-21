@@ -96,8 +96,8 @@ public class App
             if (rset.next())
             {
                 City city = new City();
-                city.name = rset.getString("Name");
-                city.population =rset.getInt("Population");
+                city.setName(rset.getString("Name"));
+                city.setPopulation(rset.getInt("Population"));
                 return city;
             }
             else
@@ -111,14 +111,14 @@ public class App
         }
     }
 
-    public void displayEmployee(City city)
+    public void displayCity(City city)
     {
         if (city != null)
         {
             System.out.println(
-                    city.id + " "
-                            + city.name + " "
-                            + city.population + "\n")   ;
+                    city.getId() + " "
+                            + city.getName() + " "
+                            + city.getPopulation() + "\n")   ;
         }
     }
     public static void main(String[] args)
@@ -130,7 +130,7 @@ public class App
         a.connect();
         City city = a.getCity(1);
         // Display results
-        a.displayEmployee(city);
+        a.displayCity(city);
         // Disconnect from database
         a.disconnect();
     }
