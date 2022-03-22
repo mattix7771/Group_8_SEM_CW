@@ -1,6 +1,7 @@
 package com.napier.sem;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 /*
 *  This program was created as a project for Software Engineering Methods Module
@@ -88,10 +89,9 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT world.country.name, concat(((SUM(world.city.Population) / world.country.Population)*100),'%') as CityPopPercantage "
-                            + "FROM world.city, world.country "
-                            + "WHERE world.city.CountryCode = world.country.code"
-                            + "GROUP BY world.country.name,world.country.Population";
+                    "SELECT world.city.ID, world.city.CountryCode, world.city.District, world.city.Name, world.city.Population  "
+                            + "FROM world.city "
+                            + "WHERE world.city.Name = '"+ aName + "' ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new city if valid.
@@ -99,8 +99,11 @@ public class App
             if (rset.next())
             {
                 City city = new City();
+                city.setDistrict(rset.getString("District"));
+                city.setCountryCode(rset.getString("CountryCode"));
                 city.setName(rset.getString("Name"));
                 city.setPopulation(rset.getInt("Population"));
+                city.setId(rset.getInt("ID"));
                 return city;
             }
             else
@@ -138,10 +141,13 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT world.country.name, concat(((SUM(world.city.Population) / world.country.Population)*100),'%') as CityPopPercantage "
-                            + "FROM world.city, world.country "
-                            + "WHERE world.city.CountryCode = world.country.code"
-                            + "GROUP BY world.country.name,world.country.Population";
+                    "SELECT world.country.name, world.country.Code,world.country.Capital,world.country.Code2," +
+                            "world.country.Continent, world.country.GNP,world.country.GNPOld,world.country.GovernmentForm," +
+                            "world.country.HeadOfState, world.country.IndepYear,world.country.LifeExpectancy,world.country.LocalName," +
+                            "world.country.Population, world.country.Region,world.country.SurfaceArea "
+                            + "FROM  world.country "
+                            + "WHERE world.country.name = '"+ cName + "' ";
+
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new country if valid.
@@ -151,6 +157,20 @@ public class App
                 Country country = new Country();
                 country.setName(rset.getString("Name"));
                 country.setPopulation(rset.getInt("Population"));
+                country.setCapital(rset.getString("Capital"));
+                country.setCode(rset.getString("Code"));
+                country.setCode2(rset.getString("setCode2"));
+                country.setGnp(rset.getInt("GNP"));
+                country.setGnpOld(rset.getInt("GNPOld"));
+                country.setGovernmentForm(rset.getString("GovernmentForm"));
+                country.setHeadOfState(rset.getString("HeadOfState"));
+                country.setIndepYear(rset.getInt("IndepYear"));
+                country.setLifeExpectancy(rset.getDouble("LifeExpectancy"));
+                country.setContinent(rset.getString("setContinent"));
+                country.setLocalName(rset.getString("LocalName"));
+                country.setRegion(rset.getString("Region"));
+                country.setSurfaceArea(rset.getInt("SurfaceArea"));
+
                 return country;
             }
             else
@@ -163,215 +183,292 @@ public class App
             return null;
         }
     }
-
-    public void displayCountryPop(Country country)
-    {
-        if (country == null)
+    /**
+     *  Print methods
+     */
+    public void printCities(ArrayList<City> cities) {
+        // Check employees is not null
+        if (cities == null)
         {
-            System.out.println("No valid country");
+            System.out.println("No cities");
             return;
         }
-
-        System.out.println(
-                country.getCode() + " "
-                        + country.getName() + " "
-                        + country.getPopulation() + "\n")   ;
+        // Print header
+        System.out.println(String.format("%-35s %-20s %-3s %-10s ", "Name", "District", "Country", "Population"));
+        // Loop over all employees in the list
+        for (City c : cities) {
+            if (c == null)
+                continue;
+            String emp_string =
+                    String.format("%-35s %-20s %-3s %-10s ",
+                            c.getName(), c.getDistrict(), c.getCountryCode(), c.getPopulation() );
+            System.out.println(emp_string);
+        }
     }
-
-    // REGION
-    public Country getRegion (String rName)
-    {
-        try
-        {
+    /**
+     *    POPULATION IN CITIES for the world
+     */
+    public ArrayList<City> getAllCities() {
+        try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT Name, Population "
-                            + "FROM world.country "
-                            + "WHERE Name = " + rName;
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new region if valid.
-            // Check one is returned
-            if (rset.next())
-            {
-                Country region = new Country();
-                region.setName(rset.getString("Name"));
-                region.setPopulation(rset.getInt("Population"));
-                return region;
-            }
-            else
-                return null;
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get region details");
-            return null;
-        }
-    }
-
-    public void displayRegionPop(Country country)
-    {
-        if (country == null)
-        {
-            System.out.println("No valid region");
-            return;
-        }
-
-        System.out.println(
-                country.getCode() + " "
-                        + country.getName() + " "
-                        + country.getPopulation() + "\n")   ;
-    }
-
-    // CONTINENT
-    public Country getContinent (String cName)
-    {
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT Name, Population "
-                            + "FROM world.country "
-                            + "WHERE Name = " + cName;
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new continent if valid.
-            // Check one is returned
-            if (rset.next())
-            {
-                Country cOntinent = new Country();
-                cOntinent.setName(rset.getString("Name"));
-                cOntinent.setPopulation(rset.getInt("Population"));
-                return cOntinent;
-            }
-            else
-                return null;
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get continent details");
-            return null;
-        }
-    }
-
-    public void displayContinentPop(Country country)
-    {
-        if (country == null)
-        {
-            System.out.println("No valid continent");
-            return;
-        }
-
-        System.out.println(
-                country.getCode() + " "
-                        + country.getName() + " "
-                        + country.getPopulation() + "\n")   ;
-    }
-
-    // WORLD
-    public Country getWorld (int pop)
-    {
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT Population "
-                            + "FROM world.country "
-                            + "WHERE Population = " + pop;
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new world if valid.
-            // Check one is returned
-            if (rset.next())
-            {
-                Country world = new Country();
-                world.setPopulation(rset.getInt("Population"));
-                return world;
-            }
-            else
-                return null;
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get population details");
-            return null;
-        }
-    }
-
-    public void displayWorldPop(Country world)
-    {
-        if (world == null)
-        {
-            System.out.println("No valid continent");
-            return;
-        }
-
-        System.out.println(
-                world.getCode() + " "
-                        + world.getPopulation() + "\n")   ;
-    }
-
-    // DISTRICT
-    public City getDistrict (String disPop)
-    {
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT Name, Population "
+                    "SELECT world.city.CountryCode, world.city.District, world.city.Name, world.city.Population "
                             + "FROM world.city "
-                            + "WHERE Name = " + disPop;
+                            + "ORDER BY world.city.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new district if valid.
-            // Check one is returned
-            if (rset.next())
-            {
-                City disTrict = new City();
-                disTrict.setName(rset.getString("Name"));
-                disTrict.setPopulation(rset.getInt("Population"));
-                return disTrict;
+            // Extract employee information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+
+                City c = new City();
+                c.setCountryCode(rset.getString("CountryCode"));
+                c.setName(rset.getString("Name"));
+                c.setDistrict(rset.getString("District"));
+                c.setPopulation(rset.getInt("Population"));
+                cities.add(c);
             }
-            else
-                return null;
-        }
-        catch (Exception e)
-        {
+            return cities;
+        } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get population details");
+            System.out.println("Failed to get city population details");
             return null;
         }
     }
 
-    public void displayDistrictPop(City dis)
-    {
-        if (dis == null)
-        {
-            System.out.println("No valid district");
-            return;
+
+    // Overloaded method to include limit selected by the user
+    public ArrayList<City> getAllCities(int limit) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.city.CountryCode, world.city.District, world.city.Name, world.city.Population "
+                            + "FROM world.city "
+                            + "ORDER BY world.city.Population DESC "
+                            + "LIMIT " + limit +" ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract employee information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+
+                City c = new City();
+                c.setCountryCode(rset.getString("CountryCode"));
+                c.setName(rset.getString("Name"));
+                c.setDistrict(rset.getString("District"));
+                c.setPopulation(rset.getInt("Population"));
+                cities.add(c);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city population details");
+            return null;
         }
-
-        System.out.println(
-                dis.getId() + " "
-                        + dis.getName() + "\n"
-                        + dis.getDistrict() + "\n"
-                        + dis.getPopulation() + "\n")   ;
     }
+    /**
+     *    POPULATION IN CITIES for the continent
+     */
+    public ArrayList<City> getAllCitiesC(String continent) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.city.CountryCode, world.city.District, world.city.Name, world.city.Population "
+                            + "FROM world.city, world.country "
+                            + "WHERE world.city.CountryCode = world.country.Code "
+                            + "WHERE world.country.Continent = '" + continent +"' "
+                            + "ORDER BY world.city.Population DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract employee information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
 
-    // POPULATION IN CITIES -----------------------
+                City c = new City();
+                c.setCountryCode(rset.getString("CountryCode"));
+                c.setName(rset.getString("Name"));
+                c.setDistrict(rset.getString("District"));
+                c.setPopulation(rset.getInt("Population"));
+                cities.add(c);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city population details");
+            return null;
+        }
+    }
+        // overloaded to add limit
+    public ArrayList<City> getAllCitiesC(String continent, int limit) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.city.CountryCode, world.city.District, world.city.Name, world.city.Population "
+                            + "FROM world.city, world.country "
+                            + "WHERE world.city.CountryCode = world.country.Code "
+                            + "WHERE world.country.Continent = '" + continent +"' "
+                            + "ORDER BY world.city.Population DESC "
+                            + "LIMIT "+ limit  +"";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract employee information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
 
+                City c = new City();
+                c.setCountryCode(rset.getString("CountryCode"));
+                c.setName(rset.getString("Name"));
+                c.setDistrict(rset.getString("District"));
+                c.setPopulation(rset.getInt("Population"));
+                cities.add(c);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city population details");
+            return null;
+        }
+    }
+    /**
+     *    POPULATION IN CITIES for the region
+     */
+    public ArrayList<City> getAllCitiesR(String region) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.city.CountryCode, world.city.District, world.city.Name, world.city.Population "
+                            + "FROM world.city, world.country "
+                            + "WHERE world.city.CountryCode = world.country.Code "
+                            + "WHERE world.country.Region = '" + region +"' "
+                            + "ORDER BY world.city.Population DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract employee information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
 
+                City c = new City();
+                c.setCountryCode(rset.getString("CountryCode"));
+                c.setName(rset.getString("Name"));
+                c.setDistrict(rset.getString("District"));
+                c.setPopulation(rset.getInt("Population"));
+                cities.add(c);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city population details");
+            return null;
+        }
+    }
+    // overloaded to add limit
+    public ArrayList<City> getAllCitiesR(String region, int limit) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.city.CountryCode, world.city.District, world.city.Name, world.city.Population "
+                            + "FROM world.city, world.country "
+                            + "WHERE world.city.CountryCode = world.country.Code "
+                            + "WHERE world.country.Region = '" + region +"' "
+                            + "ORDER BY world.city.Population DESC "
+                            + "LIMIT "+ limit  +"";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract employee information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+
+                City c = new City();
+                c.setCountryCode(rset.getString("CountryCode"));
+                c.setName(rset.getString("Name"));
+                c.setDistrict(rset.getString("District"));
+                c.setPopulation(rset.getInt("Population"));
+                cities.add(c);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city population details");
+            return null;
+        }
+    }
+    /**
+     *    POPULATION IN CITIES for the district
+     */
+    public ArrayList<City> getAllCitiesD(String district) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.city.CountryCode, world.city.District, world.city.Name, world.city.Population "
+                            + "FROM world.city, world.country "
+                            + "WHERE world.city.District = '" + district +"' "
+                            + "ORDER BY world.city.Population DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract employee information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+
+                City c = new City();
+                c.setCountryCode(rset.getString("CountryCode"));
+                c.setName(rset.getString("Name"));
+                c.setDistrict(rset.getString("District"));
+                c.setPopulation(rset.getInt("Population"));
+                cities.add(c);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city population details");
+            return null;
+        }
+    }
+    // overloaded to add limit
+    public ArrayList<City> getAllCitiesD(String district, int limit) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.city.CountryCode, world.city.District, world.city.Name, world.city.Population "
+                            + "FROM world.city, world.country "
+                            + "WHERE world.city.District = '" + district +"' "
+                            + "ORDER BY world.city.Population DESC "
+                            + "LIMIT "+ limit  +"";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract employee information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+
+                City c = new City();
+                c.setCountryCode(rset.getString("CountryCode"));
+                c.setName(rset.getString("Name"));
+                c.setDistrict(rset.getString("District"));
+                c.setPopulation(rset.getInt("Population"));
+                cities.add(c);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city population details");
+            return null;
+        }
+    }
     public static void main(String[] args)
     {
         // Create new Application
@@ -381,19 +478,7 @@ public class App
         a.connect();
 
         // POPULATION ----------------
-        City city = a.getCity("Edinburgh");
-        Country country = a.getCountry("Australia");
-        Country region = a.getRegion("Albama");
-        Country cont = a.getContinent("Africa");
-        Country world = a.getWorld(132155);
-        City district = a.getDistrict("Area51");
-        // Display population results
-        a.displayCity(city);
-        a.displayCountryPop(country);
-        a.displayRegionPop(region);
-        a.displayContinentPop(cont);
-        a.displayWorldPop(world);
-        a.displayDistrictPop(district);
+
         // ---------------------------
         // POPULATION IN CITIES
 

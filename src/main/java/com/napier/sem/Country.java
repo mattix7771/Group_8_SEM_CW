@@ -70,7 +70,7 @@ public class Country {
     /**
      * country's  capital
      */
-    private int capital ;
+    private String capital ;
 
     /**
      * country's  local Name
@@ -180,11 +180,11 @@ public class Country {
         this.gnpOld = gnpOld;
     }
 
-    public int getCapital() {
+    public String getCapital() {
         return capital;
     }
 
-    public void setCapital(int capital) {
+    public void setCapital(String capital) {
         this.capital = capital;
     }
 
