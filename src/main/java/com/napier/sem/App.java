@@ -282,8 +282,8 @@ public class App
                     "SELECT world.city.CountryCode, world.city.District, world.city.Name, world.city.Population "
                             + "FROM world.city, world.country "
                             + "WHERE world.city.CountryCode = world.country.Code "
-                            + "WHERE world.country.Continent = '" + continent +"' "
-                            + "ORDER BY world.city.Population DESC";
+                            + "AND world.country.Continent = '" + continent +"' "
+                            + "ORDER BY world.city.Population DESC ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract employee information
@@ -314,9 +314,9 @@ public class App
                     "SELECT world.city.CountryCode, world.city.District, world.city.Name, world.city.Population "
                             + "FROM world.city, world.country "
                             + "WHERE world.city.CountryCode = world.country.Code "
-                            + "WHERE world.country.Continent = '" + continent +"' "
+                            + "AND world.country.Continent = '" + continent +"' "
                             + "ORDER BY world.city.Population DESC "
-                            + "LIMIT "+ limit  +"";
+                            + "LIMIT "+ limit  +" ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract employee information
@@ -349,8 +349,8 @@ public class App
                     "SELECT world.city.CountryCode, world.city.District, world.city.Name, world.city.Population "
                             + "FROM world.city, world.country "
                             + "WHERE world.city.CountryCode = world.country.Code "
-                            + "WHERE world.country.Region = '" + region +"' "
-                            + "ORDER BY world.city.Population DESC";
+                            + "AND world.country.Region = '" + region +"' "
+                            + "ORDER BY world.city.Population DESC ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract employee information
@@ -381,9 +381,9 @@ public class App
                     "SELECT world.city.CountryCode, world.city.District, world.city.Name, world.city.Population "
                             + "FROM world.city, world.country "
                             + "WHERE world.city.CountryCode = world.country.Code "
-                            + "WHERE world.country.Region = '" + region +"' "
+                            + "AND world.country.Region = '" + region +"' "
                             + "ORDER BY world.city.Population DESC "
-                            + "LIMIT "+ limit  +"";
+                            + "LIMIT "+ limit  +" ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract employee information
@@ -415,8 +415,9 @@ public class App
             String strSelect =
                     "SELECT world.city.CountryCode, world.city.District, world.city.Name, world.city.Population "
                             + "FROM world.city, world.country "
-                            + "WHERE world.city.District = '" + district +"' "
-                            + "ORDER BY world.city.Population DESC";
+                            + "WHERE world.city.CountryCode = world.country.Code "
+                            + "AND world.city.District = '" + district +"' "
+                            + "ORDER BY world.city.Population DESC ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract employee information
@@ -446,9 +447,10 @@ public class App
             String strSelect =
                     "SELECT world.city.CountryCode, world.city.District, world.city.Name, world.city.Population "
                             + "FROM world.city, world.country "
-                            + "WHERE world.city.District = '" + district +"' "
+                            + "WHERE world.city.CountryCode = world.country.Code "
+                            + "AND world.city.District = '" + district +"' "
                             + "ORDER BY world.city.Population DESC "
-                            + "LIMIT "+ limit  +"";
+                            + "LIMIT "+ limit  +" ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract employee information
@@ -477,13 +479,15 @@ public class App
         // Connect to database
         a.connect();
 
-        // POPULATION ----------------
-
-        // ---------------------------
-        // POPULATION IN CITIES
-
-
-
+ArrayList<City> all = new ArrayList<City>( );
+all = a.getAllCitiesR("Western Europe", 5);
+a.printCities(all);
+        ArrayList<City> d = new ArrayList<City>( );
+        d = a.getAllCitiesD("Hamburg", 5);
+        a.printCities(d);
+        ArrayList<City> c = new ArrayList<City>( );
+        c= a.getAllCitiesC("Europe", 5);
+        a.printCities(c);
         // Disconnect from database
         a.disconnect();
     }
