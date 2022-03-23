@@ -93,13 +93,13 @@ public class AppIntegrationTest {
         assertEquals(country.getRegion(), "British Islands");
     }
 
-    @Test  //Extraction of all cities within region test
+    @Test  //Extraction of all cities within district test
     void testGetAllCitiesWithinDistrict(){
         List<City> cities = app.getAllCitiesD("Veneto");
         assertEquals(cities.size(), 4);
     }
 
-    @Test  //Extraction of all cities within region and limited results test
+    @Test  //Extraction of all cities within district and limited results test
     void testGetAllCitiesWithinDistrictAndLimit(){
         List<City> cities = app.getAllCitiesD("Veneto", 2);
         assertEquals(cities.size(), 2);
