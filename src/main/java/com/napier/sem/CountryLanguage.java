@@ -1,23 +1,70 @@
 package com.napier.sem;
+/**
+ * @author Edgar Park, Mattia Merati and Mateusz Wilczynski
+ * CountryLanguage class represents country language
+ * since version 1.0.3
+ */
 
 public class CountryLanguage {
+
 
     /**
      * language's  code
      */
-    public String code;
+    private String code;
 
     /**
      * language's name
      */
-    public String language;
+    private String language;
     /**
      *  language's status
      */
-    public Boolean isOfficial;
+    private Boolean isOfficial;
 
     /**
      * language's percentage
      */
-    public String percentage;
+    private String percentage;
+
+
+
+    /**
+     *  getters and setters
+     */
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public Boolean getOfficial() {
+        return isOfficial;
+    }
+
+    public void setOfficial(Boolean official) {
+        isOfficial = official;
+    }
+
+    public String getPercentage() {
+        return percentage;
+    }
+
+    public void setPercentage(String percentage) {
+        this.percentage = percentage;
+    }
+    /**
+     * end of getters and setters
+     */
 }
