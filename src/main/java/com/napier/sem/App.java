@@ -183,6 +183,60 @@ public class App
     }
 
     /**
+     * Retrieving country information from database
+     */
+    public Country getCountryC(String cCode)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.country.Name, world.country.Code,world.country.Capital,world.country.Code2," +
+                            "world.country.Continent, world.country.GNP,world.country.GNPOld,world.country.GovernmentForm," +
+                            "world.country.HeadOfState, world.country.IndepYear,world.country.LifeExpectancy,world.country.LocalName," +
+                            "world.country.Population, world.country.Region,world.country.SurfaceArea "
+                            + "FROM  world.country "
+                            + "WHERE world.country.code = '"+ cCode + "' ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new country if valid.
+            // Check one is returned
+            if (rset.next())
+            {
+                Country country = new Country();
+                country.setName(rset.getString("Name"));
+                country.setPopulation(rset.getInt("Population"));
+                country.setCapital(rset.getString("Capital"));
+                country.setCode(rset.getString("Code"));
+                country.setCode2(rset.getString("setCode2"));
+                country.setGnp(rset.getInt("GNP"));
+                country.setGnpOld(rset.getInt("GNPOld"));
+                country.setGovernmentForm(rset.getString("GovernmentForm"));
+                country.setHeadOfState(rset.getString("HeadOfState"));
+                country.setIndepYear(rset.getInt("IndepYear"));
+                country.setLifeExpectancy(rset.getDouble("LifeExpectancy"));
+                country.setContinent(rset.getString("setContinent"));
+                country.setLocalName(rset.getString("LocalName"));
+                country.setRegion(rset.getString("Region"));
+                country.setSurfaceArea(rset.getInt("SurfaceArea"));
+
+                return country;
+            }
+            else
+                return null;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Country details");
+            return null;
+        }
+    }
+
+    /**
      *  Print cities methods
      */
     public void printCities(ArrayList<City> cities) {

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
+import javax.sound.midi.SysexMessage;
 import java.io.LineNumberInputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,23 +74,22 @@ public class AppIntegrationTest {
         List<City> cities = app.getAllCitiesC("Europe", 100);
         assertEquals(cities.size(), 100);
 
-        Country country = app.getCountry(cities.get(0).getName());
+        Country country = app.getCountryC(cities.get(0).getCountryCode());
         assertEquals(country.getContinent(), "Europe");
-        //jewojfowfjwopfjopwjfopwjfopwjfowpjfp
     }
 
     @Test  //Extraction of all cities within region test
     void testGetAllCitiesWithinRegion(){
         List<City> cities = app.getAllCitiesR("British Islands");
-        assertEquals(cities.size(), 2);
+        assertEquals(cities.size(), 83);
     }
 
     @Test  //Extraction of all cities within region and limited results test
     void testGetAllCitiesWithinRegionAndLimit(){
-        List<City> cities = app.getAllCitiesR("British Islands", 1);
-        assertEquals(cities.size(), 1);
+        List<City> cities = app.getAllCitiesR("British Islands", 50);
+        assertEquals(cities.size(), 50);
 
-        Country country = app.getCountry(cities.get(0).getName());
+        Country country = app.getCountryC(cities.get(0).getCountryCode());
         assertEquals(country.getRegion(), "British Islands");
     }
 
@@ -103,8 +103,6 @@ public class AppIntegrationTest {
     void testGetAllCitiesWithinDistrictAndLimit(){
         List<City> cities = app.getAllCitiesD("Veneto", 2);
         assertEquals(cities.size(), 2);
-
-        Country country = app.getCountry(cities.get(0).getName());
-        assertEquals(country.getRegion(), "British Islands");
+        assertEquals(cities.get(0).getDistrict(), "Veneto");
     }
 }
