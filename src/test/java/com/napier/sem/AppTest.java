@@ -20,19 +20,19 @@ public class AppTest
         app = new App();
     }
 
+    /**
+     * UNIT TESTS
+     */
 
-    // Population tests ----------------------------------
-    // City
-    @Test
+    @Test // Null test
     void testDisplayCityNull()
     {
         app.displayCity(null);
     }
 
-    @Test
+    @Test // Displaying city information test
     void displayCity()
     {
-
         City city = new City();
         city.setId(1);
         city.setPopulation(500000);
@@ -40,21 +40,21 @@ public class AppTest
         app.displayCity(city);
     }
 
-    @Test
+    @Test // Empty arrayList test
     void testDisplayPrintCitiesEmpty()
     {
         ArrayList<City> cities = new ArrayList<City>();
         app.printCities(cities);
     }
 
-    @Test
+    @Test // Null arrayList test
     void testDisplayPrintCitiesNull()
     {
         ArrayList<City> cities = new ArrayList<City>();
         app.printCities(null);
     }
 
-    @Test
+    @Test // Display arrayList information test v2
     void testDisplayPrintCitiesNameNull()
     {
         ArrayList<City> cities = new ArrayList<City>();
@@ -68,7 +68,7 @@ public class AppTest
         app.printCities(cities);
     }
 
-    @Test
+    @Test // Display arrayList information test
     void displayPrintCities()
     {
         ArrayList<City> cities = new ArrayList<City>();
@@ -81,5 +81,4 @@ public class AppTest
         cities.add(city);
         app.printCities(cities);
     }
-
 }

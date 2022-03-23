@@ -71,8 +71,9 @@ public class App
         }
     }
 
-    // GET POPULATION ------------------------------------------------------------------
-    // CITY
+    /**
+     * Retrieving city information from database
+     */
     public City getCity(String aName) // executes query and returns object
     {
         try
@@ -109,6 +110,9 @@ public class App
         }
     }
 
+    /**
+     * Display city information
+     */
     public void displayCity(City city)
     {
         if (city == null)
@@ -124,7 +128,9 @@ public class App
 
     }
 
-    // COUNTRY
+    /**
+     * Retrieving country information from database
+     */
     public Country getCountry(String cName)
     {
         try
@@ -175,8 +181,9 @@ public class App
             return null;
         }
     }
+
     /**
-     *  Print methods
+     *  Print cities methods
      */
     public void printCities(ArrayList<City> cities) {
         // Check cities is not null
@@ -197,6 +204,7 @@ public class App
             System.out.println(city_s);
         }
     }
+
     /**
      *    POPULATION IN CITIES for the world
      */
@@ -230,7 +238,6 @@ public class App
         }
     }
 
-
     // Overloaded method to include limit selected by the user
     public ArrayList<City> getAllCities(int limit) {
         try {
@@ -262,6 +269,7 @@ public class App
             return null;
         }
     }
+
     /**
      *    POPULATION IN CITIES for the continent
      */
@@ -296,7 +304,8 @@ public class App
             return null;
         }
     }
-        // overloaded to add limit
+
+        // Overloaded method to include limit selected by the user
     public ArrayList<City> getAllCitiesC(String continent, int limit) {
         try {
             // Create an SQL statement
@@ -329,6 +338,7 @@ public class App
             return null;
         }
     }
+
     /**
      *    POPULATION IN CITIES for the region
      */
@@ -363,7 +373,8 @@ public class App
             return null;
         }
     }
-    // overloaded to add limit
+
+    // Overloaded method to include limit selected by the user
     public ArrayList<City> getAllCitiesR(String region, int limit) {
         try {
             // Create an SQL statement
@@ -396,6 +407,7 @@ public class App
             return null;
         }
     }
+
     /**
      *    POPULATION IN CITIES for the district
      */
@@ -430,7 +442,7 @@ public class App
             return null;
         }
     }
-    // overloaded to add limit
+    // Overloaded method to include limit selected by the user
     public ArrayList<City> getAllCitiesD(String district, int limit) {
         try {
             // Create an SQL statement
@@ -463,6 +475,10 @@ public class App
             return null;
         }
     }
+
+    /**
+     * Main
+     */
     public static void main(String[] args)
     {
         //create new application
@@ -474,16 +490,17 @@ public class App
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
-
-ArrayList<City> all = new ArrayList<City>( );
-all = a.getAllCitiesR("Western Europe", 5);
-a.printCities(all);
+        // ArrayLists
+        ArrayList<City> all = new ArrayList<City>( );
+        all = a.getAllCitiesR("Western Europe", 5);
+        a.printCities(all);
         ArrayList<City> d = new ArrayList<City>( );
         d = a.getAllCitiesD("Hamburg", 5);
         a.printCities(d);
         ArrayList<City> c = new ArrayList<City>( );
         c= a.getAllCitiesC("Europe", 5);
         a.printCities(c);
+
         // Disconnect from database
         a.disconnect();
     }

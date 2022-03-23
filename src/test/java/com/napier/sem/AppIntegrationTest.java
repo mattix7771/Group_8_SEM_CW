@@ -19,7 +19,7 @@ public class AppIntegrationTest {
 
     }
 
-    @Test
+    @Test // assertEquals test
     void testGetEmployee()
     {
         City city = app.getCity("London");
