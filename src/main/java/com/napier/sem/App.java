@@ -187,7 +187,7 @@ public class App
      *  Print methods
      */
     public void printCities(ArrayList<City> cities) {
-        // Check employees is not null
+        // Check cities is not null
         if (cities == null)
         {
             System.out.println("No cities");
@@ -195,14 +195,14 @@ public class App
         }
         // Print header
         System.out.println(String.format("%-35s %-20s %-3s %-10s ", "Name", "District", "Country", "Population"));
-        // Loop over all employees in the list
+        // Loop over all cities in the list
         for (City c : cities) {
             if (c == null)
                 continue;
-            String emp_string =
+            String city_s =
                     String.format("%-35s %-20s %-3s %-10s ",
                             c.getName(), c.getDistrict(), c.getCountryCode(), c.getPopulation() );
-            System.out.println(emp_string);
+            System.out.println(city_s);
         }
     }
     /**
@@ -219,7 +219,7 @@ public class App
                             + "ORDER BY world.city.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract employee information
+            // Extract city information
             ArrayList<City> cities = new ArrayList<City>();
             while (rset.next()) {
 
@@ -252,7 +252,7 @@ public class App
                             + "LIMIT " + limit +" ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract employee information
+            // Extract city information
             ArrayList<City> cities = new ArrayList<City>();
             while (rset.next()) {
 
@@ -286,7 +286,7 @@ public class App
                             + "ORDER BY world.city.Population DESC ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract employee information
+            // Extract city information
             ArrayList<City> cities = new ArrayList<City>();
             while (rset.next()) {
 
@@ -319,7 +319,7 @@ public class App
                             + "LIMIT "+ limit  +" ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract employee information
+            // Extract city information
             ArrayList<City> cities = new ArrayList<City>();
             while (rset.next()) {
 
@@ -353,7 +353,7 @@ public class App
                             + "ORDER BY world.city.Population DESC ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract employee information
+            // Extract city information
             ArrayList<City> cities = new ArrayList<City>();
             while (rset.next()) {
 
@@ -386,7 +386,7 @@ public class App
                             + "LIMIT "+ limit  +" ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract employee information
+            // Extract city information
             ArrayList<City> cities = new ArrayList<City>();
             while (rset.next()) {
 
@@ -420,7 +420,7 @@ public class App
                             + "ORDER BY world.city.Population DESC ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract employee information
+            // Extract city information
             ArrayList<City> cities = new ArrayList<City>();
             while (rset.next()) {
 
@@ -453,7 +453,7 @@ public class App
                             + "LIMIT "+ limit  +" ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract employee information
+            // Extract city information
             ArrayList<City> cities = new ArrayList<City>();
             while (rset.next()) {
 
