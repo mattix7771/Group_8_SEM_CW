@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /*
 *  This program was created as a project for Software Engineering Methods Module
 *  Program retrieves data from MySql database based on instructions within the app
-*  Created by Edgar Park, Ruben Cavaco Mattia Merati and Mateusz Wilczynski
+*  Created by Edgar Park, Mattia Merati and Mateusz Wilczynski
 *  Date: 01/02/2022
 *  Location: Edinburgh Napier University
 * */
@@ -139,7 +139,7 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT world.country.name, world.country.Code,world.country.Capital,world.country.Code2," +
+                    "SELECT world.country.Name, world.country.Code,world.country.Capital,world.country.Code2," +
                             "world.country.Continent, world.country.GNP,world.country.GNPOld,world.country.GovernmentForm," +
                             "world.country.HeadOfState, world.country.IndepYear,world.country.LifeExpectancy,world.country.LocalName," +
                             "world.country.Population, world.country.Region,world.country.SurfaceArea "
