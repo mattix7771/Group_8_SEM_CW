@@ -47,7 +47,7 @@ public class AppIntegrationTest {
         assertEquals(country.getLocalName(), "United Kingdom");
         assertEquals(country.getGovernmentForm(), "Constitutional Monarchy");
         assertEquals(country.getHeadOfState(), "Elisabeth II");
-        assertEquals(country.getCapital(), 456);
+        assertEquals(country.getCapital(), "456");
         assertEquals(country.getCode2(), "GB");
     }
 
