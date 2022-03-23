@@ -40,18 +40,46 @@ public class AppTest
         app.displayCity(city);
     }
 
-
-
-
-    // Population in cities with user input
     @Test
-    void testWorldCitiesNull() { }
-
-    @Test
-    void displayWorldCities()
+    void testDisplayPrintCitiesEmpty()
     {
-
+        ArrayList<City> cities = new ArrayList<City>();
+        app.printCities(cities);
     }
 
+    @Test
+    void testDisplayPrintCitiesNull()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        app.printCities(null);
+    }
+
+    @Test
+    void testDisplayPrintCitiesNameNull()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        City city = new City();
+        city.setId(2);
+        city.setName(null);
+        city.setDistrict("Essex");
+        city.setCountryCode(null);
+        city.setPopulation(45452);
+        cities.add(city);
+        app.printCities(cities);
+    }
+
+    @Test
+    void displayPrintCities()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        City city = new City();
+        city.setId(2);
+        city.setName("London");
+        city.setDistrict("Essex");
+        city.setCountryCode("0124");
+        city.setPopulation(5860);
+        cities.add(city);
+        app.printCities(cities);
+    }
 
 }
