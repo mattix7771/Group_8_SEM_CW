@@ -270,7 +270,7 @@ public class App
             String strSelect =
                     "SELECT world.city.CountryCode, world.city.District, world.city.Name, world.city.Population "
                             + "FROM world.city "
-                            + "ORDER BY world.city.Population DESC";
+                            + "ORDER BY world.city.Population DESC ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract city information
