@@ -124,10 +124,52 @@ public class App
             System.out.println(
                     city.getId() + " "
                             + city.getName() + " "
+                            + city.getCountryCode() + " "
                             + city.getPopulation() + "\n")   ;
 
     }
+    /**
+     * Display country information
+     */
+    public void displayCountry(Country country)
+    {
+        if (country == null)
+        {
+            System.out.println("No valid country");
+            return;
+        }
 
+        System.out.println(
+                country.getCode() + " "
+                        + country.getName() + " "
+                        + country.getContinent() + " "
+                        + country.getRegion() + " "
+                        + country.getCapital() + " "
+                        + country.getPopulation() + "\n")   ;
+
+    }
+    /**
+     *  Print Country methods
+     */
+    public void printCountry(ArrayList<Country> countries) {
+        // Check cities is not null
+        if (countries == null)
+        {
+            System.out.println("No countries");
+            return;
+        }
+        // Print header
+        System.out.println(String.format("%-3s %-52s %-13s %-26s %-10s %-10s ", "Code", "Name", "Continent","Region", "Population", "Capital"));
+        // Loop over all cities in the list
+        for (Country c : countries) {
+            if (c == null)
+                continue;
+            String country_s =
+                    String.format("%-3s %-52s %-13s %-26s %-10s %-10s ",
+                            c.getCode(), c.getName(), c.getContinent(),c.getRegion(), c.getPopulation(), c.getCapital() );
+            System.out.println(country_s);
+        }
+    }
     /**
      * Retrieving country information from database
      */
@@ -235,7 +277,287 @@ public class App
             return null;
         }
     }
+    /**
+     *    POPULATION IN Countries of the world
+     */
+    public ArrayList<Country> getAllCountries() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.country.Name, world.country.Code,world.country.Capital,world.country.Code2," +
+                            "world.country.Continent, world.country.GNP,world.country.GNPOld,world.country.GovernmentForm," +
+                            "world.country.HeadOfState, world.country.IndepYear,world.country.LifeExpectancy,world.country.LocalName," +
+                            "world.country.Population, world.country.Region,world.country.SurfaceArea "
+                            + "FROM  world.country "
+                            + "ORDER BY world.country.Population DESC ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<Country> countries = new ArrayList<Country>();
+            while (rset.next()) {
 
+
+                Country country = new Country();
+                country.setName(rset.getString("Name"));
+                country.setPopulation(rset.getInt("Population"));
+                country.setCapital(rset.getString("Capital"));
+                country.setCode(rset.getString("Code"));
+                country.setCode2(rset.getString("Code2"));
+                country.setGnp(rset.getInt("GNP"));
+                country.setGnpOld(rset.getInt("GNPOld"));
+                country.setGovernmentForm(rset.getString("GovernmentForm"));
+                country.setHeadOfState(rset.getString("HeadOfState"));
+                country.setIndepYear(rset.getInt("IndepYear"));
+                country.setLifeExpectancy(rset.getDouble("LifeExpectancy"));
+                country.setContinent(rset.getString("Continent"));
+                country.setLocalName(rset.getString("LocalName"));
+                country.setRegion(rset.getString("Region"));
+                country.setSurfaceArea(rset.getInt("SurfaceArea"));
+                countries.add(country);
+            }
+            return countries;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country population details");
+            return null;
+        }
+    }
+    public ArrayList<Country> getAllCountries(int limit) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.country.Name, world.country.Code,world.country.Capital,world.country.Code2," +
+                            "world.country.Continent, world.country.GNP,world.country.GNPOld,world.country.GovernmentForm," +
+                            "world.country.HeadOfState, world.country.IndepYear,world.country.LifeExpectancy,world.country.LocalName," +
+                            "world.country.Population, world.country.Region,world.country.SurfaceArea "
+                            + "FROM  world.country "
+                            + "ORDER BY world.country.Population DESC "
+                            + "LIMIT " + limit +" ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<Country> countries = new ArrayList<Country>();
+            while (rset.next()) {
+
+
+                Country country = new Country();
+                country.setName(rset.getString("Name"));
+                country.setPopulation(rset.getInt("Population"));
+                country.setCapital(rset.getString("Capital"));
+                country.setCode(rset.getString("Code"));
+                country.setCode2(rset.getString("Code2"));
+                country.setGnp(rset.getInt("GNP"));
+                country.setGnpOld(rset.getInt("GNPOld"));
+                country.setGovernmentForm(rset.getString("GovernmentForm"));
+                country.setHeadOfState(rset.getString("HeadOfState"));
+                country.setIndepYear(rset.getInt("IndepYear"));
+                country.setLifeExpectancy(rset.getDouble("LifeExpectancy"));
+                country.setContinent(rset.getString("Continent"));
+                country.setLocalName(rset.getString("LocalName"));
+                country.setRegion(rset.getString("Region"));
+                country.setSurfaceArea(rset.getInt("SurfaceArea"));
+                countries.add(country);
+            }
+            return countries;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country population details");
+            return null;
+        }
+    }
+    /**
+     *    POPULATION IN Countries of the continent
+     */
+    public ArrayList<Country> getAllCountriesCont(String continentName) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.country.Name, world.country.Code,world.country.Capital,world.country.Code2," +
+                            "world.country.Continent, world.country.GNP,world.country.GNPOld,world.country.GovernmentForm," +
+                            "world.country.HeadOfState, world.country.IndepYear,world.country.LifeExpectancy,world.country.LocalName," +
+                            "world.country.Population, world.country.Region,world.country.SurfaceArea "
+                            + "FROM  world.country "
+                            + "WHERE world.country.Continent = '"+ continentName + "' "
+                            + "ORDER BY world.country.Population DESC ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<Country> countries = new ArrayList<Country>();
+            while (rset.next()) {
+
+
+                Country country = new Country();
+                country.setName(rset.getString("Name"));
+                country.setPopulation(rset.getInt("Population"));
+                country.setCapital(rset.getString("Capital"));
+                country.setCode(rset.getString("Code"));
+                country.setCode2(rset.getString("Code2"));
+                country.setGnp(rset.getInt("GNP"));
+                country.setGnpOld(rset.getInt("GNPOld"));
+                country.setGovernmentForm(rset.getString("GovernmentForm"));
+                country.setHeadOfState(rset.getString("HeadOfState"));
+                country.setIndepYear(rset.getInt("IndepYear"));
+                country.setLifeExpectancy(rset.getDouble("LifeExpectancy"));
+                country.setContinent(rset.getString("Continent"));
+                country.setLocalName(rset.getString("LocalName"));
+                country.setRegion(rset.getString("Region"));
+                country.setSurfaceArea(rset.getInt("SurfaceArea"));
+                countries.add(country);
+            }
+            return countries;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country population details");
+            return null;
+        }
+    }
+    public ArrayList<Country> getAllCountriesCont(String continentName, int limit) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.country.Name, world.country.Code,world.country.Capital,world.country.Code2," +
+                            "world.country.Continent, world.country.GNP,world.country.GNPOld,world.country.GovernmentForm," +
+                            "world.country.HeadOfState, world.country.IndepYear,world.country.LifeExpectancy,world.country.LocalName," +
+                            "world.country.Population, world.country.Region,world.country.SurfaceArea "
+                            + "FROM  world.country "
+                            + "WHERE world.country.Continent = '"+ continentName + "' "
+                            + "ORDER BY world.country.Population DESC "
+                            + "LIMIT " + limit +" ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<Country> countries = new ArrayList<Country>();
+            while (rset.next()) {
+
+
+                Country country = new Country();
+                country.setName(rset.getString("Name"));
+                country.setPopulation(rset.getInt("Population"));
+                country.setCapital(rset.getString("Capital"));
+                country.setCode(rset.getString("Code"));
+                country.setCode2(rset.getString("Code2"));
+                country.setGnp(rset.getInt("GNP"));
+                country.setGnpOld(rset.getInt("GNPOld"));
+                country.setGovernmentForm(rset.getString("GovernmentForm"));
+                country.setHeadOfState(rset.getString("HeadOfState"));
+                country.setIndepYear(rset.getInt("IndepYear"));
+                country.setLifeExpectancy(rset.getDouble("LifeExpectancy"));
+                country.setContinent(rset.getString("Continent"));
+                country.setLocalName(rset.getString("LocalName"));
+                country.setRegion(rset.getString("Region"));
+                country.setSurfaceArea(rset.getInt("SurfaceArea"));
+                countries.add(country);
+            }
+            return countries;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country population details");
+            return null;
+        }
+    }
+    /**
+     *    POPULATION IN Countries of the region
+     */
+    public ArrayList<Country> getAllCountriesRegion(String regionName) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.country.Name, world.country.Code,world.country.Capital,world.country.Code2," +
+                            "world.country.Continent, world.country.GNP,world.country.GNPOld,world.country.GovernmentForm," +
+                            "world.country.HeadOfState, world.country.IndepYear,world.country.LifeExpectancy,world.country.LocalName," +
+                            "world.country.Population, world.country.Region,world.country.SurfaceArea "
+                            + "FROM  world.country "
+                            + "WHERE world.country.Region = '"+ regionName + "' "
+                            + "ORDER BY world.country.Population DESC ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<Country> countries = new ArrayList<Country>();
+            while (rset.next()) {
+
+
+                Country country = new Country();
+                country.setName(rset.getString("Name"));
+                country.setPopulation(rset.getInt("Population"));
+                country.setCapital(rset.getString("Capital"));
+                country.setCode(rset.getString("Code"));
+                country.setCode2(rset.getString("Code2"));
+                country.setGnp(rset.getInt("GNP"));
+                country.setGnpOld(rset.getInt("GNPOld"));
+                country.setGovernmentForm(rset.getString("GovernmentForm"));
+                country.setHeadOfState(rset.getString("HeadOfState"));
+                country.setIndepYear(rset.getInt("IndepYear"));
+                country.setLifeExpectancy(rset.getDouble("LifeExpectancy"));
+                country.setContinent(rset.getString("Continent"));
+                country.setLocalName(rset.getString("LocalName"));
+                country.setRegion(rset.getString("Region"));
+                country.setSurfaceArea(rset.getInt("SurfaceArea"));
+                countries.add(country);
+            }
+            return countries;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country population details");
+            return null;
+        }
+    }
+    public ArrayList<Country> getAllCountriesRegion(String regionName, int limit) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.country.Name, world.country.Code,world.country.Capital,world.country.Code2," +
+                            "world.country.Continent, world.country.GNP,world.country.GNPOld,world.country.GovernmentForm," +
+                            "world.country.HeadOfState, world.country.IndepYear,world.country.LifeExpectancy,world.country.LocalName," +
+                            "world.country.Population, world.country.Region,world.country.SurfaceArea "
+                            + "FROM  world.country "
+                            + "WHERE world.country.Region = '"+ regionName + "' "
+                            + "ORDER BY world.country.Population DESC "
+                            + "LIMIT " + limit +" ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<Country> countries = new ArrayList<Country>();
+            while (rset.next()) {
+
+
+                Country country = new Country();
+                country.setName(rset.getString("Name"));
+                country.setPopulation(rset.getInt("Population"));
+                country.setCapital(rset.getString("Capital"));
+                country.setCode(rset.getString("Code"));
+                country.setCode2(rset.getString("Code2"));
+                country.setGnp(rset.getInt("GNP"));
+                country.setGnpOld(rset.getInt("GNPOld"));
+                country.setGovernmentForm(rset.getString("GovernmentForm"));
+                country.setHeadOfState(rset.getString("HeadOfState"));
+                country.setIndepYear(rset.getInt("IndepYear"));
+                country.setLifeExpectancy(rset.getDouble("LifeExpectancy"));
+                country.setContinent(rset.getString("Continent"));
+                country.setLocalName(rset.getString("LocalName"));
+                country.setRegion(rset.getString("Region"));
+                country.setSurfaceArea(rset.getInt("SurfaceArea"));
+                countries.add(country);
+            }
+            return countries;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country population details");
+            return null;
+        }
+    }
     /**
      *  Print cities methods
      */
@@ -260,7 +582,7 @@ public class App
     }
 
     /**
-     *    POPULATION IN CITIES for the world
+     *    POPULATION IN CITIES of the world
      */
     public ArrayList<City> getAllCities() {
         try {
