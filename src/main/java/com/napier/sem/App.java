@@ -1462,9 +1462,8 @@ public class App
         ArrayList<Stats> all = new ArrayList<Stats>( );
 
         all = a.getLanguageSpeakers();
-       a.printStatsLanguage(all);
 
-
+        a.outputLanguageStats(all, "LanguageSpeakers.md");
         // Disconnect from database
         a.disconnect();
     }
