@@ -1,5 +1,9 @@
 package com.napier.sem;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -1464,4 +1468,194 @@ public class App
         // Disconnect from database
         a.disconnect();
     }
+    /**
+     * Outputs to Markdown
+     *
+     *
+     */
+
+    /**
+     *  Output cities method
+     */
+    public void outputCities(ArrayList<City> cities, String filename) {
+        // Check employees is not null
+        if (cities == null) {
+            System.out.println("No cities");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        // Print header
+        sb.append("| Name| District | Country | Population | \r\n");
+        sb.append("| --- | --- | --- | --- |\r\n");
+        // Loop over all cities in the list
+        for (City c : cities) {
+            if (c == null) continue;
+            sb.append("| " + c.getName() + " | " +
+                    c.getDistrict() + " | " + c.getCountryCode() + " | " +
+                    c.getPopulation() + " |\r\n");
+        }
+        try {
+            new File("./reports/").mkdir();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new                                 File("./reports/" + filename)));
+            writer.write(sb.toString());
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    /**
+     *  Print capitals method
+     */
+
+    public void outputCapitals(ArrayList<City> cities, String filename) {
+        // Check employees is not null
+        if (cities == null) {
+            System.out.println("No cities");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        // Print header
+        sb.append("| City| Country | Population | \r\n");
+        sb.append("| --- | --- | --- |\r\n");
+        // Loop over all cities in the list
+        for (City c : cities) {
+            if (c == null) continue;
+            sb.append("| " + c.getName() + " | " + c.getCountryCode() + " | " +
+                    c.getPopulation() + " |\r\n");
+        }
+        try {
+            new File("./reports/").mkdir();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new                                 File("./reports/" + filename)));
+            writer.write(sb.toString());
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    /**
+     *  Output Country methods
+     */
+    public void outputCountries(ArrayList<Country> countries, String filename) {
+        // Check employees is not null
+        if (countries == null) {
+            System.out.println("No countries");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        // Print header
+        sb.append("| Code| Name | Population | Region | Population | Capital | \r\n");
+        sb.append("| --- | --- | --- | --- | --- | --- |\r\n");
+        // Loop over all cities in the list
+        for (Country c : countries) {
+            if (c == null) continue;
+            sb.append("| " + c.getCode() + " | " + c.getName() + " | " + c.getContinent() + " | "+ c.getRegion() + " | "+ c.getPopulation() + " | "+
+                    c.getCapital() + " |\r\n");
+        }
+        try {
+            new File("./reports/").mkdir();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new                                 File("./reports/" + filename)));
+            writer.write(sb.toString());
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *  Print Stats methods
+     */
+
+    public void outputStats(ArrayList<Stats> stats, String filename) {
+        // Check employees is not null
+        if (stats == null) {
+            System.out.println("No stats");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        // Print header
+        sb.append("| Place| Total Population | Urban Population | Rural Population | Urban Population % | Rural Population % | \r\n");
+        sb.append("| --- | --- | --- | --- | --- | --- |\r\n");
+        // Loop over all cities in the list
+        for (Stats c : stats) {
+            if (c == null) continue;
+            sb.append("| " + c.getPlace() + " | " + c.getPlacePop() + " | " + c.getUrbanPop() + " | "+ c.getRuralPop() + " | "+ c.getUrbPercentage() + " | "+
+                    c.getRuralPercentage() + " |\r\n");
+        }
+        try {
+            new File("./reports/").mkdir();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new                                 File("./reports/" + filename)));
+            writer.write(sb.toString());
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    public void outputLanguageStats(ArrayList<Stats> stats, String filename) {
+        // Check employees is not null
+        if (stats == null) {
+            System.out.println("No stats");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        // Print header
+        sb.append("| Language| Total Speakers | World Population Percentage |  \r\n");
+        sb.append("| --- | --- | --- |\r\n");
+        // Loop over all cities in the list
+        for (Stats c : stats) {
+            if (c == null) continue;
+            sb.append("| " + c.getLanguage() + " | " + c.getTotalSpeakers() + " | "+
+                    c.getTotalSpeakersPercentage() + " |\r\n");
+        }
+        try {
+            new File("./reports/").mkdir();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new                                 File("./reports/" + filename)));
+            writer.write(sb.toString());
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void outputSinglePopStats(ArrayList<Stats> stats, String filename) {
+        // Check employees is not null
+        if (stats == null) {
+            System.out.println("No stats");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        // Print header
+        sb.append("| Place| Population |\r\n");
+        sb.append("| --- | --- |\r\n");
+        // Loop over all cities in the list
+        for (Stats c : stats) {
+            if (c == null) continue;
+            sb.append("| " + c.getPlace() + " | " +
+                    c.getPlacePop() + " |\r\n");
+        }
+        try {
+            new File("./reports/").mkdir();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new                                 File("./reports/" + filename)));
+            writer.write(sb.toString());
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
+
+
+
