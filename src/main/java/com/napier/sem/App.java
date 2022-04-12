@@ -71,6 +71,10 @@ public class App
         }
     }
 
+
+
+
+
     /**
      * Retrieving city information from database
      */
@@ -167,6 +171,28 @@ public class App
             String country_s =
                     String.format("%-3s %-52s %-13s %-26s %-10s %-10s ",
                             c.getCode(), c.getName(), c.getContinent(),c.getRegion(), c.getPopulation(), c.getCapital() );
+            System.out.println(country_s);
+        }
+    }
+    /**
+     *  Print Stats methods
+     */
+    public void printStats(ArrayList<Stats> stats) {
+        // Check cities is not null
+        if (stats == null)
+        {
+            System.out.println("No population reports");
+            return;
+        }
+        // Print header
+        System.out.println(String.format("%-52s %-32s %-32s %-32s %-41s %-41s ", "Place", "Total Population", "Urban Population","Rural Population", "Urban Population %", "Rural Population %"));
+        // Loop over all cities in the list
+        for (Stats c : stats) {
+            if (c == null)
+                continue;
+            String country_s =
+                    String.format("%-52s %-32s %-32s %-32s %-41s %-41s  ",
+                            c.getPlace(), c.getPlacePop(), c.getUrbanPop(),c.getRuralPop(), c.getUrbPercentage(), c.getRuralPercentage() );
             System.out.println(country_s);
         }
     }
@@ -277,6 +303,12 @@ public class App
             return null;
         }
     }
+
+
+
+
+
+
     /**
      *    POPULATION IN Countries of the world
      */
@@ -851,7 +883,120 @@ public class App
             return null;
         }
     }
+    /**
+     *   Urban and Rural population reports
+     */
+    //regions report
+    public ArrayList<Stats> getPopStatsByRegion() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "WITH cont as (SELECT world.country.Region,  SUM(world.country.Population) as Region_Population "
+            + "FROM world.country "
+            + "Group by 1) "
+            + "SELECT world.country.Region, cont.Region_Population, SUM(world.city.Population) as 'Urban_population', (cont.Region_Population - SUM(world.city.Population)) AS 'Rural_Population', concat(ROUND(((SUM(world.city.Population) /cont.Region_Population)*100),2),'%') as Urban_PopulationPercentage,concat(ROUND((((cont.Region_Population - SUM(world.city.Population))/cont.Region_Population)*100),2),'%') as Rural_PopulationPercentage "
+            + "FROM cont, world.city, world.country "
+            + "WHERE world.country.Code = world.city.CountryCode "
+            + "AND world.country.Region = cont.Region "
+            + "GROUP BY world.country.Region ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<Stats> stats = new ArrayList<Stats>();
+            while (rset.next()) {
 
+                Stats c = new Stats();
+                c.setPlace(rset.getString("Region"));
+                c.setPlacePop(rset.getLong("Region_Population"));
+                c.setUrbanPop(rset.getInt("Urban_population"));
+                c.setRuralPop(rset.getLong("Rural_Population"));
+                c.setUrbPercentage(rset.getString("Urban_PopulationPercentage"));
+                c.setRuralPercentage(rset.getString("Rural_PopulationPercentage"));
+                stats.add(c);
+            }
+            return stats;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details");
+            return null;
+        }
+    }
+
+
+    //continents report
+    public ArrayList<Stats> getPopStatsByContinent() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "WITH cont as (SELECT world.country.Continent,  SUM(world.country.Population) as Continent_Population "
+                            + "FROM world.country "
+                            + "Group by 1) "
+                            + "SELECT world.country.Continent, cont.Continent_Population, SUM(world.city.Population) as 'Urban_population', (cont.Continent_Population - SUM(world.city.Population)) AS 'Rural_Population', concat(ROUND(((SUM(world.city.Population) /cont.Continent_Population)*100),2),'%') as Urban_PopulationPercentage,concat(ROUND((((cont.Continent_Population - SUM(world.city.Population))/cont.Continent_Population)*100),2),'%') as Rural_PopulationPercentage "
+                            + "FROM cont, world.city, world.country "
+                            + "WHERE world.country.Code = world.city.CountryCode "
+                            + "AND world.country.Continent = cont.Continent "
+                            + "GROUP BY world.country.Continent ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<Stats> stats = new ArrayList<Stats>();
+            while (rset.next()) {
+
+                Stats c = new Stats();
+                c.setPlace(rset.getString("Continent"));
+                c.setPlacePop(rset.getLong("Continent_Population"));
+                c.setUrbanPop(rset.getInt("Urban_population"));
+                c.setRuralPop(rset.getLong("Rural_Population"));
+                c.setUrbPercentage(rset.getString("Urban_PopulationPercentage"));
+                c.setRuralPercentage(rset.getString("Rural_PopulationPercentage"));
+                stats.add(c);
+            }
+            return stats;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details");
+            return null;
+        }
+    }
+
+    //countries report
+    public ArrayList<Stats> getPopStatsByCountry() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                             "select  world.country.name, world.country.Population as Total_Population, SUM(world.city.Population) as Urban_Population , concat(ROUND(((SUM(world.city.Population) / world.country.Population)*100),2),'%') as Urban_Population_Percentage,(world.country.Population - SUM(world.city.Population) ) as Rural_Population,concat(ROUND((((world.country.Population-SUM(world.city.Population) )/ world.country.Population)*100),2),'%') as Rural_Population_Percentage "
+                            + "FROM world.city, world.country "
+                            + "WHERE world.city.CountryCode = world.country.code "
+                            + "group by world.country.name,world.country.Population ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<Stats> stats = new ArrayList<Stats>();
+            while (rset.next()) {
+
+                Stats c = new Stats();
+                c.setPlace(rset.getString("name"));
+                c.setPlacePop(rset.getLong("Total_Population"));
+                c.setUrbanPop(rset.getInt("Urban_population"));
+                c.setRuralPop(rset.getLong("Rural_Population"));
+                c.setUrbPercentage(rset.getString("Urban_Population_Percentage"));
+                c.setRuralPercentage(rset.getString("Rural_Population_Percentage"));
+                stats.add(c);
+            }
+            return stats;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details");
+            return null;
+        }
+    }
     /**
      * Main
      */
@@ -867,15 +1012,12 @@ public class App
         }
 
         // ArrayLists
-        ArrayList<City> all = new ArrayList<City>( );
-        all = a.getAllCitiesR("Western Europe", 5);
-        a.printCities(all);
-        ArrayList<City> d = new ArrayList<City>( );
-        d = a.getAllCitiesD("Hamburg", 5);
-        a.printCities(d);
-        ArrayList<City> c = new ArrayList<City>( );
-        c= a.getAllCitiesC("Europe", 5);
-        a.printCities(c);
+        ArrayList<Stats> all = new ArrayList<Stats>( );
+        ArrayList<Stats> countries = new ArrayList<Stats>( );
+        all = a.getPopStatsByContinent();
+       a.printStats(all);
+        countries = a.getPopStatsByCountry();
+        a.printStats(countries);
 
         // Disconnect from database
         a.disconnect();
