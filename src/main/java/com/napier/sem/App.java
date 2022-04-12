@@ -215,6 +215,24 @@ public class App
             System.out.println(stats_s);
         }
     }
+    public void printSinglePop(Stats s ) {
+        // Check stats is not null
+        if (s == null)
+        {
+            System.out.println("No population reports");
+            return;
+        }
+        // Print header
+        System.out.println(String.format("%-52s %-36s ", "Place", " Population" ));
+        // Loop over all stats in the list
+
+            String stats_s =
+                    String.format("%-52s %-36s %-45s ",
+                            s.getPlace(), s.getPlacePop() );
+            System.out.println(stats_s);
+
+    }
+
     /**
      * Retrieving country information from database
      */
@@ -324,7 +342,7 @@ public class App
     }
 
     /**
-     *  Print cities methods
+     *  Print cities method
      */
     public void printCities(ArrayList<City> cities) {
         // Check cities is not null
@@ -346,7 +364,7 @@ public class App
         }
     }
     /**
-     *  Print cities methods
+     *  Print capitals method
      */
     public void printCapitals(ArrayList<City> cities) {
         // Check cities is not null
@@ -368,8 +386,148 @@ public class App
         }
     }
 
+    /**
+     * Population access methods
+     */
+    public Stats getCityPop(String City) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.city.Name, SUM(world.city.Population) as Population "
+                   + "FROM  world.city "
+                   + "WHERE world.city.Name like '" + City + "' "
+                   + "GROUP BY 1 ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract stat information
 
 
+
+                Stats c = new Stats();
+                c.setPlace(rset.getString("Name"));
+                c.setPlacePop(rset.getLong("Population"));
+
+
+            return c;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details");
+            return null;
+        }
+    }
+    public Stats getDistrictPop(String District) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.city.District, SUM(world.city.Population) as Population "
+                            + "FROM  world.city "
+                            + "WHERE world.city.District like '" + District + "' "
+                            + "GROUP BY 1 ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract stat information
+
+
+
+            Stats c = new Stats();
+            c.setPlace(rset.getString("Name"));
+            c.setPlacePop(rset.getLong("Population"));
+
+
+            return c;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details");
+            return null;
+        }
+    }
+    public Stats getContinentPop(String Continent) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.country.Continent, SUM(world.city.Population) as Population "
+                            + "FROM  world.country "
+                            + "WHERE world.country.Continent like '" + Continent + "' "
+                            + "GROUP BY 1 ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract stat information
+
+
+
+            Stats c = new Stats();
+            c.setPlace(rset.getString("Name"));
+            c.setPlacePop(rset.getLong("Population"));
+
+
+            return c;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details");
+            return null;
+        }
+    }
+    public Stats getRegionPop(String Region) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.country.Region, SUM(world.city.Population) as Population "
+                            + "FROM  world.country "
+                            + "WHERE world.country.Region like '" + Region + "' "
+                            + "GROUP BY 1 ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract stat information
+
+
+
+            Stats c = new Stats();
+            c.setPlace(rset.getString("Name"));
+            c.setPlacePop(rset.getLong("Population"));
+
+
+            return c;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details");
+            return null;
+        }
+    }
+    public Stats getWorldPop() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT  SUM(world.city.Population) as Population "
+                            + "FROM  world.country ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract stat information
+
+
+
+            Stats c = new Stats();
+            c.setPlace("World");
+            c.setPlacePop(rset.getLong("Population"));
+
+
+            return c;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details");
+            return null;
+        }
+    }
     /**
      *    POPULATION IN Countries of the world
      */
