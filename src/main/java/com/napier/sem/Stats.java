@@ -1,14 +1,16 @@
 package com.napier.sem;
 /**
  * @author Edgar Park, Mattia Merati and Mateusz Wilczynski
- * Report class represents populastion reports
+ * Report class represents data required for language and population reports
  * since version 1.0.3
  */
 public class Stats {
 
-
     /**
-     *  represents a name of the report - can be a country, continent or a region
+     *  Variables used in retrieving data urban and rural population
+     */
+    /**
+     *  Represents statistical data required
      */
     private String place;
     /**
@@ -33,9 +35,58 @@ public class Stats {
     private String ruralPercentage;
 
 
+
+
+    /**
+     *  Variables used in retrieving data about language speakers
+     */
+
+
+    /**
+     *  represents language name
+     */
+    private String Language;
+    /**
+     *  represents total number of speakers of a language
+     */
+    private long totalSpeakers;
+    /**
+     *  represents percentage of world populatiuon that speaks a particular language
+     */
+    private String totalSpeakersPercentage;
+
+
+
+
+
+
     /**
      *  getters and setters
      */
+    public String getLanguage() {
+        return Language;
+    }
+
+    public void setLanguage(String language) {
+        Language = language;
+    }
+
+    public long getTotalSpeakers() {
+        return totalSpeakers;
+    }
+
+    public void setTotalSpeakers(long totalSpeakers) {
+        this.totalSpeakers = totalSpeakers;
+    }
+
+    public String getTotalSpeakersPercentage() {
+        return totalSpeakersPercentage;
+    }
+
+    public void setTotalSpeakersPercentage(String totalSpeakersPercentage) {
+        this.totalSpeakersPercentage = totalSpeakersPercentage;
+    }
+
     public String getPlace() {
         return place;
     }

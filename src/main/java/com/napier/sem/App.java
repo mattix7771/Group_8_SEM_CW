@@ -177,8 +177,8 @@ public class App
     /**
      *  Print Stats methods
      */
-    public void printStats(ArrayList<Stats> stats) {
-        // Check cities is not null
+    public void printStatsPopulation(ArrayList<Stats> stats) {
+        // Check stats is not null
         if (stats == null)
         {
             System.out.println("No population reports");
@@ -186,7 +186,7 @@ public class App
         }
         // Print header
         System.out.println(String.format("%-52s %-32s %-32s %-32s %-41s %-41s ", "Place", "Total Population", "Urban Population","Rural Population", "Urban Population %", "Rural Population %"));
-        // Loop over all cities in the list
+        // Loop over all stats in the list
         for (Stats c : stats) {
             if (c == null)
                 continue;
@@ -194,6 +194,25 @@ public class App
                     String.format("%-52s %-32s %-32s %-32s %-41s %-41s  ",
                             c.getPlace(), c.getPlacePop(), c.getUrbanPop(),c.getRuralPop(), c.getUrbPercentage(), c.getRuralPercentage() );
             System.out.println(country_s);
+        }
+    }
+    public void printStatsLanguage(ArrayList<Stats> stats) {
+        // Check stats is not null
+        if (stats == null)
+        {
+            System.out.println("No language reports");
+            return;
+        }
+        // Print header
+        System.out.println(String.format("%-52s %-36s %-45s ", "Language", "Total Speakers", "World Population Percentage"));
+        // Loop over all stats in the list
+        for (Stats c : stats) {
+            if (c == null)
+                continue;
+            String stats_s =
+                    String.format("%-52s %-36s %-45s ",
+                            c.getLanguage(), c.getTotalSpeakers(), c.getTotalSpeakersPercentage() );
+            System.out.println(stats_s);
         }
     }
     /**
@@ -998,6 +1017,50 @@ public class App
         }
     }
     /**
+     *   Languages report
+     */
+
+    public ArrayList<Stats> getLanguageSpeakers() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "WITH a as (SELECT world.country.Name, world.countrylanguage.Language as Language,world.country.Population, world.countrylanguage.Percentage, ((world.country.Population/100) * world.countrylanguage.Percentage) as Speakers "
+            + "FROM world.country, world.countrylanguage "
+            + "WHERE CountryCode = Code), "
+            + "B as ( SELECT SUM(world.country.Population) as WorldTotalPopulation "
+            + "FROM world.country) "
+            + "SELECT a.Language, ROUND(SUM(a.Speakers),0) as Total_Speakers, CONCAT(ROUND(((SUM(a.Speakers)) / (B.WorldTotalPopulation /100) ),2), '%') as Total_Population_Percentage "
+            + "FROM a,B "
+            + "WHERE  Language like 'English' "
+            + "OR Language like 'Chinese' "
+            + "OR Language like 'Hindi' "
+            + "OR Language like 'Spanish' "
+            + "OR Language like 'Arabic' "
+            + "GROUP BY 1,B.WorldTotalPopulation "
+            + "ORDER BY 2 DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<Stats> stats = new ArrayList<Stats>();
+            while (rset.next()) {
+
+                Stats c = new Stats();
+                c.setLanguage(rset.getString("Language"));
+                c.setTotalSpeakers(rset.getLong("Total_Speakers"));
+                c.setTotalSpeakersPercentage(rset.getString("Total_Population_Percentage"));
+
+                stats.add(c);
+            }
+            return stats;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details");
+            return null;
+        }
+    }
+    /**
      * Main
      */
     public static void main(String[] args)
@@ -1013,11 +1076,10 @@ public class App
 
         // ArrayLists
         ArrayList<Stats> all = new ArrayList<Stats>( );
-        ArrayList<Stats> countries = new ArrayList<Stats>( );
-        all = a.getPopStatsByContinent();
-       a.printStats(all);
-        countries = a.getPopStatsByCountry();
-        a.printStats(countries);
+
+        all = a.getLanguageSpeakers();
+       a.printStatsLanguage(all);
+
 
         // Disconnect from database
         a.disconnect();
