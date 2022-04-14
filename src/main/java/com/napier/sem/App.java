@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 /*
@@ -161,7 +162,7 @@ public class App
     /**
      *  Print Country methods
      */
-    public void printCountry(ArrayList<Country> countries) {
+    public void printCountry(List<Country> countries) {
         // Check cities is not null
         if (countries == null)
         {
@@ -183,7 +184,7 @@ public class App
     /**
      *  Print Stats methods
      */
-    public void printStatsPopulation(ArrayList<Stats> stats) {
+    public void printStatsPopulation(List<Stats> stats) {
         // Check stats is not null
         if (stats == null)
         {
@@ -202,7 +203,7 @@ public class App
             log.fine(country_s);
         }
     }
-    public void printStatsLanguage(ArrayList<Stats> stats) {
+    public void printStatsLanguage(List<Stats> stats) {
         // Check stats is not null
         if (stats == null)
         {
@@ -350,7 +351,7 @@ public class App
     /**
      *  Print cities method
      */
-    public void printCities(ArrayList<City> cities) {
+    public void printCities(List<City> cities) {
         // Check cities is not null
         if (cities == null)
         {
@@ -372,7 +373,7 @@ public class App
     /**
      *  Print capitals method
      */
-    public void printCapitals(ArrayList<City> cities) {
+    public void printCapitals(List<City> cities) {
         // Check cities is not null
         if (cities == null)
         {
@@ -537,7 +538,7 @@ public class App
     /**
      *    POPULATION IN Countries of the world
      */
-    public ArrayList<Country> getAllCountries() {
+    public List<Country> getAllCountries() {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -581,7 +582,7 @@ public class App
             return null;
         }
     }
-    public ArrayList<Country> getAllCountries(int limit) {
+    public List<Country> getAllCountries(int limit) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -629,7 +630,7 @@ public class App
     /**
      *    POPULATION IN Countries of the continent
      */
-    public ArrayList<Country> getAllCountriesCont(String continentName) {
+    public List<Country> getAllCountriesCont(String continentName) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -674,7 +675,7 @@ public class App
             return null;
         }
     }
-    public ArrayList<Country> getAllCountriesCont(String continentName, int limit) {
+    public List<Country> getAllCountriesCont(String continentName, int limit) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -724,7 +725,7 @@ public class App
     /**
      *    POPULATION IN Countries of the region
      */
-    public ArrayList<Country> getAllCountriesRegion(String regionName) {
+    public List<Country> getAllCountriesRegion(String regionName) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -769,7 +770,7 @@ public class App
             return null;
         }
     }
-    public ArrayList<Country> getAllCountriesRegion(String regionName, int limit) {
+    public List<Country> getAllCountriesRegion(String regionName, int limit) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -820,7 +821,7 @@ public class App
     /**
      *    POPULATION IN CITIES of the world
      */
-    public ArrayList<City> getAllCities() {
+    public List<City> getAllCities() {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -851,7 +852,7 @@ public class App
     }
 
     // Overloaded method to include limit selected by the user
-    public ArrayList<City> getAllCities(int limit) {
+    public List<City> getAllCities(int limit) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -885,7 +886,7 @@ public class App
     /**
      *    POPULATION IN CITIES for the continent
      */
-    public ArrayList<City> getAllCitiesC(String continent) {
+    public List<City> getAllCitiesC(String continent) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -918,7 +919,7 @@ public class App
     }
 
         // Overloaded method to include limit selected by the user
-    public ArrayList<City> getAllCitiesC(String continent, int limit) {
+    public List<City> getAllCitiesC(String continent, int limit) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -954,7 +955,7 @@ public class App
     /**
      *    POPULATION IN CITIES for the region
      */
-    public ArrayList<City> getAllCitiesR(String region) {
+    public List<City> getAllCitiesR(String region) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -987,7 +988,7 @@ public class App
     }
 
     // Overloaded method to include limit selected by the user
-    public ArrayList<City> getAllCitiesR(String region, int limit) {
+    public List<City> getAllCitiesR(String region, int limit) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1023,7 +1024,7 @@ public class App
     /**
      *    POPULATION IN CITIES for the district
      */
-    public ArrayList<City> getAllCitiesD(String district) {
+    public List<City> getAllCitiesD(String district) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1055,7 +1056,7 @@ public class App
         }
     }
     // Overloaded method to include limit selected by the user
-    public ArrayList<City> getAllCitiesD(String district, int limit) {
+    public List<City> getAllCitiesD(String district, int limit) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1090,7 +1091,7 @@ public class App
     /**
      *   Capitals reports
      */
-    public ArrayList<City> getAllCapitals() {
+    public List<City> getAllCapitals() {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1121,7 +1122,7 @@ public class App
         }
     }
     //  overloaded
-    public ArrayList<City> getAllCapitals( int limit) {
+    public List<City> getAllCapitals( int limit) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1153,7 +1154,7 @@ public class App
         }
     }
     //  by region
-    public ArrayList<City> getAllCapitalsRegion(  String Region) {
+    public List<City> getAllCapitalsRegion(  String Region) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1186,7 +1187,7 @@ public class App
         }
     }
     //  overloaded
-    public ArrayList<City> getAllCapitalsRegion( int limit , String Region) {
+    public List<City> getAllCapitalsRegion( int limit , String Region) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1221,7 +1222,7 @@ public class App
 
 
     //  by region
-    public ArrayList<City> getAllCapitalsContinent(  String Continent ) {
+    public List<City> getAllCapitalsContinent(  String Continent ) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1254,7 +1255,7 @@ public class App
         }
     }
     //  overloaded
-    public ArrayList<City> getAllCapitalsContinent( int limit , String Continent) {
+    public List<City> getAllCapitalsContinent( int limit , String Continent) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1292,7 +1293,7 @@ public class App
      *   Urban and Rural population reports
      */
     //regions report
-    public ArrayList<Stats> getPopStatsByRegion() {
+    public List<Stats> getPopStatsByRegion() {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1331,7 +1332,7 @@ public class App
 
 
     //continents report
-    public ArrayList<Stats> getPopStatsByContinent() {
+    public List<Stats> getPopStatsByContinent() {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1369,7 +1370,7 @@ public class App
     }
 
     //countries report
-    public ArrayList<Stats> getPopStatsByCountry() {
+    public List<Stats> getPopStatsByCountry() {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1406,7 +1407,7 @@ public class App
      *   Languages report
      */
 
-    public ArrayList<Stats> getLanguageSpeakers() {
+    public List<Stats> getLanguageSpeakers() {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1461,7 +1462,7 @@ public class App
         }
 
         // ArrayLists
-        ArrayList<Stats> all = new ArrayList<Stats>( );
+        List<Stats> all = new ArrayList<Stats>( );
 
         all = a.getLanguageSpeakers();
 
@@ -1478,7 +1479,7 @@ public class App
     /**
      *  Output cities method
      */
-    public void outputCities(ArrayList<City> cities, String filename) {
+    public void outputCities(List<City> cities, String filename) {
         // Check employees is not null
         if (cities == null) {
             log.fine("No cities");
@@ -1512,7 +1513,7 @@ public class App
      *  Print capitals method
      */
 
-    public void outputCapitals(ArrayList<City> cities, String filename) {
+    public void outputCapitals(List<City> cities, String filename) {
         // Check employees is not null
         if (cities == null) {
             log.fine("No cities");
@@ -1541,7 +1542,7 @@ public class App
     /**
      *  Output Country methods
      */
-    public void outputCountries(ArrayList<Country> countries, String filename) {
+    public void outputCountries(List<Country> countries, String filename) {
         // Check employees is not null
         if (countries == null) {
             log.fine("No countries");
@@ -1572,7 +1573,7 @@ public class App
      *  Print Stats methods
      */
 
-    public void outputStats(ArrayList<Stats> stats, String filename) {
+    public void outputStats(List<Stats> stats, String filename) {
         // Check employees is not null
         if (stats == null) {
             log.fine("No stats");
@@ -1601,7 +1602,7 @@ public class App
 
 
 
-    public void outputLanguageStats(ArrayList<Stats> stats, String filename) {
+    public void outputLanguageStats(List<Stats> stats, String filename) {
         // Check employees is not null
         if (stats == null) {
             log.fine("No stats");
@@ -1629,7 +1630,7 @@ public class App
     }
 
 
-    public void outputSinglePopStats(ArrayList<Stats> stats, String filename) {
+    public void outputSinglePopStats(List<Stats> stats, String filename) {
         // Check employees is not null
         if (stats == null) {
             log.fine("No stats");
