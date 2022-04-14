@@ -4,11 +4,8 @@ import com.napier.sem.App;
 import com.napier.sem.City;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 
 import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class AppTest
 {
@@ -24,12 +21,14 @@ public class AppTest
      * UNIT TESTS
      */
 
+    /**
+     * CITY TESTS
+     */
     @Test // Null test
     void testDisplayCityNull()
     {
         app.displayCity(null);
     }
-
     @Test // Displaying city information test
     void displayCity()
     {
@@ -39,21 +38,18 @@ public class AppTest
         city.setName("London");
         app.displayCity(city);
     }
-
     @Test // Empty arrayList test
     void testDisplayPrintCitiesEmpty()
     {
         ArrayList<City> cities = new ArrayList<City>();
         app.printCities(cities);
     }
-
     @Test // Null arrayList test
     void testDisplayPrintCitiesNull()
     {
         ArrayList<City> cities = new ArrayList<City>();
         app.printCities(null);
     }
-
     @Test // Display arrayList information test v2
     void testDisplayPrintCitiesNameNull()
     {
@@ -67,7 +63,6 @@ public class AppTest
         cities.add(city);
         app.printCities(cities);
     }
-
     @Test // Display arrayList information test
     void displayPrintCities()
     {
@@ -80,5 +75,137 @@ public class AppTest
         city.setPopulation(5860);
         cities.add(city);
         app.printCities(cities);
+    }
+
+    /**
+     * COUNTRY TESTS
+     */
+    @Test // Displaying country information test
+    void displayCountry()
+    {
+        Country country = new Country();
+        country.setCode("010");
+        country.setName("UK");
+        country.setContinent("Brexit");
+        country.setRegion("Scotland");
+        country.setCapital("Edinburgh");
+        country.setPopulation(456660);
+        app.displayCountry(country);
+    }
+    @Test // Null country test
+    void testDisplayCountryNull()
+    {
+        app.displayCountry(null);
+    }
+    @Test // Empty arrayList test
+    void testDisplayPrintCountriesEmpty()
+    {
+        ArrayList<Country> countries = new ArrayList<Country>();
+        app.printCountry(countries);
+    }
+    @Test // Null arrayList
+    void testDisplayPrintCountriesNull()
+    {
+        ArrayList<Country> countries = new ArrayList<Country>();
+        app.printCountry(null);
+    }
+    @Test // Display arrayList information test
+    void displayPrintCountries()
+    {
+        ArrayList<Country> countries = new ArrayList<Country>();
+        Country country = new Country();
+        country.setName("England");
+        country.setPopulation(56486);
+        country.setCapital("London");
+        country.setRegion("South");
+        country.setContinent("UK");
+        country.setCode("456465");
+        countries.add(country);
+        app.printCountry(countries);
+    }
+
+    /**
+     * STATS TESTS
+     */
+    @Test // Population stats NULL test
+    void testDisplayPrintStatsPopulationNull()
+    {
+        ArrayList<Stats> stats = new ArrayList<Stats>();
+        app.printStatsPopulation(null);
+    }
+    @Test // Population stats EMPTY test
+    void testDisplayPrintStatsPopulationEmpty()
+    {
+        ArrayList<Stats> stats = new ArrayList<Stats>();
+        app.printStatsPopulation(stats);
+    }
+    @Test // Display population stats arrayList test
+    void displayPrintStatsPopulation()
+    {
+        ArrayList<Stats> stats = new ArrayList<Stats>();
+        Stats statistics = new Stats();
+        statistics.setPlace("Cardiff");
+        statistics.setPlacePop(564156);
+        statistics.setRuralPop(452452);
+        statistics.setUrbanPop(4545245);
+        statistics.setUrbPercentage("45%");
+        statistics.setRuralPercentage("55%");
+        stats.add(statistics);
+        app.printStatsPopulation(stats);
+    }
+    @Test // Language stats NULL test
+    void testDisplayPrintStatsLanguageNull()
+    {
+        ArrayList<Stats> stats = new ArrayList<Stats>();
+        app.printStatsLanguage(null);
+    }
+    @Test // Language stats EMPTY test
+    void testDisplayPrintStatsLanguageEmpty()
+    {
+        ArrayList<Stats> stats = new ArrayList<Stats>();
+        app.printStatsLanguage(stats);
+    }
+    @Test // Display language stats test
+    void displayPrintStatsLanguage()
+    {
+        ArrayList<Stats> stats = new ArrayList<Stats>();
+        Stats statistics = new Stats();
+        statistics.setLanguage("Arabic");
+        statistics.setTotalSpeakers(165450);
+        statistics.setTotalSpeakersPercentage("12%");
+        stats.add(statistics);
+        app.printStatsLanguage(stats);
+    }
+    @Test // Single population NULL test
+    void testDisplayPrintSinglePopNull()
+    {
+        app.printSinglePop(null);
+    }
+
+    /**
+     * CAPITAL TESTS
+     */
+    @Test // Capital NULL test
+    void testDislayPrintCapitalsNUll()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        app.printCapitals(null);
+    }
+    @Test // Capital EMPTY test
+    void testDisplayPrintCapitalsEmpty()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        app.printCapitals(cities);
+    }
+    @Test // Display capital test
+    void displayPrintCapitals()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        City capital = new City();
+        capital.setName("London");
+        capital.setCountryCode("UK-005");
+        capital.setPopulation(6004);
+        cities.add(capital);
+        app.printCapitals(cities);
     }
 }

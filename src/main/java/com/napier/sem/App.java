@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 /*
 *  This program was created as a project for Software Engineering Methods Module
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 
 public class App
 {
+    Logger log = Logger.getLogger(App.class.getName());
     /**
      * Connection to MySQL database.
      */
@@ -31,13 +33,13 @@ public class App
             // Load Database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            System.out.println("Could not load SQL driver");
+            log.fine("Could not load SQL driver");
             System.exit(-1);
         }
 
         int retries = 10;
         for (int i = 0; i < retries; ++i) {
-            System.out.println("Connecting to database...");
+            log.fine("Connecting to database...");
             try {
                 // Wait a bit for db to start
                 Thread.sleep(delay);
@@ -45,13 +47,13 @@ public class App
                 con = DriverManager.getConnection("jdbc:mysql://" + location
                                 + "/world?allowPublicKeyRetrieval=true&useSSL=false",
                         "root", "example");
-                System.out.println("Successfully connected");
+                log.fine("Successfully connected");
                 break;
             } catch (SQLException sqle) {
-                System.out.println("Failed to connect to database attempt " +                                  Integer.toString(i));
-                System.out.println(sqle.getMessage());
+                log.fine("Failed to connect to database attempt " +                                  Integer.toString(i));
+                log.fine(sqle.getMessage());
             } catch (InterruptedException ie) {
-                System.out.println("Thread interrupted? Should not happen.");
+                log.fine("Thread interrupted? Should not happen.");
             }
         }
     }
@@ -70,7 +72,7 @@ public class App
             }
             catch (Exception e)
             {
-                System.out.println("Error closing connection to database");
+                log.fine("Error closing connection to database");
             }
         }
     }
@@ -112,8 +114,8 @@ public class App
         }
         catch (Exception e)
         {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get City details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get City details");
             return null;
         }
     }
@@ -125,15 +127,15 @@ public class App
     {
         if (city == null)
         {
-            System.out.println("No valid city");
+            log.fine("No valid city");
             return;
         }
 
-            System.out.println(
+            log.fine(
                     city.getId() + " "
                             + city.getName() + " "
                             + city.getCountryCode() + " "
-                            + city.getPopulation() + "\n")   ;
+                            + city.getPopulation() + "\n");   ;
 
     }
     /**
@@ -143,17 +145,17 @@ public class App
     {
         if (country == null)
         {
-            System.out.println("No valid country");
+            log.fine("No valid country");
             return;
         }
 
-        System.out.println(
+        log.fine(
                 country.getCode() + " "
                         + country.getName() + " "
                         + country.getContinent() + " "
                         + country.getRegion() + " "
                         + country.getCapital() + " "
-                        + country.getPopulation() + "\n")   ;
+                        + country.getPopulation() + "\n");   ;
 
     }
     /**
@@ -163,11 +165,11 @@ public class App
         // Check cities is not null
         if (countries == null)
         {
-            System.out.println("No countries");
+            log.fine("No countries");
             return;
         }
         // Print header
-        System.out.println(String.format("%-3s %-52s %-13s %-26s %-10s %-10s ", "Code", "Name", "Continent","Region", "Population", "Capital"));
+        log.fine(String.format("%-3s %-52s %-13s %-26s %-10s %-10s ", "Code", "Name", "Continent","Region", "Population", "Capital"));
         // Loop over all cities in the list
         for (Country c : countries) {
             if (c == null)
@@ -175,7 +177,7 @@ public class App
             String country_s =
                     String.format("%-3s %-52s %-13s %-26s %-10s %-10s ",
                             c.getCode(), c.getName(), c.getContinent(),c.getRegion(), c.getPopulation(), c.getCapital() );
-            System.out.println(country_s);
+            log.fine(country_s);
         }
     }
     /**
@@ -185,11 +187,11 @@ public class App
         // Check stats is not null
         if (stats == null)
         {
-            System.out.println("No population reports");
+            log.fine("No population reports");
             return;
         }
         // Print header
-        System.out.println(String.format("%-52s %-32s %-32s %-32s %-41s %-41s ", "Place", "Total Population", "Urban Population","Rural Population", "Urban Population %", "Rural Population %"));
+        log.fine(String.format("%-52s %-32s %-32s %-32s %-41s %-41s ", "Place", "Total Population", "Urban Population","Rural Population", "Urban Population %", "Rural Population %"));
         // Loop over all stats in the list
         for (Stats c : stats) {
             if (c == null)
@@ -197,18 +199,18 @@ public class App
             String country_s =
                     String.format("%-52s %-32s %-32s %-32s %-41s %-41s  ",
                             c.getPlace(), c.getPlacePop(), c.getUrbanPop(),c.getRuralPop(), c.getUrbPercentage(), c.getRuralPercentage() );
-            System.out.println(country_s);
+            log.fine(country_s);
         }
     }
     public void printStatsLanguage(ArrayList<Stats> stats) {
         // Check stats is not null
         if (stats == null)
         {
-            System.out.println("No language reports");
+            log.fine("No language reports");
             return;
         }
         // Print header
-        System.out.println(String.format("%-52s %-36s %-45s ", "Language", "Total Speakers", "World Population Percentage"));
+        log.fine(String.format("%-52s %-36s %-45s ", "Language", "Total Speakers", "World Population Percentage"));
         // Loop over all stats in the list
         for (Stats c : stats) {
             if (c == null)
@@ -216,24 +218,24 @@ public class App
             String stats_s =
                     String.format("%-52s %-36s %-45s ",
                             c.getLanguage(), c.getTotalSpeakers(), c.getTotalSpeakersPercentage() );
-            System.out.println(stats_s);
+            log.fine(stats_s);
         }
     }
     public void printSinglePop(Stats s ) {
         // Check stats is not null
         if (s == null)
         {
-            System.out.println("No population reports");
+            log.fine("No population reports");
             return;
         }
         // Print header
-        System.out.println(String.format("%-52s %-36s ", "Place", " Population" ));
+        log.fine(String.format("%-52s %-36s ", "Place", " Population" ));
         // Loop over all stats in the list
 
             String stats_s =
                     String.format("%-52s %-36s %-45s ",
                             s.getPlace(), s.getPlacePop() );
-            System.out.println(stats_s);
+            log.fine(stats_s);
 
     }
 
@@ -285,8 +287,8 @@ public class App
         }
         catch (Exception e)
         {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get Country details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get Country details");
             return null;
         }
     }
@@ -339,8 +341,8 @@ public class App
         }
         catch (Exception e)
         {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get Country details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get Country details");
             return null;
         }
     }
@@ -352,11 +354,11 @@ public class App
         // Check cities is not null
         if (cities == null)
         {
-            System.out.println("No cities");
+            log.fine("No cities");
             return;
         }
         // Print header
-        System.out.println(String.format("%-35s %-20s %-3s %-10s ", "Name", "District", "Country", "Population"));
+        log.fine(String.format("%-35s %-20s %-3s %-10s ", "Name", "District", "Country", "Population"));
         // Loop over all cities in the list
         for (City c : cities) {
             if (c == null)
@@ -364,7 +366,7 @@ public class App
             String city_s =
                     String.format("%-35s %-20s %-3s %-10s ",
                             c.getName(), c.getDistrict(), c.getCountryCode(), c.getPopulation() );
-            System.out.println(city_s);
+            log.fine(city_s);
         }
     }
     /**
@@ -374,11 +376,11 @@ public class App
         // Check cities is not null
         if (cities == null)
         {
-            System.out.println("No cities");
+            log.fine("No cities");
             return;
         }
         // Print header
-        System.out.println(String.format("%-35s %-52s %-10s ", "City", "Country", "Population"));
+        log.fine(String.format("%-35s %-52s %-10s ", "City", "Country", "Population"));
         // Loop over all cities in the list
         for (City c : cities) {
             if (c == null)
@@ -386,7 +388,7 @@ public class App
             String city_s =
                     String.format("%-35s %-52s %-10s ",
                             c.getName(), c.getCountryCode(), c.getPopulation() );
-            System.out.println(city_s);
+            log.fine(city_s);
         }
     }
 
@@ -416,8 +418,8 @@ public class App
 
             return c;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get population details");
             return null;
         }
     }
@@ -444,8 +446,8 @@ public class App
 
             return c;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get population details");
             return null;
         }
     }
@@ -472,8 +474,8 @@ public class App
 
             return c;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get population details");
             return null;
         }
     }
@@ -500,8 +502,8 @@ public class App
 
             return c;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get population details");
             return null;
         }
     }
@@ -527,8 +529,8 @@ public class App
 
             return c;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get population details");
             return null;
         }
     }
@@ -574,8 +576,8 @@ public class App
             }
             return countries;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get country population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get country population details");
             return null;
         }
     }
@@ -619,8 +621,8 @@ public class App
             }
             return countries;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get country population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get country population details");
             return null;
         }
     }
@@ -667,8 +669,8 @@ public class App
             }
             return countries;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get country population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get country population details");
             return null;
         }
     }
@@ -714,8 +716,8 @@ public class App
             }
             return countries;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get country population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get country population details");
             return null;
         }
     }
@@ -762,8 +764,8 @@ public class App
             }
             return countries;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get country population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get country population details");
             return null;
         }
     }
@@ -808,8 +810,8 @@ public class App
             }
             return countries;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get country population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get country population details");
             return null;
         }
     }
@@ -842,8 +844,8 @@ public class App
             }
             return cities;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get city population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get city population details");
             return null;
         }
     }
@@ -874,8 +876,8 @@ public class App
             }
             return cities;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get city population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get city population details");
             return null;
         }
     }
@@ -909,8 +911,8 @@ public class App
             }
             return cities;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get city population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get city population details");
             return null;
         }
     }
@@ -943,8 +945,8 @@ public class App
             }
             return cities;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get city population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get city population details");
             return null;
         }
     }
@@ -978,8 +980,8 @@ public class App
             }
             return cities;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get city population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get city population details");
             return null;
         }
     }
@@ -1012,8 +1014,8 @@ public class App
             }
             return cities;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get city population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get city population details");
             return null;
         }
     }
@@ -1047,8 +1049,8 @@ public class App
             }
             return cities;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get city population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get city population details");
             return null;
         }
     }
@@ -1080,8 +1082,8 @@ public class App
             }
             return cities;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get city population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get city population details");
             return null;
         }
     }
@@ -1113,8 +1115,8 @@ public class App
             }
             return cities;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get city population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get city population details");
             return null;
         }
     }
@@ -1145,8 +1147,8 @@ public class App
             }
             return cities;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get city population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get city population details");
             return null;
         }
     }
@@ -1178,8 +1180,8 @@ public class App
             }
             return cities;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get city population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get city population details");
             return null;
         }
     }
@@ -1211,8 +1213,8 @@ public class App
             }
             return cities;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get city population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get city population details");
             return null;
         }
     }
@@ -1246,8 +1248,8 @@ public class App
             }
             return cities;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get city population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get city population details");
             return null;
         }
     }
@@ -1279,8 +1281,8 @@ public class App
             }
             return cities;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get city population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get city population details");
             return null;
         }
     }
@@ -1321,8 +1323,8 @@ public class App
             }
             return stats;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get population details");
             return null;
         }
     }
@@ -1360,8 +1362,8 @@ public class App
             }
             return stats;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get population details");
             return null;
         }
     }
@@ -1395,8 +1397,8 @@ public class App
             }
             return stats;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get population details");
             return null;
         }
     }
@@ -1439,8 +1441,8 @@ public class App
             }
             return stats;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get population details");
+            log.fine(e.getMessage());
+            log.fine("Failed to get population details");
             return null;
         }
     }
@@ -1479,7 +1481,7 @@ public class App
     public void outputCities(ArrayList<City> cities, String filename) {
         // Check employees is not null
         if (cities == null) {
-            System.out.println("No cities");
+            log.fine("No cities");
             return;
         }
 
@@ -1513,7 +1515,7 @@ public class App
     public void outputCapitals(ArrayList<City> cities, String filename) {
         // Check employees is not null
         if (cities == null) {
-            System.out.println("No cities");
+            log.fine("No cities");
             return;
         }
 
@@ -1542,7 +1544,7 @@ public class App
     public void outputCountries(ArrayList<Country> countries, String filename) {
         // Check employees is not null
         if (countries == null) {
-            System.out.println("No countries");
+            log.fine("No countries");
             return;
         }
 
@@ -1573,7 +1575,7 @@ public class App
     public void outputStats(ArrayList<Stats> stats, String filename) {
         // Check employees is not null
         if (stats == null) {
-            System.out.println("No stats");
+            log.fine("No stats");
             return;
         }
 
@@ -1602,7 +1604,7 @@ public class App
     public void outputLanguageStats(ArrayList<Stats> stats, String filename) {
         // Check employees is not null
         if (stats == null) {
-            System.out.println("No stats");
+            log.fine("No stats");
             return;
         }
 
@@ -1630,7 +1632,7 @@ public class App
     public void outputSinglePopStats(ArrayList<Stats> stats, String filename) {
         // Check employees is not null
         if (stats == null) {
-            System.out.println("No stats");
+            log.fine("No stats");
             return;
         }
 
