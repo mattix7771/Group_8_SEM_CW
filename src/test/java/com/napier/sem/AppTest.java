@@ -47,7 +47,6 @@ public class AppTest
     @Test // Null arrayList test
     void testDisplayPrintCitiesNull()
     {
-        ArrayList<City> cities = new ArrayList<City>();
         app.printCities(null);
     }
     @Test // Display arrayList information test v2
@@ -106,7 +105,6 @@ public class AppTest
     @Test // Null arrayList
     void testDisplayPrintCountriesNull()
     {
-        ArrayList<Country> countries = new ArrayList<Country>();
         app.printCountry(null);
     }
     @Test // Display arrayList information test
@@ -130,7 +128,6 @@ public class AppTest
     @Test // Population stats NULL test
     void testDisplayPrintStatsPopulationNull()
     {
-        ArrayList<Stats> stats = new ArrayList<Stats>();
         app.printStatsPopulation(null);
     }
     @Test // Population stats EMPTY test
@@ -156,7 +153,6 @@ public class AppTest
     @Test // Language stats NULL test
     void testDisplayPrintStatsLanguageNull()
     {
-        ArrayList<Stats> stats = new ArrayList<Stats>();
         app.printStatsLanguage(null);
     }
     @Test // Language stats EMPTY test
@@ -188,7 +184,6 @@ public class AppTest
     @Test // Capital NULL test
     void testDislayPrintCapitalsNUll()
     {
-        ArrayList<City> cities = new ArrayList<City>();
         app.printCapitals(null);
     }
     @Test // Capital EMPTY test

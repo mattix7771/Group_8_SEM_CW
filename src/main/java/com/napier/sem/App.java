@@ -1502,7 +1502,7 @@ public class App
             BufferedWriter writer = new BufferedWriter(new FileWriter(new                                 File("./reports/" + filename)));
             writer.write(sb.toString());
             writer.close();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -1535,7 +1535,7 @@ public class App
             BufferedWriter writer = new BufferedWriter(new FileWriter(new                                 File("./reports/" + filename)));
             writer.write(sb.toString());
             writer.close();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -1564,7 +1564,7 @@ public class App
             BufferedWriter writer = new BufferedWriter(new FileWriter(new                                 File("./reports/" + filename)));
             writer.write(sb.toString());
             writer.close();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -1595,7 +1595,7 @@ public class App
             BufferedWriter writer = new BufferedWriter(new FileWriter(new                                 File("./reports/" + filename)));
             writer.write(sb.toString());
             writer.close();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -1624,7 +1624,7 @@ public class App
             BufferedWriter writer = new BufferedWriter(new FileWriter(new                                 File("./reports/" + filename)));
             writer.write(sb.toString());
             writer.close();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -1652,7 +1652,7 @@ public class App
             BufferedWriter writer = new BufferedWriter(new FileWriter(new                                 File("./reports/" + filename)));
             writer.write(sb.toString());
             writer.close();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
