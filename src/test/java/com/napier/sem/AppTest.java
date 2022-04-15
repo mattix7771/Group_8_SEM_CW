@@ -7,8 +7,14 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
+/**
+ * Unit Tests
+ */
 public class AppTest
 {
+    /**
+     * Creating app object
+     */
     static App app;
 
     @BeforeAll
@@ -18,17 +24,14 @@ public class AppTest
     }
 
     /**
-     * UNIT TESTS
-     */
-
-    /**
-     * CITY TESTS
+     * City tests
      */
     @Test // Null test
     void testDisplayCityNull()
     {
         app.displayCity(null);
     }
+
     @Test // Displaying city information test
     void displayCity()
     {
@@ -38,17 +41,20 @@ public class AppTest
         city.setName("London");
         app.displayCity(city);
     }
+
     @Test // Empty arrayList test
     void testDisplayPrintCitiesEmpty()
     {
         ArrayList<City> cities = new ArrayList<City>();
         app.printCities(cities);
     }
+
     @Test // Null arrayList test
     void testDisplayPrintCitiesNull()
     {
         app.printCities(null);
     }
+
     @Test // Display arrayList information test v2
     void testDisplayPrintCitiesNameNull()
     {
@@ -62,6 +68,7 @@ public class AppTest
         cities.add(city);
         app.printCities(cities);
     }
+
     @Test // Display arrayList information test
     void displayPrintCities()
     {
@@ -77,7 +84,7 @@ public class AppTest
     }
 
     /**
-     * COUNTRY TESTS
+     * Country tests
      */
     @Test // Displaying country information test
     void displayCountry()
@@ -91,22 +98,23 @@ public class AppTest
         country.setPopulation(456660);
         app.displayCountry(country);
     }
+
     @Test // Null country test
     void testDisplayCountryNull()
     {
         app.displayCountry(null);
     }
+
     @Test // Empty arrayList test
     void testDisplayPrintCountriesEmpty()
     {
         ArrayList<Country> countries = new ArrayList<Country>();
         app.printCountry(countries);
     }
+
     @Test // Null arrayList
-    void testDisplayPrintCountriesNull()
-    {
-        app.printCountry(null);
-    }
+    void testDisplayPrintCountriesNull() { app.printCountry(null); }
+
     @Test // Display arrayList information test
     void displayPrintCountries()
     {
@@ -123,19 +131,18 @@ public class AppTest
     }
 
     /**
-     * STATS TESTS
+     * Stats tests
      */
     @Test // Population stats NULL test
-    void testDisplayPrintStatsPopulationNull()
-    {
-        app.printStatsPopulation(null);
-    }
+    void testDisplayPrintStatsPopulationNull(){ app.printStatsPopulation(null); }
+
     @Test // Population stats EMPTY test
     void testDisplayPrintStatsPopulationEmpty()
     {
         ArrayList<Stats> stats = new ArrayList<Stats>();
         app.printStatsPopulation(stats);
     }
+
     @Test // Display population stats arrayList test
     void displayPrintStatsPopulation()
     {
@@ -150,17 +157,17 @@ public class AppTest
         stats.add(statistics);
         app.printStatsPopulation(stats);
     }
+
     @Test // Language stats NULL test
-    void testDisplayPrintStatsLanguageNull()
-    {
-        app.printStatsLanguage(null);
-    }
+    void testDisplayPrintStatsLanguageNull() { app.printStatsLanguage(null); }
+
     @Test // Language stats EMPTY test
     void testDisplayPrintStatsLanguageEmpty()
     {
         ArrayList<Stats> stats = new ArrayList<Stats>();
         app.printStatsLanguage(stats);
     }
+
     @Test // Display language stats test
     void displayPrintStatsLanguage()
     {
@@ -172,6 +179,7 @@ public class AppTest
         stats.add(statistics);
         app.printStatsLanguage(stats);
     }
+
     @Test // Single population NULL test
     void testDisplayPrintSinglePopNull()
     {
@@ -179,19 +187,18 @@ public class AppTest
     }
 
     /**
-     * CAPITAL TESTS
+     * Capital tests
      */
     @Test // Capital NULL test
-    void testDislayPrintCapitalsNUll()
-    {
-        app.printCapitals(null);
-    }
+    void testDislayPrintCapitalsNUll(){ app.printCapitals(null); }
+
     @Test // Capital EMPTY test
     void testDisplayPrintCapitalsEmpty()
     {
         ArrayList<City> cities = new ArrayList<City>();
         app.printCapitals(cities);
     }
+
     @Test // Display capital test
     void displayPrintCapitals()
     {

@@ -49,10 +49,18 @@ public class CountryLanguage {
         this.language = language;
     }
 
+    /**
+     *
+     * @return
+     */
     public Boolean getOfficial() {
         return isOfficial;
     }
 
+    /**
+     *
+     * @param official
+     */
     public void setOfficial(Boolean official) {
         isOfficial = official;
     }

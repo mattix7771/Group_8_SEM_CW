@@ -11,16 +11,22 @@ import java.util.logging.Logger;
 
 /*
 *  This program was created as a project for Software Engineering Methods Module
-*  Program retrieves data from MySql database based on instructions within the app
+*  Program retrieves data from MySql database
+*  based on instructions within the app
 *  Created by Edgar Park, Mattia Merati and Mateusz Wilczynski
-*  Date: 01/02/2022
-*  Location: Edinburgh Napier University
+*  Location: Edinburgh Napier University | Date: 01/02/2022
 * */
 
-
+/**
+ * Main class for all database related work
+ */
 public class App
 {
+    /**
+     * Logger used instead of system.out.println
+     */
     Logger log = Logger.getLogger(App.class.getName());
+
     /**
      * Connection to MySQL database.
      */
@@ -29,7 +35,8 @@ public class App
     /**
      * Connect to the MySQL database.
      */
-    public void connect(String location, int delay) {
+    public void connect(String location, int delay)
+    {
         try {
             // Load Database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -51,7 +58,7 @@ public class App
                 log.fine("Successfully connected");
                 break;
             } catch (SQLException sqle) {
-                log.fine("Failed to connect to database attempt " +                                  Integer.toString(i));
+                log.fine("Failed to connect to database attempt " + Integer.toString(i));
                 log.fine(sqle.getMessage());
             } catch (InterruptedException ie) {
                 log.fine("Thread interrupted? Should not happen.");
@@ -77,10 +84,6 @@ public class App
             }
         }
     }
-
-
-
-
 
     /**
      * Retrieving city information from database
@@ -139,6 +142,7 @@ public class App
                             + city.getPopulation() + "\n");   ;
 
     }
+
     /**
      * Display country information
      */
@@ -159,10 +163,12 @@ public class App
                         + country.getPopulation() + "\n");   ;
 
     }
+
     /**
      *  Print Country methods
      */
-    public void printCountry(List<Country> countries) {
+    public void printCountry(List<Country> countries)
+    {
         // Check cities is not null
         if (countries == null)
         {
@@ -181,10 +187,12 @@ public class App
             log.fine(country_s);
         }
     }
+
     /**
      *  Print Stats methods
      */
-    public void printStatsPopulation(List<Stats> stats) {
+    public void printStatsPopulation(List<Stats> stats)
+    {
         // Check stats is not null
         if (stats == null)
         {
@@ -203,6 +211,11 @@ public class App
             log.fine(country_s);
         }
     }
+
+    /**
+     *
+     * @param stats
+     */
     public void printStatsLanguage(List<Stats> stats) {
         // Check stats is not null
         if (stats == null)
@@ -222,7 +235,13 @@ public class App
             log.fine(stats_s);
         }
     }
-    public void printSinglePop(Stats s ) {
+
+    /**
+     *
+     * @param s
+     */
+    public void printSinglePop(Stats s )
+    {
         // Check stats is not null
         if (s == null)
         {
@@ -351,7 +370,8 @@ public class App
     /**
      *  Print cities method
      */
-    public void printCities(List<City> cities) {
+    public void printCities(List<City> cities)
+    {
         // Check cities is not null
         if (cities == null)
         {
@@ -370,6 +390,7 @@ public class App
             log.fine(city_s);
         }
     }
+
     /**
      *  Print capitals method
      */
@@ -396,7 +417,8 @@ public class App
     /**
      * Population access methods
      */
-    public Stats getCityPop(String City) {
+    public Stats getCityPop(String City)
+    {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -408,14 +430,11 @@ public class App
                    + "GROUP BY 1 ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
+
             // Extract stat information
-
-
-
                 Stats c = new Stats();
                 c.setPlace(rset.getString("Name"));
                 c.setPlacePop(rset.getLong("Population"));
-
 
             return c;
         } catch (Exception e) {
@@ -424,7 +443,14 @@ public class App
             return null;
         }
     }
-    public Stats getDistrictPop(String District) {
+
+    /**
+     *
+     * @param District
+     * @return
+     */
+    public Stats getDistrictPop(String District)
+    {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -436,14 +462,11 @@ public class App
                             + "GROUP BY 1 ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
+
             // Extract stat information
-
-
-
             Stats c = new Stats();
             c.setPlace(rset.getString("Name"));
             c.setPlacePop(rset.getLong("Population"));
-
 
             return c;
         } catch (Exception e) {
@@ -452,7 +475,14 @@ public class App
             return null;
         }
     }
-    public Stats getContinentPop(String Continent) {
+
+    /**
+     *
+     * @param Continent
+     * @return
+     */
+    public Stats getContinentPop(String Continent)
+    {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -464,14 +494,11 @@ public class App
                             + "GROUP BY 1 ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
+
             // Extract stat information
-
-
-
             Stats c = new Stats();
             c.setPlace(rset.getString("Name"));
             c.setPlacePop(rset.getLong("Population"));
-
 
             return c;
         } catch (Exception e) {
@@ -480,7 +507,14 @@ public class App
             return null;
         }
     }
-    public Stats getRegionPop(String Region) {
+
+    /**
+     *
+     * @param Region
+     * @return
+     */
+    public Stats getRegionPop(String Region)
+    {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -492,14 +526,11 @@ public class App
                             + "GROUP BY 1 ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
+
             // Extract stat information
-
-
-
             Stats c = new Stats();
             c.setPlace(rset.getString("Name"));
             c.setPlacePop(rset.getLong("Population"));
-
 
             return c;
         } catch (Exception e) {
@@ -508,7 +539,13 @@ public class App
             return null;
         }
     }
-    public Stats getWorldPop() {
+
+    /**
+     *
+     * @return
+     */
+    public Stats getWorldPop()
+    {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -519,14 +556,11 @@ public class App
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
+
             // Extract stat information
-
-
-
             Stats c = new Stats();
             c.setPlace("World");
             c.setPlacePop(rset.getLong("Population"));
-
 
             return c;
         } catch (Exception e) {
@@ -535,10 +569,12 @@ public class App
             return null;
         }
     }
+
     /**
      *    POPULATION IN Countries of the world
      */
-    public List<Country> getAllCountries() {
+    public List<Country> getAllCountries()
+    {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -555,8 +591,6 @@ public class App
             // Extract city information
             ArrayList<Country> countries = new ArrayList<Country>();
             while (rset.next()) {
-
-
                 Country country = new Country();
                 country.setName(rset.getString("Name"));
                 country.setPopulation(rset.getInt("Population"));
@@ -582,7 +616,14 @@ public class App
             return null;
         }
     }
-    public List<Country> getAllCountries(int limit) {
+
+    /**
+     *
+     * @param limit
+     * @return
+     */
+    public List<Country> getAllCountries(int limit)
+    {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -600,8 +641,6 @@ public class App
             // Extract city information
             ArrayList<Country> countries = new ArrayList<Country>();
             while (rset.next()) {
-
-
                 Country country = new Country();
                 country.setName(rset.getString("Name"));
                 country.setPopulation(rset.getInt("Population"));
@@ -627,10 +666,12 @@ public class App
             return null;
         }
     }
+
     /**
      *    POPULATION IN Countries of the continent
      */
-    public List<Country> getAllCountriesCont(String continentName) {
+    public List<Country> getAllCountriesCont(String continentName)
+    {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -648,8 +689,6 @@ public class App
             // Extract city information
             ArrayList<Country> countries = new ArrayList<Country>();
             while (rset.next()) {
-
-
                 Country country = new Country();
                 country.setName(rset.getString("Name"));
                 country.setPopulation(rset.getInt("Population"));
@@ -675,7 +714,15 @@ public class App
             return null;
         }
     }
-    public List<Country> getAllCountriesCont(String continentName, int limit) {
+
+    /**
+     *
+     * @param continentName
+     * @param limit
+     * @return
+     */
+    public List<Country> getAllCountriesCont(String continentName, int limit)
+    {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -695,8 +742,6 @@ public class App
             // Extract city information
             ArrayList<Country> countries = new ArrayList<Country>();
             while (rset.next()) {
-
-
                 Country country = new Country();
                 country.setName(rset.getString("Name"));
                 country.setPopulation(rset.getInt("Population"));
@@ -722,10 +767,12 @@ public class App
             return null;
         }
     }
+
     /**
      *    POPULATION IN Countries of the region
      */
-    public List<Country> getAllCountriesRegion(String regionName) {
+    public List<Country> getAllCountriesRegion(String regionName)
+    {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -743,8 +790,6 @@ public class App
             // Extract city information
             ArrayList<Country> countries = new ArrayList<Country>();
             while (rset.next()) {
-
-
                 Country country = new Country();
                 country.setName(rset.getString("Name"));
                 country.setPopulation(rset.getInt("Population"));
@@ -770,7 +815,15 @@ public class App
             return null;
         }
     }
-    public List<Country> getAllCountriesRegion(String regionName, int limit) {
+
+    /**
+     *
+     * @param regionName
+     * @param limit
+     * @return
+     */
+    public List<Country> getAllCountriesRegion(String regionName, int limit)
+    {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -789,8 +842,6 @@ public class App
             // Extract city information
             ArrayList<Country> countries = new ArrayList<Country>();
             while (rset.next()) {
-
-
                 Country country = new Country();
                 country.setName(rset.getString("Name"));
                 country.setPopulation(rset.getInt("Population"));
@@ -816,12 +867,12 @@ public class App
             return null;
         }
     }
-
 
     /**
      *    POPULATION IN CITIES of the world
      */
-    public List<City> getAllCities() {
+    public List<City> getAllCities()
+    {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -851,8 +902,13 @@ public class App
         }
     }
 
-    // Overloaded method to include limit selected by the user
-    public List<City> getAllCities(int limit) {
+    /**
+     * Overloaded method to include limit selected by the user
+     * @param limit
+     * @return
+     */
+    public List<City> getAllCities(int limit)
+    {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -886,7 +942,8 @@ public class App
     /**
      *    POPULATION IN CITIES for the continent
      */
-    public List<City> getAllCitiesC(String continent) {
+    public List<City> getAllCitiesC(String continent)
+    {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -918,8 +975,14 @@ public class App
         }
     }
 
-        // Overloaded method to include limit selected by the user
-    public List<City> getAllCitiesC(String continent, int limit) {
+    /**
+     * Overloaded method to include limit selected by the user
+     * @param continent
+     * @param limit
+     * @return
+     */
+    public List<City> getAllCitiesC(String continent, int limit)
+    {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -955,7 +1018,8 @@ public class App
     /**
      *    POPULATION IN CITIES for the region
      */
-    public List<City> getAllCitiesR(String region) {
+    public List<City> getAllCitiesR(String region)
+    {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -987,8 +1051,14 @@ public class App
         }
     }
 
-    // Overloaded method to include limit selected by the user
-    public List<City> getAllCitiesR(String region, int limit) {
+    /**
+     * Overloaded method to include limit selected by the user
+     * @param region
+     * @param limit
+     * @return
+     */
+    public List<City> getAllCitiesR(String region, int limit)
+    {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1024,7 +1094,8 @@ public class App
     /**
      *    POPULATION IN CITIES for the district
      */
-    public List<City> getAllCitiesD(String district) {
+    public List<City> getAllCitiesD(String district)
+    {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1055,8 +1126,15 @@ public class App
             return null;
         }
     }
-    // Overloaded method to include limit selected by the user
-    public List<City> getAllCitiesD(String district, int limit) {
+
+    /**
+     * Overloaded method to include limit selected by the user
+     * @param district
+     * @param limit
+     * @return
+     */
+    public List<City> getAllCitiesD(String district, int limit)
+    {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1088,10 +1166,12 @@ public class App
             return null;
         }
     }
+
     /**
      *   Capitals reports
      */
-    public List<City> getAllCapitals() {
+    public List<City> getAllCapitals()
+    {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1121,179 +1201,209 @@ public class App
             return null;
         }
     }
-    //  overloaded
-    public List<City> getAllCapitals( int limit) {
-        try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT world.city.Name, world.country.Name as Country, world.city.Population "
-                            + "FROM world.country, world.city "
-                            + "WHERE world.city.ID = world.country.Capital "
-                            + "ORDER BY 3 DESC "
-                            + "LIMIT " + limit + " " ;
-
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract city information
-            ArrayList<City> cities = new ArrayList<City>();
-            while (rset.next()) {
-
-                City c = new City();
-                c.setName(rset.getString("Name"));
-                c.setCountryCode(rset.getString("Country"));
-                c.setPopulation(rset.getInt("Population"));
-                cities.add(c);
-            }
-            return cities;
-        } catch (Exception e) {
-            log.fine(e.getMessage());
-            log.fine("Failed to get city population details");
-            return null;
-        }
-    }
-    //  by region
-    public List<City> getAllCapitalsRegion(  String Region) {
-        try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT world.city.Name, world.country.Name as Country, world.city.Population "
-                            + "FROM world.country, world.city "
-                            + "WHERE world.city.ID = world.country.Capital "
-                            + "AND world.country.Region = '"+ Region +"' "
-                            + "ORDER BY 3 DESC ";
-
-
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract city information
-            ArrayList<City> cities = new ArrayList<City>();
-            while (rset.next()) {
-
-                City c = new City();
-                c.setName(rset.getString("Name"));
-                c.setCountryCode(rset.getString("Country"));
-                c.setPopulation(rset.getInt("Population"));
-                cities.add(c);
-            }
-            return cities;
-        } catch (Exception e) {
-            log.fine(e.getMessage());
-            log.fine("Failed to get city population details");
-            return null;
-        }
-    }
-    //  overloaded
-    public List<City> getAllCapitalsRegion( int limit , String Region) {
-        try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT world.city.Name, world.country.Name as Country, world.city.Population "
-                            + "FROM world.country, world.city "
-                            + "WHERE world.city.ID = world.country.Capital "
-                            + "AND world.country.Region = '"+ Region +"' "
-                            + "ORDER BY 3 DESC "
-                            + "LIMIT " + limit + " " ;
-
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract city information
-            ArrayList<City> cities = new ArrayList<City>();
-            while (rset.next()) {
-
-                City c = new City();
-                c.setName(rset.getString("Name"));
-                c.setCountryCode(rset.getString("Country"));
-                c.setPopulation(rset.getInt("Population"));
-                cities.add(c);
-            }
-            return cities;
-        } catch (Exception e) {
-            log.fine(e.getMessage());
-            log.fine("Failed to get city population details");
-            return null;
-        }
-    }
-
-
-    //  by region
-    public List<City> getAllCapitalsContinent(  String Continent ) {
-        try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT world.city.Name, world.country.Name as Country, world.city.Population "
-                            + "FROM world.country, world.city "
-                            + "WHERE world.city.ID = world.country.Capital "
-                            + "AND world.country.Continent = '"+ Continent +"' "
-                            + "ORDER BY 3 DESC ";
-
-
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract city information
-            ArrayList<City> cities = new ArrayList<City>();
-            while (rset.next()) {
-
-                City c = new City();
-                c.setName(rset.getString("Name"));
-                c.setCountryCode(rset.getString("Country"));
-                c.setPopulation(rset.getInt("Population"));
-                cities.add(c);
-            }
-            return cities;
-        } catch (Exception e) {
-            log.fine(e.getMessage());
-            log.fine("Failed to get city population details");
-            return null;
-        }
-    }
-    //  overloaded
-    public List<City> getAllCapitalsContinent( int limit , String Continent) {
-        try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT world.city.Name, world.country.Name as Country, world.city.Population "
-                            + "FROM world.country, world.city "
-                            + "WHERE world.city.ID = world.country.Capital "
-                            + "AND world.country.Continent = '"+ Continent +"' "
-                            + "ORDER BY 3 DESC "
-                            + "LIMIT " + limit + " " ;
-
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract city information
-            ArrayList<City> cities = new ArrayList<City>();
-            while (rset.next()) {
-
-                City c = new City();
-                c.setName(rset.getString("Name"));
-                c.setCountryCode(rset.getString("Country"));
-                c.setPopulation(rset.getInt("Population"));
-                cities.add(c);
-            }
-            return cities;
-        } catch (Exception e) {
-            log.fine(e.getMessage());
-            log.fine("Failed to get city population details");
-            return null;
-        }
-    }
-
 
     /**
-     *   Urban and Rural population reports
+     * Overloaded
+     * @param limit
+     * @return
      */
-    //regions report
-    public List<Stats> getPopStatsByRegion() {
+    public List<City> getAllCapitals( int limit)
+    {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.city.Name, world.country.Name as Country, world.city.Population "
+                            + "FROM world.country, world.city "
+                            + "WHERE world.city.ID = world.country.Capital "
+                            + "ORDER BY 3 DESC "
+                            + "LIMIT " + limit + " " ;
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+
+                City c = new City();
+                c.setName(rset.getString("Name"));
+                c.setCountryCode(rset.getString("Country"));
+                c.setPopulation(rset.getInt("Population"));
+                cities.add(c);
+            }
+            return cities;
+        } catch (Exception e) {
+            log.fine(e.getMessage());
+            log.fine("Failed to get city population details");
+            return null;
+        }
+    }
+
+    /**
+     * By region
+     * @param Region
+     * @return
+     */
+    public List<City> getAllCapitalsRegion(  String Region)
+    {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.city.Name, world.country.Name as Country, world.city.Population "
+                            + "FROM world.country, world.city "
+                            + "WHERE world.city.ID = world.country.Capital "
+                            + "AND world.country.Region = '"+ Region +"' "
+                            + "ORDER BY 3 DESC ";
+
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+
+                City c = new City();
+                c.setName(rset.getString("Name"));
+                c.setCountryCode(rset.getString("Country"));
+                c.setPopulation(rset.getInt("Population"));
+                cities.add(c);
+            }
+            return cities;
+        } catch (Exception e) {
+            log.fine(e.getMessage());
+            log.fine("Failed to get city population details");
+            return null;
+        }
+    }
+
+    /**
+     * Overloaded
+     * @param limit
+     * @param Region
+     * @return
+     */
+    public List<City> getAllCapitalsRegion( int limit , String Region)
+    {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.city.Name, world.country.Name as Country, world.city.Population "
+                            + "FROM world.country, world.city "
+                            + "WHERE world.city.ID = world.country.Capital "
+                            + "AND world.country.Region = '"+ Region +"' "
+                            + "ORDER BY 3 DESC "
+                            + "LIMIT " + limit + " " ;
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+
+                City c = new City();
+                c.setName(rset.getString("Name"));
+                c.setCountryCode(rset.getString("Country"));
+                c.setPopulation(rset.getInt("Population"));
+                cities.add(c);
+            }
+            return cities;
+        } catch (Exception e) {
+            log.fine(e.getMessage());
+            log.fine("Failed to get city population details");
+            return null;
+        }
+    }
+
+    /**
+     * By region
+     * @param Continent
+     * @return
+     */
+    public List<City> getAllCapitalsContinent(  String Continent )
+    {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.city.Name, world.country.Name as Country, world.city.Population "
+                            + "FROM world.country, world.city "
+                            + "WHERE world.city.ID = world.country.Capital "
+                            + "AND world.country.Continent = '"+ Continent +"' "
+                            + "ORDER BY 3 DESC ";
+
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+
+                City c = new City();
+                c.setName(rset.getString("Name"));
+                c.setCountryCode(rset.getString("Country"));
+                c.setPopulation(rset.getInt("Population"));
+                cities.add(c);
+            }
+            return cities;
+        } catch (Exception e) {
+            log.fine(e.getMessage());
+            log.fine("Failed to get city population details");
+            return null;
+        }
+    }
+
+    /**
+     * Overloaded
+     * @param limit
+     * @param Continent
+     * @return
+     */
+    public List<City> getAllCapitalsContinent( int limit , String Continent)
+    {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.city.Name, world.country.Name as Country, world.city.Population "
+                            + "FROM world.country, world.city "
+                            + "WHERE world.city.ID = world.country.Capital "
+                            + "AND world.country.Continent = '"+ Continent +"' "
+                            + "ORDER BY 3 DESC "
+                            + "LIMIT " + limit + " " ;
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+
+                City c = new City();
+                c.setName(rset.getString("Name"));
+                c.setCountryCode(rset.getString("Country"));
+                c.setPopulation(rset.getInt("Population"));
+                cities.add(c);
+            }
+            return cities;
+        } catch (Exception e) {
+            log.fine(e.getMessage());
+            log.fine("Failed to get city population details");
+            return null;
+        }
+    }
+
+    /**
+     * Urban and Rural population reports
+     * @return
+     */
+    public List<Stats> getPopStatsByRegion()
+    {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1330,9 +1440,12 @@ public class App
         }
     }
 
-
-    //continents report
-    public List<Stats> getPopStatsByContinent() {
+    /**
+     * Continents report
+     * @return
+     */
+    public List<Stats> getPopStatsByContinent()
+    {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1369,8 +1482,12 @@ public class App
         }
     }
 
-    //countries report
-    public List<Stats> getPopStatsByCountry() {
+    /**
+     * Countries report
+     * @return
+     */
+    public List<Stats> getPopStatsByCountry()
+    {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1403,11 +1520,12 @@ public class App
             return null;
         }
     }
+
     /**
      *   Languages report
      */
-
-    public List<Stats> getLanguageSpeakers() {
+    public List<Stats> getLanguageSpeakers()
+    {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1447,6 +1565,7 @@ public class App
             return null;
         }
     }
+
     /**
      * Main
      */
@@ -1470,16 +1589,13 @@ public class App
         // Disconnect from database
         a.disconnect();
     }
-    /**
-     * Outputs to Markdown
-     *
-     *
-     */
 
+    // Outputs to Markdown
     /**
-     *  Output cities method
+     * Output cities method
      */
-    public void outputCities(List<City> cities, String filename) {
+    public void outputCities(List<City> cities, String filename)
+    {
         // Check employees is not null
         if (cities == null) {
             log.fine("No cities");
@@ -1499,7 +1615,7 @@ public class App
         }
         try {
             new File("./reports/").mkdir();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new                                 File("./reports/" + filename)));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File("./reports/" + filename)));
             writer.write(sb.toString());
             writer.close();
         } catch (IOException e) {
@@ -1507,13 +1623,11 @@ public class App
         }
     }
 
-
-
     /**
      *  Print capitals method
      */
-
-    public void outputCapitals(List<City> cities, String filename) {
+    public void outputCapitals(List<City> cities, String filename)
+    {
         // Check employees is not null
         if (cities == null) {
             log.fine("No cities");
@@ -1532,17 +1646,19 @@ public class App
         }
         try {
             new File("./reports/").mkdir();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new                                 File("./reports/" + filename)));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File("./reports/" + filename)));
             writer.write(sb.toString());
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     /**
      *  Output Country methods
      */
-    public void outputCountries(List<Country> countries, String filename) {
+    public void outputCountries(List<Country> countries, String filename)
+    {
         // Check employees is not null
         if (countries == null) {
             log.fine("No countries");
@@ -1561,7 +1677,7 @@ public class App
         }
         try {
             new File("./reports/").mkdir();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new                                 File("./reports/" + filename)));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File("./reports/" + filename)));
             writer.write(sb.toString());
             writer.close();
         } catch (IOException e) {
@@ -1572,8 +1688,8 @@ public class App
     /**
      *  Print Stats methods
      */
-
-    public void outputStats(List<Stats> stats, String filename) {
+    public void outputStats(List<Stats> stats, String filename)
+    {
         // Check employees is not null
         if (stats == null) {
             log.fine("No stats");
@@ -1592,7 +1708,7 @@ public class App
         }
         try {
             new File("./reports/").mkdir();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new                                 File("./reports/" + filename)));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File("./reports/" + filename)));
             writer.write(sb.toString());
             writer.close();
         } catch (IOException e) {
@@ -1600,9 +1716,13 @@ public class App
         }
     }
 
-
-
-    public void outputLanguageStats(List<Stats> stats, String filename) {
+    /**
+     *
+     * @param stats
+     * @param filename
+     */
+    public void outputLanguageStats(List<Stats> stats, String filename)
+    {
         // Check employees is not null
         if (stats == null) {
             log.fine("No stats");
@@ -1621,7 +1741,7 @@ public class App
         }
         try {
             new File("./reports/").mkdir();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new                                 File("./reports/" + filename)));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File("./reports/" + filename)));
             writer.write(sb.toString());
             writer.close();
         } catch (IOException e) {
@@ -1629,8 +1749,13 @@ public class App
         }
     }
 
-
-    public void outputSinglePopStats(List<Stats> stats, String filename) {
+    /**
+     *
+     * @param stats
+     * @param filename
+     */
+    public void outputSinglePopStats(List<Stats> stats, String filename)
+    {
         // Check employees is not null
         if (stats == null) {
             log.fine("No stats");
@@ -1649,14 +1774,13 @@ public class App
         }
         try {
             new File("./reports/").mkdir();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new                                 File("./reports/" + filename)));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File("./reports/" + filename)));
             writer.write(sb.toString());
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
 }
 
 

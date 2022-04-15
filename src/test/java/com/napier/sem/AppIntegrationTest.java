@@ -3,18 +3,23 @@ package com.napier.sem;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Integration Tests
+ */
 public class AppIntegrationTest {
+
+    /**
+     * Connection to database setup
+     */
     static App app;
 
-    @BeforeAll  //Connection to database setup
+    @BeforeAll
     static void init()
     {
         app = new App();
         app.connect("localhost:33060", 30000);
-
     }
 
     @Test  //City extraction test
@@ -27,7 +32,8 @@ public class AppIntegrationTest {
     }
 
     @Test  //Country extraction test
-    void testGetCountry(){
+    void testGetCountry()
+    {
         Country country = app.getCountry("United Kingdom");
         assertEquals(country.getCode(), "GBR");
         assertEquals(country.getName(), "United Kingdom");
@@ -47,25 +53,29 @@ public class AppIntegrationTest {
     }
 
     @Test  //Extraction of all cities test
-    void testGetAllCities(){
+    void testGetAllCities()
+    {
         List<City> cities = app.getAllCities();
         assertEquals(cities.size(), 4079);
     }
 
     @Test  //Extraction of all cities with limited results test
-    void testGetAllCitiesWithLimit(){
+    void testGetAllCitiesWithLimit()
+    {
         List<City> cities = app.getAllCities(100);
         assertEquals(cities.size(), 100);
     }
 
     @Test  //Extraction of all cities within continent test
-    void testGetAllCitiesWithinContinent(){
+    void testGetAllCitiesWithinContinent()
+    {
         List<City> cities = app.getAllCitiesC("Europe");
         assertEquals(cities.size(), 841);
     }
 
     @Test  //Extraction of all cities within continent and limited results test
-    void testGetAllCitiesWithinContinentAndLimit(){
+    void testGetAllCitiesWithinContinentAndLimit()
+    {
         List<City> cities = app.getAllCitiesC("Europe", 100);
         assertEquals(cities.size(), 100);
 
@@ -74,13 +84,15 @@ public class AppIntegrationTest {
     }
 
     @Test  //Extraction of all cities within region test
-    void testGetAllCitiesWithinRegion(){
+    void testGetAllCitiesWithinRegion()
+    {
         List<City> cities = app.getAllCitiesR("British Islands");
         assertEquals(cities.size(), 83);
     }
 
     @Test  //Extraction of all cities within region and limited results test
-    void testGetAllCitiesWithinRegionAndLimit(){
+    void testGetAllCitiesWithinRegionAndLimit()
+    {
         List<City> cities = app.getAllCitiesR("British Islands", 50);
         assertEquals(cities.size(), 50);
 
@@ -89,13 +101,15 @@ public class AppIntegrationTest {
     }
 
     @Test  //Extraction of all cities within district test
-    void testGetAllCitiesWithinDistrict(){
+    void testGetAllCitiesWithinDistrict()
+    {
         List<City> cities = app.getAllCitiesD("Veneto");
         assertEquals(cities.size(), 4);
     }
 
     @Test  //Extraction of all cities within district and limited results test
-    void testGetAllCitiesWithinDistrictAndLimit(){
+    void testGetAllCitiesWithinDistrictAndLimit()
+    {
         List<City> cities = app.getAllCitiesD("Veneto", 2);
         assertEquals(cities.size(), 2);
         assertEquals(cities.get(0).getDistrict(), "Veneto");
