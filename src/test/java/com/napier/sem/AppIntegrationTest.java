@@ -2,6 +2,8 @@ package com.napier.sem;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import java.io.File;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -157,7 +159,7 @@ public class AppIntegrationTest {
         assertEquals(c.getContinent(), "Europe");
     }
 
-    @Test //Extraction of population statistics of all regions
+    @Test //Extraction of population statistics of all regions test
     void testGetPopStatsByRegion(){
         List<Stats> stats = app.getPopStatsByRegion();
 
@@ -173,7 +175,7 @@ public class AppIntegrationTest {
         }
     }
 
-    @Test //Extraction of population statistics of all countries
+    @Test //Extraction of population statistics of all countries test
     void testGetPopStatsByCountry(){
         List<Stats> stats = app.getPopStatsByCountry();
 
@@ -189,7 +191,7 @@ public class AppIntegrationTest {
         }
     }
 
-    @Test //Extraction of population statistics of all continents
+    @Test //Extraction of population statistics of all continents test
     void testGetPopStatsByContinent(){
         List<Stats> stats = app.getPopStatsByContinent();
 
@@ -205,10 +207,95 @@ public class AppIntegrationTest {
         }
     }
 
-/*
-    @Test //Extraction of all capitals
-    void testGetAllCapitals(){
-        List<City> capitals = app.getAllCapitals();
+    @Test //Extraction of language speakers test
+    void testGetAllLanguageSpeakers(){
+        List<Stats> languages = app.getLanguageSpeakers();
+
+        for(int i = 0; i < languages.size(); i++){
+            if(languages.get(i).getLanguage().equals("English")){
+                assertEquals(languages.get(i).getLanguage(), "English");
+                assertEquals(languages.get(i).getTotalSpeakers(), 347077867);
+                assertEquals(languages.get(i).getTotalSpeakersPercentage(), 5.71+"%");
+            }
+        }
     }
- */
+
+    @Test //Output cities results to table test
+    void testOutputCities(){
+        List<City> cities = app.getAllCities();
+        app.outputCities(cities, "all_cities.md");
+
+        String dir = "reports/all_cities.md";
+        File f = new File(dir);
+
+        assertTrue(f.exists());
+        assertTrue(f.isFile());
+        assertEquals(f.getName(), "all_cities.md");
+    }
+
+    @Test //Output capitals results to table test
+    void testOutputCapitals(){
+        List<City> capitals = app.getAllCapitals();
+        app.outputCapitals(capitals, "all_capitals.md");
+
+        String dir = "reports/all_capitals.md";
+        File f = new File(dir);
+
+        assertTrue(f.exists());
+        assertTrue(f.isFile());
+        assertEquals(f.getName(), "all_capitals.md");
+    }
+
+    @Test //Output countries results to table test
+    void testOutputCountries(){
+        List<Country> countries = app.getAllCountries();
+        app.outputCountries(countries, "all_countries.md");
+
+        String dir = "reports/all_countries.md";
+        File f = new File(dir);
+
+        assertTrue(f.exists());
+        assertTrue(f.isFile());
+        assertEquals(f.getName(), "all_countries.md");
+    }
+
+    @Test //Output stats results to table test
+    void testOutputStats(){
+        List<Stats> stats = app.getPopStatsByContinent();
+        app.outputStats(stats, "all_stats.md");
+
+        String dir = "reports/all_stats.md";
+        File f = new File(dir);
+
+        assertTrue(f.exists());
+        assertTrue(f.isFile());
+        assertEquals(f.getName(), "all_stats.md");
+    }
+
+    @Test //Output language stats results to table test
+    void testOutputLanguageStats(){
+        List<Stats> stats = app.getLanguageSpeakers();
+        app.outputLanguageStats(stats, "language_stats.md");
+
+        String dir = "reports/language_stats.md";
+        File f = new File(dir);
+
+        assertTrue(f.exists());
+        assertTrue(f.isFile());
+        assertEquals(f.getName(), "language_stats.md");
+    }
+
+    @Test //Output single population entry to table test
+    void testOutputSinglePopStats(){
+        List<Stats> stats = app.getPopStatsByContinent();
+        app.outputSinglePopStats(stats, "single_continent_population_entry.md");
+
+        String dir = "reports/single_continent_population_entry.md";
+        File f = new File(dir);
+
+        assertTrue(f.exists());
+        assertTrue(f.isFile());
+        assertEquals(f.getName(), "single_continent_population_entry.md");
+    }
+
 }
