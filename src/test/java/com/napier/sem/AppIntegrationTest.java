@@ -120,4 +120,21 @@ public class AppIntegrationTest {
         List<City> capitals = app.getAllCapitals();
         assertEquals(capitals.size(), 232);
     }
+
+    @Test //Extraction of all capitals with limit test
+    void testGetAllCapitalsWithLimit(){
+        List<City> capitals = app.getAllCapitals(100);
+        assertEquals(capitals.size(), 100);
+    }
+
+    @Test //Extraction of all capitals within a region
+    void testGetAllCapitalsWithinRegion(){
+        List<City> capitals = app.getAllCapitalsRegion("Southern Europe");
+
+    }
+
+    @Test //Extraction of all capitals
+    void testGetAllCapitals(){
+        List<City> capitals = app.getAllCapitals();
+    }
 }
