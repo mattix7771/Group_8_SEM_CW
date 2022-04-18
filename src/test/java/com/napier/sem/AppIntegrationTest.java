@@ -157,6 +157,22 @@ public class AppIntegrationTest {
         assertEquals(c.getContinent(), "Europe");
     }
 
+    @Test //Extraction of all capitals
+    void testGetPopStatsByRegion(){
+        List<Stats> stats = app.getPopStatsByRegion();
+
+        for(int i = 0; i < stats.size(); i++){
+            if(stats.get(i).getPlace().equals("Southern Europe")){
+                assertEquals(stats.get(i).getPlace(), "Southern Europe");
+                assertEquals(stats.get(i).getPlacePop(), 144674200);
+                assertEquals(stats.get(i).getRuralPop(), 104657542);
+                assertEquals(stats.get(i).getRuralPercentage(), 72.34+"%");
+                assertEquals(stats.get(i).getUrbanPop(), 40016658);
+                assertEquals(stats.get(i).getUrbPercentage(), 27.66+"%");
+            }
+        }
+    }
+
 /*
     @Test //Extraction of all capitals
     void testGetAllCapitals(){
