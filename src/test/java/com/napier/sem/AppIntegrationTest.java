@@ -130,11 +130,37 @@ public class AppIntegrationTest {
     @Test //Extraction of all capitals within a region
     void testGetAllCapitalsWithinRegion(){
         List<City> capitals = app.getAllCapitalsRegion("Southern Europe");
-
+        assertEquals(capitals.size(), 15);
     }
 
+    @Test //Extraction of all capitals within a region and limited results test
+    void testGetAllCapitalsWithinRegionAndLimit(){
+        List<City> capitals = app.getAllCapitalsRegion(10, "Southern Europe");
+        assertEquals(capitals.size(), 10);
+
+        Country c = app.getCountry(capitals.get(0).getCountryCode());
+        assertEquals(c.getRegion(), "Southern Europe");
+    }
+
+    @Test //Extraction of all capitals within a continent test
+    void testGetAllCapitalsWithinContinent(){
+        List<City> capitals = app.getAllCapitalsContinent("Europe");
+        assertEquals(capitals.size(), 46);
+    }
+
+    @Test //Extraction of all capitals within a continent and limited results test
+    void testGetAllCapitalsWithinContinentAndLimit(){
+        List<City> capitals = app.getAllCapitalsContinent(20, "Europe");
+        assertEquals(capitals.size(), 20);
+
+        Country c = app.getCountry(capitals.get(0).getCountryCode());
+        assertEquals(c.getContinent(), "Europe");
+    }
+
+/*
     @Test //Extraction of all capitals
     void testGetAllCapitals(){
         List<City> capitals = app.getAllCapitals();
     }
+ */
 }
