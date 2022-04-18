@@ -114,4 +114,10 @@ public class AppIntegrationTest {
         assertEquals(cities.size(), 2);
         assertEquals(cities.get(0).getDistrict(), "Veneto");
     }
+
+    @Test //Extraction of all capitals test
+    void testGetAllCapitals(){
+        List<City> capitals = app.getAllCapitals();
+        assertEquals(capitals.size(), 232);
+    }
 }
