@@ -157,7 +157,7 @@ public class AppIntegrationTest {
         assertEquals(c.getContinent(), "Europe");
     }
 
-    @Test //Extraction of all capitals
+    @Test //Extraction of population statistics of all regions
     void testGetPopStatsByRegion(){
         List<Stats> stats = app.getPopStatsByRegion();
 
@@ -169,6 +169,38 @@ public class AppIntegrationTest {
                 assertEquals(stats.get(i).getRuralPercentage(), 72.34+"%");
                 assertEquals(stats.get(i).getUrbanPop(), 40016658);
                 assertEquals(stats.get(i).getUrbPercentage(), 27.66+"%");
+            }
+        }
+    }
+
+    @Test //Extraction of population statistics of all countries
+    void testGetPopStatsByCountry(){
+        List<Stats> stats = app.getPopStatsByCountry();
+
+        for(int i = 0; i < stats.size(); i++){
+            if(stats.get(i).getPlace().equals("Italy")){
+                assertEquals(stats.get(i).getPlace(), "Italy");
+                assertEquals(stats.get(i).getPlacePop(), 57680000);
+                assertEquals(stats.get(i).getRuralPop(), 42592981);
+                assertEquals(stats.get(i).getRuralPercentage(), 73.84+"%");
+                assertEquals(stats.get(i).getUrbanPop(), 15087019);
+                assertEquals(stats.get(i).getUrbPercentage(), 26.16+"%");
+            }
+        }
+    }
+
+    @Test //Extraction of population statistics of all continents
+    void testGetPopStatsByContinent(){
+        List<Stats> stats = app.getPopStatsByContinent();
+
+        for(int i = 0; i < stats.size(); i++){
+            if(stats.get(i).getPlace().equals("Europe")){
+                assertEquals(stats.get(i).getPlace(), "Europe");
+                assertEquals(stats.get(i).getPlacePop(), 730074600);
+                assertEquals(stats.get(i).getRuralPop(), 488131787);
+                assertEquals(stats.get(i).getRuralPercentage(), 66.86+"%");
+                assertEquals(stats.get(i).getUrbanPop(), 241942813);
+                assertEquals(stats.get(i).getUrbPercentage(), 33.14+"%");
             }
         }
     }
