@@ -447,7 +447,7 @@ public class App
     /**
      *
      * @param District
-     * @return
+     * @return c - district statistics
      */
     public Stats getDistrictPop(String District)
     {
@@ -479,7 +479,7 @@ public class App
     /**
      *
      * @param Continent
-     * @return
+     * @return c - continent statistics
      */
     public Stats getContinentPop(String Continent)
     {
@@ -511,7 +511,7 @@ public class App
     /**
      *
      * @param Region
-     * @return
+     * @return c - region statistics
      */
     public Stats getRegionPop(String Region)
     {
@@ -542,7 +542,7 @@ public class App
 
     /**
      *
-     * @return
+     * @return c - world statistics
      */
     public Stats getWorldPop()
     {
@@ -620,7 +620,7 @@ public class App
     /**
      *
      * @param limit
-     * @return
+     * @return countries
      */
     public List<Country> getAllCountries(int limit)
     {
@@ -719,7 +719,7 @@ public class App
      *
      * @param continentName
      * @param limit
-     * @return
+     * @return countries
      */
     public List<Country> getAllCountriesCont(String continentName, int limit)
     {
@@ -820,7 +820,7 @@ public class App
      *
      * @param regionName
      * @param limit
-     * @return
+     * @return countries
      */
     public List<Country> getAllCountriesRegion(String regionName, int limit)
     {
@@ -905,7 +905,7 @@ public class App
     /**
      * Overloaded method to include limit selected by the user
      * @param limit
-     * @return
+     * @return cities
      */
     public List<City> getAllCities(int limit)
     {
@@ -979,7 +979,7 @@ public class App
      * Overloaded method to include limit selected by the user
      * @param continent
      * @param limit
-     * @return
+     * @return cities
      */
     public List<City> getAllCitiesC(String continent, int limit)
     {
@@ -1055,7 +1055,7 @@ public class App
      * Overloaded method to include limit selected by the user
      * @param region
      * @param limit
-     * @return
+     * @return cities
      */
     public List<City> getAllCitiesR(String region, int limit)
     {
@@ -1131,7 +1131,7 @@ public class App
      * Overloaded method to include limit selected by the user
      * @param district
      * @param limit
-     * @return
+     * @return cities
      */
     public List<City> getAllCitiesD(String district, int limit)
     {
@@ -1205,7 +1205,7 @@ public class App
     /**
      * Overloaded
      * @param limit
-     * @return
+     * @return cities
      */
     public List<City> getAllCapitals( int limit)
     {
@@ -1243,7 +1243,7 @@ public class App
     /**
      * By region
      * @param Region
-     * @return
+     * @return cities
      */
     public List<City> getAllCapitalsRegion(  String Region)
     {
@@ -1283,7 +1283,7 @@ public class App
      * Overloaded
      * @param limit
      * @param Region
-     * @return
+     * @return cities
      */
     public List<City> getAllCapitalsRegion( int limit , String Region)
     {
@@ -1322,7 +1322,7 @@ public class App
     /**
      * By region
      * @param Continent
-     * @return
+     * @return cities
      */
     public List<City> getAllCapitalsContinent(  String Continent )
     {
@@ -1362,7 +1362,7 @@ public class App
      * Overloaded
      * @param limit
      * @param Continent
-     * @return
+     * @return cities
      */
     public List<City> getAllCapitalsContinent( int limit , String Continent)
     {
@@ -1400,7 +1400,7 @@ public class App
 
     /**
      * Urban and Rural population reports
-     * @return
+     * @return stats
      */
     public List<Stats> getPopStatsByRegion()
     {
@@ -1442,7 +1442,7 @@ public class App
 
     /**
      * Continents report
-     * @return
+     * @return stats
      */
     public List<Stats> getPopStatsByContinent()
     {
@@ -1484,7 +1484,7 @@ public class App
 
     /**
      * Countries report
-     * @return
+     * @return stats
      */
     public List<Stats> getPopStatsByCountry()
     {
