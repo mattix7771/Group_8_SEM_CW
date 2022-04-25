@@ -1092,6 +1092,82 @@ public class App
     }
 
     /**
+     *    POPULATION IN CITIES for the country
+     */
+    public List<City> getAllCitiesCountry(String country)
+    {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.city.CountryCode, world.city.District, world.city.Name, world.city.Population "
+                            + "FROM world.city, world.country "
+                            + "WHERE world.city.CountryCode = world.country.Code "
+                            + "AND world.city.District = '" + country +"' "
+                            + "ORDER BY world.city.Population DESC ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+
+                City c = new City();
+                c.setCountryCode(rset.getString("CountryCode"));
+                c.setName(rset.getString("Name"));
+                c.setDistrict(rset.getString("District"));
+                c.setPopulation(rset.getInt("Population"));
+                cities.add(c);
+            }
+            return cities;
+        } catch (Exception e) {
+            log.fine(e.getMessage());
+            log.fine("Failed to get city population details");
+            return null;
+        }
+    }
+
+    /**
+     * Overloaded method to include limit selected by the user
+     * @param country
+     * @param limit
+     * @return cities
+     */
+    public List<City> getAllCitiesCountry(String country, int limit)
+    {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.city.CountryCode, world.city.District, world.city.Name, world.city.Population "
+                            + "FROM world.city, world.country "
+                            + "WHERE world.city.CountryCode = world.country.Code "
+                            + "AND world.city.District = '" + country +"' "
+                            + "ORDER BY world.city.Population DESC "
+                            + "LIMIT "+ limit  +" ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+
+                City c = new City();
+                c.setCountryCode(rset.getString("CountryCode"));
+                c.setName(rset.getString("Name"));
+                c.setDistrict(rset.getString("District"));
+                c.setPopulation(rset.getInt("Population"));
+                cities.add(c);
+            }
+            return cities;
+        } catch (Exception e) {
+            log.fine(e.getMessage());
+            log.fine("Failed to get city population details");
+            return null;
+        }
+    }
+
+    /**
      *    POPULATION IN CITIES for the district
      */
     public List<City> getAllCitiesD(String district)
@@ -1582,8 +1658,46 @@ public class App
 
         // ArrayLists
         List<Stats> all = new ArrayList<Stats>( );
+        List<Country> wCountries = new ArrayList<Country>( );
+        List<Country> cCountries = new ArrayList<Country>( );
+        List<Country> rCountries = new ArrayList<Country>( );
+        List<Country> woCountries = new ArrayList<Country>( );
+        List<Country> coCountries = new ArrayList<Country>( );
+        List<Country> reCountries = new ArrayList<Country>( );
+        List<City> wCities = new ArrayList<City>( );
+        List<City> cCities = new ArrayList<City>( );
+        List<City> rCities = new ArrayList<City>( );
+        List<City> coCities = new ArrayList<City>( );
+        List<City> dCities = new ArrayList<City>( );
+
+
+        // Extracting information
+        wCountries = a.getAllCountries();
+        woCountries = a.getAllCountries(5);
+        cCountries = a.getAllCountriesCont("Europe");
+        rCountries = a.getAllCountriesRegion("North America");
+        coCountries = a.getAllCountriesCont("Asia", 5);
+        reCountries = a.getAllCountriesRegion("North America", 5);
+        wCities = a.getAllCities();
+        cCities = a.getAllCitiesC("Europe");
+        rCities = a.getAllCitiesR("North America");
+        dCities = a.getAllCitiesD("Scotland");
+        coCities = a.getAllCitiesCountry("England");
 
         all = a.getLanguageSpeakers();
+
+        // Write search results to md file
+        a.outputCountries(wCountries, "AllWorldCountriesDescPop.md");
+        a.outputCountries(rCountries, "AllCountriesRegDescPop");
+        a.outputCountries(cCountries, "AllCountriesContDescPop");
+        a.outputCountries(woCountries, "TopFivePopWorldCountries.md");
+        a.outputCountries(coCountries, "TopFivePopContCountries.md");
+        a.outputCountries(reCountries, "TopFivePopRegCountries.md");
+        a.outputCities(wCities, "AllWorldCitiesDescPop.md");
+        a.outputCities(cCities, "AllCitiesContDescPop.md");
+        a.outputCities(rCities, "AllCitiesRegDescPop.md");
+        a.outputCities(dCities, "AllCitiesDisDescPop.md");
+        a.outputCities(coCities, "AllCitiesCountryDescPop.md");
 
         a.outputLanguageStats(all, "LanguageSpeakers.md");
         // Disconnect from database
