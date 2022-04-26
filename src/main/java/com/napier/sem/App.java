@@ -1707,6 +1707,7 @@ public class App
         a.outputCities(coCities, "AllCitiesCountryDescPop.md");
 
         a.outputLanguageStats(all, "LanguageSpeakers.md");
+
         // Disconnect from database
         a.disconnect();
     }
