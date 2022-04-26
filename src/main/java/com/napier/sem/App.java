@@ -1682,7 +1682,7 @@ public class App
         cCities = a.getAllCitiesC("Europe");
         rCities = a.getAllCitiesR("North America");
         dCities = a.getAllCitiesD("Scotland");
-        coCities = a.getAllCitiesCountry("England");
+        coCities = a.getAllCitiesCountry("France");
 
         all = a.getLanguageSpeakers();
 
