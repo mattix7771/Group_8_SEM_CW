@@ -1104,7 +1104,7 @@ public class App
                     "SELECT world.city.CountryCode, world.city.District, world.city.Name, world.city.Population "
                             + "FROM world.city, world.country "
                             + "WHERE world.city.CountryCode = world.country.Code "
-                            + "AND world.city.District = '" + country +"' "
+                            + "AND world.country.Name  = '" + country +"' "
                             + "ORDER BY world.city.Population DESC ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -1143,7 +1143,7 @@ public class App
                     "SELECT world.city.CountryCode, world.city.District, world.city.Name, world.city.Population "
                             + "FROM world.city, world.country "
                             + "WHERE world.city.CountryCode = world.country.Code "
-                            + "AND world.city.District = '" + country +"' "
+                            + "AND world.country.Name = '" + country +"' "
                             + "ORDER BY world.city.Population DESC "
                             + "LIMIT "+ limit  +" ";
             // Execute SQL statement
