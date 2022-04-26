@@ -1,4 +1,4 @@
-| Code| Name | Population | Region | Population | Capital | 
+| Code| Name | Continent | Region | Population | Capital | 
 | --- | --- | --- | --- | --- | --- |
 | USA | United States | North America | North America | 278357000 | 3813 |
 | CAN | Canada | North America | North America | 31147000 | 1822 |

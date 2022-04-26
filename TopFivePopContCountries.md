@@ -1,4 +1,4 @@
-| Code| Name | Population | Region | Population | Capital | 
+| Code| Name | Continent | Region | Population | Capital | 
 | --- | --- | --- | --- | --- | --- |
 | CHN | China | Asia | Eastern Asia | 1277558000 | 1891 |
 | IND | India | Asia | Southern and Central Asia | 1013662000 | 1109 |
