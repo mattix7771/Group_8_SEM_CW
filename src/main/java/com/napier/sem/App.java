@@ -1781,7 +1781,7 @@ public class App
 
         StringBuilder sb = new StringBuilder();
         // Print header
-        sb.append("| Code| Name | Population | Region | Population | Capital | \r\n");
+        sb.append("| Code| Name | Continent | Region | Population | Capital | \r\n");
         sb.append("| --- | --- | --- | --- | --- | --- |\r\n");
         // Loop over all cities in the list
         for (Country c : countries) {
