@@ -176,13 +176,13 @@ public class App
             return;
         }
         // Print header
-        log.fine(String.format("%-3s %-52s %-13s %-26s %-10s %-10s ", "Code", "Name", "Continent","Region", "Population", "Capital"));
+        log.fine(String.format("%-3s %-52s %-13s %-26s %-10s %-35s ", "Code", "Name", "Continent","Region", "Population", "Capital"));
         // Loop over all cities in the list
         for (Country c : countries) {
             if (c == null)
                 continue;
             String country_s =
-                    String.format("%-3s %-52s %-13s %-26s %-10s %-10s ",
+                    String.format("%-3s %-52s %-13s %-26s %-10s %-35s ",
                             c.getCode(), c.getName(), c.getContinent(),c.getRegion(), c.getPopulation(), c.getCapital() );
             log.fine(country_s);
         }
@@ -273,9 +273,10 @@ public class App
                     "SELECT world.country.Name, world.country.Code,world.country.Capital,world.country.Code2," +
                             "world.country.Continent, world.country.GNP,world.country.GNPOld,world.country.GovernmentForm," +
                             "world.country.HeadOfState, world.country.IndepYear,world.country.LifeExpectancy,world.country.LocalName," +
-                            "world.country.Population, world.country.Region,world.country.SurfaceArea "
-                            + "FROM  world.country "
-                            + "WHERE world.country.name = '"+ cName + "' ";
+                            "world.country.Population, world.country.Region,world.country.SurfaceArea,world.city.Name as CapitalName "
+                            + "FROM  world.country,world.city "
+                            + "WHERE world.country.name = '"+ cName + "' "
+                            + "AND world.city.ID = world.country.Capital ";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -286,7 +287,7 @@ public class App
                 Country country = new Country();
                 country.setName(rset.getString("Name"));
                 country.setPopulation(rset.getInt("Population"));
-                country.setCapital(rset.getString("Capital"));
+                country.setCapital(rset.getString("CapitalName"));
                 country.setCode(rset.getString("Code"));
                 country.setCode2(rset.getString("Code2"));
                 country.setGnp(rset.getInt("GNP"));
@@ -327,9 +328,10 @@ public class App
                     "SELECT world.country.Name, world.country.Code,world.country.Capital,world.country.Code2," +
                             "world.country.Continent, world.country.GNP,world.country.GNPOld,world.country.GovernmentForm," +
                             "world.country.HeadOfState, world.country.IndepYear,world.country.LifeExpectancy,world.country.LocalName," +
-                            "world.country.Population, world.country.Region,world.country.SurfaceArea "
-                            + "FROM  world.country "
-                            + "WHERE world.country.code = '"+ cCode + "' ";
+                            "world.country.Population, world.country.Region,world.country.SurfaceArea, world.city.Name as CapitalName "
+                            + "FROM  world.country,world.city "
+                            + "WHERE world.country.code = '"+ cCode + "' "
+                            + "AND world.city.ID = world.country.Capital ";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -340,7 +342,7 @@ public class App
                 Country country = new Country();
                 country.setName(rset.getString("Name"));
                 country.setPopulation(rset.getInt("Population"));
-                country.setCapital(rset.getString("Capital"));
+                country.setCapital(rset.getString("CapitalName"));
                 country.setCode(rset.getString("Code"));
                 country.setCode2(rset.getString("Code2"));
                 country.setGnp(rset.getInt("GNP"));
@@ -583,8 +585,9 @@ public class App
                     "SELECT world.country.Name, world.country.Code,world.country.Capital,world.country.Code2," +
                             "world.country.Continent, world.country.GNP,world.country.GNPOld,world.country.GovernmentForm," +
                             "world.country.HeadOfState, world.country.IndepYear,world.country.LifeExpectancy,world.country.LocalName," +
-                            "world.country.Population, world.country.Region,world.country.SurfaceArea "
-                            + "FROM  world.country "
+                            "world.country.Population, world.country.Region,world.country.SurfaceArea, world.city.Name as CapitalName "
+                            + "FROM  world.country, world.city "
+                            + "WHERE world.city.ID = world.country.Capital "
                             + "ORDER BY world.country.Population DESC ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -594,7 +597,7 @@ public class App
                 Country country = new Country();
                 country.setName(rset.getString("Name"));
                 country.setPopulation(rset.getInt("Population"));
-                country.setCapital(rset.getString("Capital"));
+                country.setCapital(rset.getString("CapitalName"));
                 country.setCode(rset.getString("Code"));
                 country.setCode2(rset.getString("Code2"));
                 country.setGnp(rset.getInt("GNP"));
@@ -632,8 +635,9 @@ public class App
                     "SELECT world.country.Name, world.country.Code,world.country.Capital,world.country.Code2," +
                             "world.country.Continent, world.country.GNP,world.country.GNPOld,world.country.GovernmentForm," +
                             "world.country.HeadOfState, world.country.IndepYear,world.country.LifeExpectancy,world.country.LocalName," +
-                            "world.country.Population, world.country.Region,world.country.SurfaceArea "
-                            + "FROM  world.country "
+                            "world.country.Population, world.country.Region,world.country.SurfaceArea, world.city.Name as CapitalName "
+                            + "FROM  world.country, world.city "
+                            + "AND world.city.ID = world.country.Capital "
                             + "ORDER BY world.country.Population DESC "
                             + "LIMIT " + limit +" ";
             // Execute SQL statement
@@ -644,7 +648,7 @@ public class App
                 Country country = new Country();
                 country.setName(rset.getString("Name"));
                 country.setPopulation(rset.getInt("Population"));
-                country.setCapital(rset.getString("Capital"));
+                country.setCapital(rset.getString("CapitalName"));
                 country.setCode(rset.getString("Code"));
                 country.setCode2(rset.getString("Code2"));
                 country.setGnp(rset.getInt("GNP"));
@@ -680,9 +684,10 @@ public class App
                     "SELECT world.country.Name, world.country.Code,world.country.Capital,world.country.Code2," +
                             "world.country.Continent, world.country.GNP,world.country.GNPOld,world.country.GovernmentForm," +
                             "world.country.HeadOfState, world.country.IndepYear,world.country.LifeExpectancy,world.country.LocalName," +
-                            "world.country.Population, world.country.Region,world.country.SurfaceArea "
-                            + "FROM  world.country "
+                            "world.country.Population, world.country.Region,world.country.SurfaceArea, world.city.Name as CapitalName "
+                            + "FROM  world.country, world.city "
                             + "WHERE world.country.Continent = '"+ continentName + "' "
+                            + "AND world.city.ID = world.country.Capital "
                             + "ORDER BY world.country.Population DESC ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -692,7 +697,7 @@ public class App
                 Country country = new Country();
                 country.setName(rset.getString("Name"));
                 country.setPopulation(rset.getInt("Population"));
-                country.setCapital(rset.getString("Capital"));
+                country.setCapital(rset.getString("CapitalName"));
                 country.setCode(rset.getString("Code"));
                 country.setCode2(rset.getString("Code2"));
                 country.setGnp(rset.getInt("GNP"));
@@ -731,9 +736,10 @@ public class App
                     "SELECT world.country.Name, world.country.Code,world.country.Capital,world.country.Code2," +
                             "world.country.Continent, world.country.GNP,world.country.GNPOld,world.country.GovernmentForm," +
                             "world.country.HeadOfState, world.country.IndepYear,world.country.LifeExpectancy,world.country.LocalName," +
-                            "world.country.Population, world.country.Region,world.country.SurfaceArea "
-                            + "FROM  world.country "
+                            "world.country.Population, world.country.Region,world.country.SurfaceArea,world.city.Name as CapitalName "
+                            + "FROM  world.country, world.city "
                             + "WHERE world.country.Continent = '"+ continentName + "' "
+                            + "AND world.city.ID = world.country.Capital "
                             + "ORDER BY world.country.Population DESC "
                             + "LIMIT " + limit +" ";
 
@@ -781,9 +787,10 @@ public class App
                     "SELECT world.country.Name, world.country.Code,world.country.Capital,world.country.Code2," +
                             "world.country.Continent, world.country.GNP,world.country.GNPOld,world.country.GovernmentForm," +
                             "world.country.HeadOfState, world.country.IndepYear,world.country.LifeExpectancy,world.country.LocalName," +
-                            "world.country.Population, world.country.Region,world.country.SurfaceArea "
-                            + "FROM  world.country "
-                            + "WHERE world.country.Region = '"+ regionName + "' "
+                            "world.country.Population, world.country.Region,world.country.SurfaceArea, world.city.Name as CapitalName "
+                            + "FROM  world.country , world.city "
+                            + "WHERE world.country.Region = '"+ regionName + "'"
+                            + "AND world.city.ID = world.country.Capital "
                             + "ORDER BY world.country.Population DESC ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -793,7 +800,7 @@ public class App
                 Country country = new Country();
                 country.setName(rset.getString("Name"));
                 country.setPopulation(rset.getInt("Population"));
-                country.setCapital(rset.getString("Capital"));
+                country.setCapital(rset.getString("CapitalName"));
                 country.setCode(rset.getString("Code"));
                 country.setCode2(rset.getString("Code2"));
                 country.setGnp(rset.getInt("GNP"));
