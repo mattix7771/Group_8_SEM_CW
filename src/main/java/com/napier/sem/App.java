@@ -1695,8 +1695,8 @@ public class App
 
         // Write search results to md file
         a.outputCountries(wCountries, "AllWorldCountriesDescPop.md");
-        a.outputCountries(rCountries, "AllCountriesRegDescPop");
-        a.outputCountries(cCountries, "AllCountriesContDescPop");
+        a.outputCountries(rCountries, "AllCountriesRegDescPop.md");
+        a.outputCountries(cCountries, "AllCountriesContDescPop.md");
         a.outputCountries(woCountries, "TopFivePopWorldCountries.md");
         a.outputCountries(coCountries, "TopFivePopContCountries.md");
         a.outputCountries(reCountries, "TopFivePopRegCountries.md");
