@@ -556,7 +556,7 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT world.country.Region, SUM(world.city.Population) as Population "
+                    "SELECT world.country.Region, SUM(world.country.Population) as Population "
                             + "FROM  world.country "
                             + "WHERE world.country.Region like '" + Region + "' "
                             + "GROUP BY 1 ";
@@ -587,7 +587,7 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT  SUM(world.city.Population) as Population "
+                    "SELECT  SUM(world.country.Population) as Population "
                             + "FROM  world.country ";
 
             // Execute SQL statement
