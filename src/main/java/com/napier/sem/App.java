@@ -1664,7 +1664,7 @@ public class App
         }
 
         // ArrayLists
-        /*List<Stats> all = new ArrayList<Stats>( );
+        List<Stats> all = new ArrayList<Stats>( );
         List<Country> wCountries = new ArrayList<Country>( );
         List<Country> cCountries = new ArrayList<Country>( );
         List<Country> rCountries = new ArrayList<Country>( );
@@ -1675,7 +1675,7 @@ public class App
         List<City> cCities = new ArrayList<City>( );
         List<City> rCities = new ArrayList<City>( );
         List<City> coCities = new ArrayList<City>( );
-        List<City> dCities = new ArrayList<City>( );*/
+        List<City> dCities = new ArrayList<City>( );
         List<City> topPopWorldCities = new ArrayList<City>();
         List<City> topPopContCities = new ArrayList<City>();
         List<City> topPopRegCities = new ArrayList<City>();
@@ -1689,7 +1689,7 @@ public class App
         List<City> topPopRegCapitals = new ArrayList<City>();
 
         // Extracting information
-        /*wCountries = a.getAllCountries();
+        wCountries = a.getAllCountries();
         woCountries = a.getAllCountries(5);
         cCountries = a.getAllCountriesCont("Europe");
         rCountries = a.getAllCountriesRegion("North America");
@@ -1701,7 +1701,8 @@ public class App
         dCities = a.getAllCitiesD("Scotland");
         coCities = a.getAllCitiesCountry("France");
 
-        all = a.getLanguageSpeakers();*/
+        all = a.getLanguageSpeakers();
+
         topPopWorldCities = a.getAllCities(5);
         topPopContCities = a.getAllCitiesC("Europe", 5);
         topPopRegCities = a.getAllCitiesR("South America", 5);
@@ -1716,10 +1717,10 @@ public class App
 
 
         // Write search results to md file
-        /*a.outputCountries(wCountries, "AllWorldCountriesDescPop.md");
+        a.outputCountries(wCountries, "AllWorldCountriesDescPop.md");
         a.outputCountries(rCountries, "AllCountriesRegDescPop.md");
         a.outputCountries(cCountries, "AllCountriesContDescPop.md");
-        a.outputCountries(woCountries, "TopFivePopWorldCountries.md");
+        a.outputCountries(woCountries, "TopFivePopWorldCountries.md"); // <----- DOESNT GENERATE REPORT !!!!!
         a.outputCountries(coCountries, "TopFivePopContCountries.md");
         a.outputCountries(reCountries, "TopFivePopRegCountries.md");
         a.outputCities(wCities, "AllWorldCitiesDescPop.md");
@@ -1728,7 +1729,8 @@ public class App
         a.outputCities(dCities, "AllCitiesDisDescPop.md");
         a.outputCities(coCities, "AllCitiesCountryDescPop.md");
 
-        a.outputLanguageStats(all, "LanguageSpeakers.md");*/
+        a.outputLanguageStats(all, "LanguageSpeakers.md");
+
         a.outputCities(topPopWorldCities, "TopFivePopWorldCities.md");
         a.outputCities(topPopContCities, "TopFivePopContinentCities.md");
         a.outputCities(topPopRegCities, "TopFivePopRegionCities.md");
