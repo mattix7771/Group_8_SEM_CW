@@ -588,7 +588,8 @@ public class App
                             "world.country.Population, world.country.Region,world.country.SurfaceArea, world.city.Name as CapitalName "
                             + "FROM  world.country, world.city "
                             + "WHERE world.city.ID = world.country.Capital "
-                            + "ORDER BY world.country.Population DESC ";
+                            + "ORDER BY world.country.Population DESC " ;
+
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract city information
@@ -637,7 +638,7 @@ public class App
                             "world.country.HeadOfState, world.country.IndepYear,world.country.LifeExpectancy,world.country.LocalName," +
                             "world.country.Population, world.country.Region,world.country.SurfaceArea, world.city.Name as CapitalName "
                             + "FROM  world.country, world.city "
-                            + "AND world.city.ID = world.country.Capital "
+                            + "WHERE world.city.ID = world.country.Capital "
                             + "ORDER BY world.country.Population DESC "
                             + "LIMIT " + limit +" ";
             // Execute SQL statement
