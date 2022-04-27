@@ -527,7 +527,7 @@ public class App
             String strSelect =
                     "SELECT world.country.Name, world.country.Population as Population "
                             + "FROM  world.country "
-                            + "WHERE world.country.Name like '" + country + "' ";
+                            + "WHERE world.country.Name = '" + country + "' ";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -1749,7 +1749,7 @@ public class App
         worldPop.add(a.getWorldPop());
         contPop.add(a.getContinentPop("Europe"));
 
-        countryPop.add(a.getCountryPop("Jamaica"));
+        countryPop.add(a.getCountryPop("France"));
         regionPop.add(a.getRegionPop("Eastern Europe"));
         districtPop.add(a.getDistrictPop("Lombardia"));
         cityPop.add(a.getCityPop("Berlin"));
