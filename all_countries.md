@@ -4,13 +4,13 @@
 | IND | India | Asia | Southern and Central Asia | 1013662000 | New Delhi |
 | USA | United States | North America | North America | 278357000 | Washington |
 | IDN | Indonesia | Asia | Southeast Asia | 212107000 | Jakarta |
-| BRA | Brazil | South America | South America | 170115000 | BrasÃ­lia |
+| BRA | Brazil | South America | South America | 170115000 | Brasília |
 | PAK | Pakistan | Asia | Southern and Central Asia | 156483000 | Islamabad |
 | RUS | Russian Federation | Europe | Eastern Europe | 146934000 | Moscow |
 | BGD | Bangladesh | Asia | Southern and Central Asia | 129155000 | Dhaka |
 | JPN | Japan | Asia | Eastern Asia | 126714000 | Tokyo |
 | NGA | Nigeria | Africa | Western Africa | 111506000 | Abuja |
-| MEX | Mexico | North America | Central America | 98881000 | Ciudad de MÃ©xico |
+| MEX | Mexico | North America | Central America | 98881000 | Ciudad de México |
 | DEU | Germany | Europe | Western Europe | 82164700 | Berlin |
 | VNM | Vietnam | Asia | Southeast Asia | 79832000 | Hanoi |
 | PHL | Philippines | Asia | Southeast Asia | 75967000 | Manila |
@@ -26,7 +26,7 @@
 | UKR | Ukraine | Europe | Eastern Europe | 50456000 | Kyiv |
 | KOR | South Korea | Asia | Eastern Asia | 46844000 | Seoul |
 | MMR | Myanmar | Asia | Southeast Asia | 45611000 | Rangoon (Yangon) |
-| COL | Colombia | South America | South America | 42321000 | SantafÃ© de BogotÃ¡ |
+| COL | Colombia | South America | South America | 42321000 | Santafé de Bogotá |
 | ZAF | South Africa | Africa | Southern Africa | 40377000 | Pretoria |
 | ESP | Spain | Europe | Southern Europe | 39441700 | Madrid |
 | POL | Poland | Europe | Eastern Europe | 38653600 | Warszawa |
@@ -59,8 +59,8 @@
 | MDG | Madagascar | Africa | Eastern Africa | 15942000 | Antananarivo |
 | NLD | Netherlands | Europe | Western Europe | 15864000 | Amsterdam |
 | CHL | Chile | South America | South America | 15211000 | Santiago de Chile |
-| CMR | Cameroon | Africa | Central Africa | 15085000 | YaoundÃ© |
-| CIV | CÃ´te dâ€™Ivoire | Africa | Western Africa | 14786000 | Yamoussoukro |
+| CMR | Cameroon | Africa | Central Africa | 15085000 | Yaoundé |
+| CIV | Côte d’Ivoire | Africa | Western Africa | 14786000 | Yamoussoukro |
 | AGO | Angola | Africa | Central Africa | 12878000 | Luanda |
 | ECU | Ecuador | South America | South America | 12646000 | Quito |
 | BFA | Burkina Faso | Africa | Western Africa | 11937000 | Ouagadougou |
@@ -83,14 +83,14 @@
 | SEN | Senegal | Africa | Western Africa | 9481000 | Dakar |
 | ZMB | Zambia | Africa | Eastern Africa | 9169000 | Lusaka |
 | SWE | Sweden | Europe | Nordic Countries | 8861400 | Stockholm |
-| DOM | Dominican Republic | North America | Caribbean | 8495000 | Santo Domingo de GuzmÃ¡n |
+| DOM | Dominican Republic | North America | Caribbean | 8495000 | Santo Domingo de Guzmán |
 | BOL | Bolivia | South America | South America | 8329000 | La Paz |
 | HTI | Haiti | North America | Caribbean | 8222000 | Port-au-Prince |
 | BGR | Bulgaria | Europe | Eastern Europe | 8190900 | Sofija |
 | AUT | Austria | Europe | Western Europe | 8091800 | Wien |
 | AZE | Azerbaijan | Asia | Middle East | 7734000 | Baku |
 | RWA | Rwanda | Africa | Eastern Africa | 7733000 | Kigali |
-| TCD | Chad | Africa | Central Africa | 7651000 | NÂ´DjamÃ©na |
+| TCD | Chad | Africa | Central Africa | 7651000 | N´Djaména |
 | GIN | Guinea | Africa | Western Africa | 7430000 | Conakry |
 | CHE | Switzerland | Europe | Western Europe | 7160400 | Bern |
 | HKG | Hong Kong | Asia | Eastern Asia | 6782000 | Victoria |
@@ -101,10 +101,10 @@
 | TJK | Tajikistan | Asia | Southern and Central Asia | 6188000 | Dushanbe |
 | BEN | Benin | Africa | Western Africa | 6097000 | Porto-Novo |
 | LBY | Libyan Arab Jamahiriya | Africa | Northern Africa | 5605000 | Tripoli |
-| PRY | Paraguay | South America | South America | 5496000 | AsunciÃ³n |
+| PRY | Paraguay | South America | South America | 5496000 | Asunción |
 | LAO | Laos | Asia | Southeast Asia | 5433000 | Vientiane |
 | SVK | Slovakia | Europe | Eastern Europe | 5398700 | Bratislava |
-| DNK | Denmark | Europe | Nordic Countries | 5330000 | KÃ¸benhavn |
+| DNK | Denmark | Europe | Nordic Countries | 5330000 | København |
 | FIN | Finland | Europe | Nordic Countries | 5171300 | Helsinki [Helsingfors] |
 | JOR | Jordan | Asia | Middle East | 5083000 | Amman |
 | NIC | Nicaragua | North America | Central America | 5074000 | Managua |
@@ -112,12 +112,12 @@
 | SLE | Sierra Leone | Africa | Western Africa | 4854000 | Freetown |
 | PNG | Papua New Guinea | Oceania | Melanesia | 4807000 | Port Moresby |
 | KGZ | Kyrgyzstan | Asia | Southern and Central Asia | 4699000 | Bishkek |
-| TGO | Togo | Africa | Western Africa | 4629000 | LomÃ© |
+| TGO | Togo | Africa | Western Africa | 4629000 | Lomé |
 | NOR | Norway | Europe | Nordic Countries | 4478500 | Oslo |
 | HRV | Croatia | Europe | Southern Europe | 4473000 | Zagreb |
 | TKM | Turkmenistan | Asia | Southern and Central Asia | 4459000 | Ashgabat |
 | MDA | Moldova | Europe | Eastern Europe | 4380000 | Chisinau |
-| CRI | Costa Rica | North America | Central America | 4023000 | San JosÃ© |
+| CRI | Costa Rica | North America | Central America | 4023000 | San José |
 | BIH | Bosnia and Herzegovina | Europe | Southern Europe | 3972000 | Sarajevo |
 | PRI | Puerto Rico | North America | Caribbean | 3869000 | San Juan |
 | NZL | New Zealand | Oceania | Australia and New Zealand | 3862000 | Wellington |
@@ -133,7 +133,7 @@
 | LBR | Liberia | Africa | Western Africa | 3154000 | Monrovia |
 | PSE | Palestine | Asia | Middle East | 3101000 | Gaza |
 | COG | Congo | Africa | Central Africa | 2943000 | Brazzaville |
-| PAN | Panama | North America | Central America | 2856000 | Ciudad de PanamÃ¡ |
+| PAN | Panama | North America | Central America | 2856000 | Ciudad de Panamá |
 | MRT | Mauritania | Africa | Western Africa | 2670000 | Nouakchott |
 | MNG | Mongolia | Asia | Eastern Asia | 2662000 | Ulan Bator |
 | JAM | Jamaica | North America | Caribbean | 2583000 | Kingston |
@@ -158,7 +158,7 @@
 | GUY | Guyana | South America | South America | 861000 | Georgetown |
 | FJI | Fiji Islands | Oceania | Melanesia | 817000 | Suva |
 | CYP | Cyprus | Asia | Middle East | 754700 | Nicosia |
-| REU | RÃ©union | Africa | Eastern Africa | 699000 | Saint-Denis |
+| REU | Réunion | Africa | Eastern Africa | 699000 | Saint-Denis |
 | DJI | Djibouti | Africa | Eastern Africa | 638000 | Djibouti |
 | BHR | Bahrain | Asia | Middle East | 617000 | al-Manama |
 | QAT | Qatar | Asia | Middle East | 599000 | Doha |
@@ -167,33 +167,33 @@
 | GLP | Guadeloupe | North America | Caribbean | 456000 | Basse-Terre |
 | GNQ | Equatorial Guinea | Africa | Central Africa | 453000 | Malabo |
 | SLB | Solomon Islands | Oceania | Melanesia | 444000 | Honiara |
-| LUX | Luxembourg | Europe | Western Europe | 435700 | Luxembourg [Luxemburg/LÃ«tzebuerg] |
+| LUX | Luxembourg | Europe | Western Europe | 435700 | Luxembourg [Luxemburg/Lëtzebuerg] |
 | CPV | Cape Verde | Africa | Western Africa | 428000 | Praia |
 | SUR | Suriname | South America | South America | 417000 | Paramaribo |
 | MTQ | Martinique | North America | Caribbean | 395000 | Fort-de-France |
 | MLT | Malta | Europe | Southern Europe | 380200 | Valletta |
 | BRN | Brunei | Asia | Southeast Asia | 328000 | Bandar Seri Begawan |
 | BHS | Bahamas | North America | Caribbean | 307000 | Nassau |
-| ESH | Western Sahara | Africa | Northern Africa | 293000 | El-AaiÃºn |
+| ESH | Western Sahara | Africa | Northern Africa | 293000 | El-Aaiún |
 | MDV | Maldives | Asia | Southern and Central Asia | 286000 | Male |
-| ISL | Iceland | Europe | Nordic Countries | 279000 | ReykjavÃ­k |
+| ISL | Iceland | Europe | Nordic Countries | 279000 | Reykjavík |
 | BRB | Barbados | North America | Caribbean | 270000 | Bridgetown |
 | BLZ | Belize | North America | Central America | 241000 | Belmopan |
 | PYF | French Polynesia | Oceania | Polynesia | 235000 | Papeete |
 | ANT | Netherlands Antilles | North America | Caribbean | 217000 | Willemstad |
-| NCL | New Caledonia | Oceania | Melanesia | 214000 | NoumÃ©a |
+| NCL | New Caledonia | Oceania | Melanesia | 214000 | Nouméa |
 | VUT | Vanuatu | Oceania | Melanesia | 190000 | Port-Vila |
 | GUF | French Guiana | South America | South America | 181000 | Cayenne |
 | WSM | Samoa | Oceania | Polynesia | 180000 | Apia |
-| GUM | Guam | Oceania | Micronesia | 168000 | AgaÃ±a |
+| GUM | Guam | Oceania | Micronesia | 168000 | Agaña |
 | LCA | Saint Lucia | North America | Caribbean | 154000 | Castries |
 | MYT | Mayotte | Africa | Eastern Africa | 149000 | Mamoutzou |
-| STP | Sao Tome and Principe | Africa | Central Africa | 147000 | SÃ£o TomÃ© |
+| STP | Sao Tome and Principe | Africa | Central Africa | 147000 | São Tomé |
 | FSM | Micronesia, Federated States of | Oceania | Micronesia | 119000 | Palikir |
 | VCT | Saint Vincent and the Grenadines | North America | Caribbean | 114000 | Kingstown |
 | ABW | Aruba | North America | Caribbean | 103000 | Oranjestad |
-| TON | Tonga | Oceania | Polynesia | 99000 | NukuÂ´alofa |
-| GRD | Grenada | North America | Caribbean | 94000 | Saint GeorgeÂ´s |
+| TON | Tonga | Oceania | Polynesia | 99000 | Nuku´alofa |
+| GRD | Grenada | North America | Caribbean | 94000 | Saint George´s |
 | VIR | Virgin Islands, U.S. | North America | Caribbean | 93000 | Charlotte Amalie |
 | KIR | Kiribati | Oceania | Micronesia | 83000 | Bairiki |
 | AND | Andorra | Europe | Southern Europe | 78000 | Andorra la Vella |
@@ -201,11 +201,11 @@
 | SYC | Seychelles | Africa | Eastern Africa | 77000 | Victoria |
 | DMA | Dominica | North America | Caribbean | 71000 | Roseau |
 | ASM | American Samoa | Oceania | Polynesia | 68000 | Fagatogo |
-| ATG | Antigua and Barbuda | North America | Caribbean | 68000 | Saint JohnÂ´s |
+| ATG | Antigua and Barbuda | North America | Caribbean | 68000 | Saint John´s |
 | BMU | Bermuda | North America | North America | 65000 | Hamilton |
 | MHL | Marshall Islands | Oceania | Micronesia | 64000 | Dalap-Uliga-Darrit |
 | GRL | Greenland | North America | North America | 56000 | Nuuk |
-| FRO | Faroe Islands | Europe | Nordic Countries | 43000 | TÃ³rshavn |
+| FRO | Faroe Islands | Europe | Nordic Countries | 43000 | Tórshavn |
 | CYM | Cayman Islands | North America | Caribbean | 38000 | George Town |
 | KNA | Saint Kitts and Nevis | North America | Caribbean | 38000 | Basseterre |
 | MCO | Monaco | Europe | Western Europe | 34000 | Monaco-Ville |
@@ -229,6 +229,6 @@
 | NFK | Norfolk Island | Oceania | Australia and New Zealand | 2000 | Kingston |
 | NIU | Niue | Oceania | Polynesia | 2000 | Alofi |
 | TKL | Tokelau | Oceania | Polynesia | 2000 | Fakaofo |
-| VAT | Holy See (Vatican City State) | Europe | Southern Europe | 1000 | CittÃ  del Vaticano |
+| VAT | Holy See (Vatican City State) | Europe | Southern Europe | 1000 | Città del Vaticano |
 | CCK | Cocos (Keeling) Islands | Oceania | Australia and New Zealand | 600 | West Island |
 | PCN | Pitcairn | Oceania | Polynesia | 50 | Adamstown |
