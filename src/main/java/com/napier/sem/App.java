@@ -213,7 +213,7 @@ public class App
     }
 
     /**
-     *
+     *Printing language statistics data
      * @param stats
      */
     public void printStatsLanguage(List<Stats> stats) {
@@ -237,6 +237,7 @@ public class App
     }
 
     /**
+     *  Printing population of a single place
      *
      * @param s
      */
@@ -418,6 +419,9 @@ public class App
 
     /**
      * Population access methods
+     * City population
+     * @param City
+     * @return c - City statistics
      */
     public Stats getCityPop(String City)
     {
@@ -447,7 +451,7 @@ public class App
     }
 
     /**
-     *
+     * District population
      * @param District
      * @return c - district statistics
      */
@@ -479,7 +483,7 @@ public class App
     }
 
     /**
-     *
+     *  Continent population
      * @param Continent
      * @return c - continent statistics
      */
@@ -509,9 +513,39 @@ public class App
             return null;
         }
     }
-
     /**
-     *
+     *  country population
+     * @param country
+     * @return c - country statistics
+     */
+    public Stats getCountryPop(String country)
+    {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.country.Name, world.country.Population as Population "
+                            + "FROM  world.country "
+                            + "WHERE world.country.Name like '" + country + "' ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Extract stat information
+            Stats c = new Stats();
+            c.setPlace(rset.getString("Name"));
+            c.setPlacePop(rset.getLong("Population"));
+
+            return c;
+        } catch (Exception e) {
+            log.fine(e.getMessage());
+            log.fine("Failed to get population details");
+            return null;
+        }
+    }
+    /**
+     *  Region population
      * @param Region
      * @return c - region statistics
      */
@@ -543,7 +577,7 @@ public class App
     }
 
     /**
-     *
+     *    World population
      * @return c - world statistics
      */
     public Stats getWorldPop()
@@ -574,6 +608,7 @@ public class App
 
     /**
      *    POPULATION IN Countries of the world
+     *    @return countries
      */
     public List<Country> getAllCountries()
     {
@@ -622,7 +657,7 @@ public class App
     }
 
     /**
-     *
+     *   POPULATION IN Top x amount of countries
      * @param limit
      * @return countries
      */
@@ -674,6 +709,9 @@ public class App
 
     /**
      *    POPULATION IN Countries of the continent
+     *
+     *     @param continentName
+     *     @return countries
      */
     public List<Country> getAllCountriesCont(String continentName)
     {
@@ -777,6 +815,7 @@ public class App
 
     /**
      *    POPULATION IN Countries of the region
+     *     @return countries
      */
     public List<Country> getAllCountriesRegion(String regionName)
     {
@@ -878,6 +917,7 @@ public class App
 
     /**
      *    POPULATION IN CITIES of the world
+     *    @return cities
      */
     public List<City> getAllCities()
     {
@@ -949,6 +989,8 @@ public class App
 
     /**
      *    POPULATION IN CITIES for the continent
+     * @param continent
+     * @return cities
      */
     public List<City> getAllCitiesC(String continent)
     {
@@ -1025,6 +1067,8 @@ public class App
 
     /**
      *    POPULATION IN CITIES for the region
+     * @param region
+     * @return cities
      */
     public List<City> getAllCitiesR(String region)
     {
@@ -1101,6 +1145,8 @@ public class App
 
     /**
      *    POPULATION IN CITIES for the country
+     *     @param country
+     *     @return cities
      */
     public List<City> getAllCitiesCountry(String country)
     {
@@ -1177,6 +1223,8 @@ public class App
 
     /**
      *    POPULATION IN CITIES for the district
+     *    @param district
+     *    @return cities
      */
     public List<City> getAllCitiesD(String district)
     {
@@ -1253,6 +1301,7 @@ public class App
 
     /**
      *   Capitals reports
+     *    @return cities
      */
     public List<City> getAllCapitals()
     {
@@ -1607,6 +1656,7 @@ public class App
 
     /**
      *   Languages report
+     *    @return stats
      */
     public List<Stats> getLanguageSpeakers()
     {
@@ -1666,6 +1716,12 @@ public class App
 
         // ArrayLists
         List<Stats> all = new ArrayList<Stats>( );
+        List<Stats> worldPop = new ArrayList<>();
+        List<Stats> contPop = new ArrayList<>();
+        List<Stats> countryPop = new ArrayList<>();
+        List<Stats> regionPop = new ArrayList<>();
+        List<Stats> districtPop = new ArrayList<>();
+        List<Stats> cityPop = new ArrayList<>();
         List<Country> wCountries = new ArrayList<Country>( );
         List<Country> cCountries = new ArrayList<Country>( );
         List<Country> rCountries = new ArrayList<Country>( );
@@ -1688,6 +1744,15 @@ public class App
         List<City> topPopWorldCapitals = new ArrayList<City>();
         List<City> topPopContCapitals = new ArrayList<City>();
         List<City> topPopRegCapitals = new ArrayList<City>();
+
+        //adding to stats
+        worldPop.add(a.getWorldPop());
+        contPop.add(a.getContinentPop("Europe"));
+
+        countryPop.add(a.getCountryPop("Jamaica"));
+        regionPop.add(a.getRegionPop("Eastern Europe"));
+        districtPop.add(a.getDistrictPop("Lombardia"));
+        cityPop.add(a.getCityPop("Berlin"));
 
         // Extracting information
         wCountries = a.getAllCountries();
@@ -1745,6 +1810,17 @@ public class App
         a.outputCities(topPopRegCapitals, "TopFivePopRegionCapitals.md");
 
 
+
+        a.outputStats(a.getPopStatsByRegion(), "UrbanAndRuralPopRegion.md" );
+        a.outputStats(a.getPopStatsByContinent(), "UrbanAndRuralPopContinent.md" );
+        a.outputStats(a.getPopStatsByCountry(), "UrbanAndRuralPopCountry.md" );
+
+        a.outputSinglePopStats( worldPop,"WorldPopulation.md");
+        a.outputSinglePopStats( contPop,"ContinentPopulation.md");
+        a.outputSinglePopStats( regionPop,"RegionPopulation.md");
+        a.outputSinglePopStats( countryPop,"CountryPopulation.md");
+        a.outputSinglePopStats( districtPop,"DistrictPopulation.md");
+        a.outputSinglePopStats( cityPop,"CityPopulation.md");
         // Disconnect from database
         a.disconnect();
     }
@@ -1909,7 +1985,7 @@ public class App
     }
 
     /**
-     *
+     *  Output method for stats
      * @param stats
      * @param filename
      */
