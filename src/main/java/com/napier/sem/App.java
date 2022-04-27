@@ -41,13 +41,13 @@ public class App
             // Load Database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            log.fine("Could not load SQL driver");
+            System.out.println("Could not load SQL driver");
             System.exit(-1);
         }
 
         int retries = 10;
         for (int i = 0; i < retries; ++i) {
-            log.fine("Connecting to database...");
+            System.out.println("Connecting to database...");
             try {
                 // Wait a bit for db to start
                 Thread.sleep(delay);
@@ -246,17 +246,17 @@ public class App
         // Check stats is not null
         if (s == null)
         {
-            log.fine("No population reports");
+            System.out.println("No population reports");
             return;
         }
         // Print header
-        log.fine(String.format("%-52s %-36s ", "Place", " Population" ));
+        System.out.println(String.format("%-52s %-36s ", "Place", " Population" ));
         // Loop over all stats in the list
 
             String stats_s =
-                    String.format("%-52s %-36s %-45s ",
+                    String.format("%-52s %-36s ",
                             s.getPlace(), s.getPlacePop() );
-            log.fine(stats_s);
+        System.out.println(stats_s);
 
     }
 
@@ -423,8 +423,7 @@ public class App
      * @param City
      * @return c - City statistics
      */
-    public Stats getCityPop(String City)
-    {
+    public Stats getCityPop(String City) throws SQLException {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -436,13 +435,20 @@ public class App
                    + "GROUP BY 1 ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-
-            // Extract stat information
+            if (rset.next())
+            {
                 Stats c = new Stats();
                 c.setPlace(rset.getString("Name"));
                 c.setPlacePop(rset.getLong("Population"));
+                return c;
+            }
+            else {
+                return null;
+            }
+            // Extract stat information
 
-            return c;
+
+
         } catch (Exception e) {
             log.fine(e.getMessage());
             log.fine("Failed to get population details");
@@ -462,7 +468,7 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT world.city.District, SUM(world.city.Population) as Population "
+                    "SELECT world.city.District as Name, SUM(world.city.Population) as Population "
                             + "FROM  world.city "
                             + "WHERE world.city.District like '" + District + "' "
                             + "GROUP BY 1 ";
@@ -470,11 +476,16 @@ public class App
             ResultSet rset = stmt.executeQuery(strSelect);
 
             // Extract stat information
-            Stats c = new Stats();
-            c.setPlace(rset.getString("Name"));
-            c.setPlacePop(rset.getLong("Population"));
-
-            return c;
+            if (rset.next())
+            {
+                Stats c = new Stats();
+                c.setPlace(rset.getString("Name"));
+                c.setPlacePop(rset.getLong("Population"));
+                return c;
+            }
+            else {
+                return null;
+            }
         } catch (Exception e) {
             log.fine(e.getMessage());
             log.fine("Failed to get population details");
@@ -494,7 +505,7 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT world.country.Continent, SUM(world.city.Population) as Population "
+                    "SELECT world.country.Continent as Name, SUM(world.country.Population) as Population "
                             + "FROM  world.country "
                             + "WHERE world.country.Continent like '" + Continent + "' "
                             + "GROUP BY 1 ";
@@ -502,11 +513,18 @@ public class App
             ResultSet rset = stmt.executeQuery(strSelect);
 
             // Extract stat information
-            Stats c = new Stats();
-            c.setPlace(rset.getString("Name"));
-            c.setPlacePop(rset.getLong("Population"));
+            if (rset.next())
+            {
+                Stats c = new Stats();
+                c.setPlace(rset.getString("Name"));
+                c.setPlacePop(rset.getLong("Population"));
+                return c;
+            }
+            else {
+                return null;
+            }
 
-            return c;
+
         } catch (Exception e) {
             log.fine(e.getMessage());
             log.fine("Failed to get population details");
@@ -533,11 +551,16 @@ public class App
             ResultSet rset = stmt.executeQuery(strSelect);
 
             // Extract stat information
-            Stats c = new Stats();
-            c.setPlace(rset.getString("Name"));
-            c.setPlacePop(rset.getLong("Population"));
-
-            return c;
+            if (rset.next())
+            {
+                Stats c = new Stats();
+                c.setPlace(rset.getString("Name"));
+                c.setPlacePop(rset.getLong("Population"));
+                return c;
+            }
+            else {
+                return null;
+            }
         } catch (Exception e) {
             log.fine(e.getMessage());
             log.fine("Failed to get population details");
@@ -564,11 +587,17 @@ public class App
             ResultSet rset = stmt.executeQuery(strSelect);
 
             // Extract stat information
-            Stats c = new Stats();
-            c.setPlace(rset.getString("Name"));
-            c.setPlacePop(rset.getLong("Population"));
+            if (rset.next())
+            {
+                Stats c = new Stats();
+                c.setPlace(rset.getString("Region"));
+                c.setPlacePop(rset.getLong("Population"));
 
-            return c;
+                return c;
+            }
+            else {
+                return null;
+            }
         } catch (Exception e) {
             log.fine(e.getMessage());
             log.fine("Failed to get population details");
@@ -594,14 +623,22 @@ public class App
             ResultSet rset = stmt.executeQuery(strSelect);
 
             // Extract stat information
-            Stats c = new Stats();
-            c.setPlace("World");
-            c.setPlacePop(rset.getLong("Population"));
 
-            return c;
+            if (rset.next())
+            {
+                Stats c = new Stats();
+                c.setPlace("World");
+                c.setPlacePop(rset.getLong("Population"));
+
+                return c;
+            }
+            else {
+                return null;
+            }
+
         } catch (Exception e) {
-            log.fine(e.getMessage());
-            log.fine("Failed to get population details");
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details");
             return null;
         }
     }
@@ -1703,8 +1740,7 @@ public class App
     /**
      * Main
      */
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) throws SQLException {
         //create new application
         App a = new App();
 
@@ -1753,6 +1789,9 @@ public class App
         regionPop.add(a.getRegionPop("Eastern Europe"));
         districtPop.add(a.getDistrictPop("Lombardia"));
         cityPop.add(a.getCityPop("Berlin"));
+
+
+
 
         // Extracting information
         wCountries = a.getAllCountries();

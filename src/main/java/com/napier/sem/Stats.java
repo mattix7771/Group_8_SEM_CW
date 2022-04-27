@@ -8,6 +8,7 @@ public class Stats {
 
     /**
      *  Variables used in retrieving data urban and rural population
+     *  place and placePop also represent general population of a place
      */
     /**
      *  Represents statistical data required
