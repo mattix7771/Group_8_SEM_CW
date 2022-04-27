@@ -514,7 +514,7 @@ public class App
         }
     }
     /**
-     *  country population
+     *  Country population
      * @param country
      * @return c - country statistics
      */
