@@ -2,7 +2,7 @@
 | --- | --- | --- |
 | Seoul | South Korea | 9981619 |
 | Jakarta | Indonesia | 9604900 |
-| Ciudad de México | Mexico | 8591309 |
+| Ciudad de MÃ©xico | Mexico | 8591309 |
 | Moscow | Russian Federation | 8389200 |
 | Tokyo | Japan | 7980230 |
 | Peking | China | 7472000 |
@@ -11,7 +11,7 @@
 | Teheran | Iran | 6758845 |
 | Lima | Peru | 6464693 |
 | Bangkok | Thailand | 6320174 |
-| Santafé de Bogotá | Colombia | 6260862 |
+| SantafÃ© de BogotÃ¡ | Colombia | 6260862 |
 | Kinshasa | Congo, The Democratic Republic of the | 5064000 |
 | Santiago de Chile | Chile | 4703954 |
 | Baghdad | Iraq | 4336000 |
@@ -36,20 +36,20 @@
 | Luanda | Angola | 2022000 |
 | Bucuresti | Romania | 2016131 |
 | Caracas | Venezuela | 1975294 |
-| Brasília | Brazil | 1969868 |
+| BrasÃ­lia | Brazil | 1969868 |
 | Budapest | Hungary | 1811552 |
 | Baku | Azerbaijan | 1787800 |
 | Kabul | Afghanistan | 1780000 |
 | Tripoli | Libyan Arab Jamahiriya | 1682000 |
 | Minsk | Belarus | 1674000 |
 | Warszawa | Poland | 1615369 |
-| Santo Domingo de Guzmán | Dominican Republic | 1609966 |
+| Santo Domingo de GuzmÃ¡n | Dominican Republic | 1609966 |
 | Wien | Austria | 1608144 |
 | Manila | Philippines | 1581082 |
 | Quito | Ecuador | 1573458 |
 | Hanoi | Vietnam | 1410000 |
 | Harare | Zimbabwe | 1410000 |
-| Yaoundé | Cameroon | 1372800 |
+| YaoundÃ© | Cameroon | 1372800 |
 | Damascus | Syria | 1347000 |
 | Lusaka | Zambia | 1317000 |
 | Victoria | Hong Kong | 1312637 |
@@ -99,19 +99,19 @@
 | Washington | United States | 572059 |
 | Phnom Penh | Cambodia | 570155 |
 | Lisboa | Portugal | 563210 |
-| Asunción | Paraguay | 557776 |
+| AsunciÃ³n | Paraguay | 557776 |
 | Helsinki [Helsingfors] | Finland | 555474 |
 | Ashgabat | Turkmenistan | 540600 |
 | Vientiane | Laos | 531800 |
-| N´Djaména | Chad | 530965 |
+| NÂ´DjamÃ©na | Chad | 530965 |
 | Islamabad | Pakistan | 524500 |
 | Bangui | Central African Republic | 524000 |
 | Dushanbe | Tajikistan | 524000 |
 | Oslo | Norway | 508726 |
 | Sanaa | Yemen | 503600 |
-| København | Denmark | 495699 |
+| KÃ¸benhavn | Denmark | 495699 |
 | Dublin | Ireland | 481854 |
-| Ciudad de Panamá | Panama | 471373 |
+| Ciudad de PanamÃ¡ | Panama | 471373 |
 | Bratislava | Slovakia | 448292 |
 | Skopje | Macedonia | 444299 |
 | Macao | Macao | 437500 |
@@ -124,12 +124,12 @@
 | Tallinn | Estonia | 403981 |
 | Abu Dhabi | United Arab Emirates | 398695 |
 | Djibouti | Djibouti | 383000 |
-| Lomé | Togo | 375000 |
+| LomÃ© | Togo | 375000 |
 | Sarajevo | Bosnia and Herzegovina | 360000 |
 | Doha | Qatar | 355000 |
 | Gaza | Palestine | 353632 |
 | Abuja | Nigeria | 350100 |
-| San José | Costa Rica | 339131 |
+| San JosÃ© | Costa Rica | 339131 |
 | Ottawa | Canada | 335277 |
 | Canberra | Australia | 322723 |
 | Astana | Kazakstan | 311200 |
@@ -147,29 +147,29 @@
 | Porto-Novo | Benin | 194000 |
 | Dodoma | Tanzania | 189000 |
 | Nassau | Bahamas | 172000 |
-| El-Aaiún | Western Sahara | 169000 |
+| El-AaiÃºn | Western Sahara | 169000 |
 | Windhoek | Namibia | 169000 |
 | Wellington | New Zealand | 166700 |
 | al-Manama | Bahrain | 148000 |
 | Port-Louis | Mauritius | 138200 |
 | Bruxelles [Brussel] | Belgium | 133859 |
-| Saint-Denis | Réunion | 131480 |
-| Yamoussoukro | Côte d’Ivoire | 130000 |
+| Saint-Denis | RÃ©union | 131480 |
+| Yamoussoukro | CÃ´te dâ€™Ivoire | 130000 |
 | Bern | Switzerland | 122700 |
 | Paramaribo | Suriname | 112000 |
-| Reykjavík | Iceland | 109184 |
+| ReykjavÃ­k | Iceland | 109184 |
 | Kingston | Jamaica | 103962 |
 | Praia | Cape Verde | 94800 |
 | Fort-de-France | Martinique | 94050 |
-| Luxembourg [Luxemburg/Lëtzebuerg] | Luxembourg | 80700 |
+| Luxembourg [Luxemburg/LÃ«tzebuerg] | Luxembourg | 80700 |
 | Suva | Fiji Islands | 77366 |
-| Nouméa | New Caledonia | 76293 |
+| NoumÃ©a | New Caledonia | 76293 |
 | Male | Maldives | 71000 |
 | Mbabane | Swaziland | 61000 |
 | Masqat | Oman | 51969 |
 | Cayenne | French Guiana | 50699 |
 | Honiara | Solomon Islands | 50100 |
-| São Tomé | Sao Tome and Principe | 49541 |
+| SÃ£o TomÃ© | Sao Tome and Principe | 49541 |
 | Dili | East Timor | 47900 |
 | Port-of-Spain | Trinidad and Tobago | 43396 |
 | Banjul | Gambia | 42326 |
@@ -183,15 +183,15 @@
 | Dalap-Uliga-Darrit | Marshall Islands | 28000 |
 | Gibraltar | Gibraltar | 27025 |
 | Papeete | French Polynesia | 25553 |
-| Saint John´s | Antigua and Barbuda | 24000 |
-| Nuku´alofa | Tonga | 22400 |
+| Saint JohnÂ´s | Antigua and Barbuda | 24000 |
+| NukuÂ´alofa | Tonga | 22400 |
 | Thimphu | Bhutan | 22000 |
 | Bandar Seri Begawan | Brunei | 21484 |
 | Andorra la Vella | Andorra | 21189 |
 | George Town | Cayman Islands | 19600 |
 | Kingstown | Saint Vincent and the Grenadines | 17100 |
 | Roseau | Dominica | 16243 |
-| Tórshavn | Faroe Islands | 14542 |
+| TÃ³rshavn | Faroe Islands | 14542 |
 | Nuuk | Greenland | 13445 |
 | Charlotte Amalie | Virgin Islands, U.S. | 13000 |
 | Basse-Terre | Guadeloupe | 12433 |
@@ -208,7 +208,7 @@
 | Saint-Pierre | Saint Pierre and Miquelon | 5808 |
 | Vaduz | Liechtenstein | 5043 |
 | Cockburn Town | Turks and Caicos Islands | 4800 |
-| Saint George´s | Grenada | 4621 |
+| Saint GeorgeÂ´s | Grenada | 4621 |
 | Funafuti | Tuvalu | 4600 |
 | Willemstad | Netherlands Antilles | 2345 |
 | Fagatogo | American Samoa | 2323 |
@@ -221,14 +221,14 @@
 | Longyearbyen | Svalbard and Jan Mayen | 1438 |
 | Monaco-Ville | Monaco | 1234 |
 | Hamilton | Bermuda | 1200 |
-| Agaña | Guam | 1139 |
+| AgaÃ±a | Guam | 1139 |
 | Mata-Utu | Wallis and Futuna | 1137 |
 | Kingston | Norfolk Island | 800 |
 | Flying Fish Cove | Christmas Island | 700 |
 | Alofi | Niue | 682 |
 | The Valley | Anguilla | 595 |
 | Yaren | Nauru | 559 |
-| Città del Vaticano | Holy See (Vatican City State) | 455 |
+| CittÃ  del Vaticano | Holy See (Vatican City State) | 455 |
 | Fakaofo | Tokelau | 300 |
 | West Island | Cocos (Keeling) Islands | 167 |
 | Adamstown | Pitcairn | 42 |
