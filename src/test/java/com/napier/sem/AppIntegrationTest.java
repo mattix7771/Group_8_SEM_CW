@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.sql.SQLException;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -296,6 +297,84 @@ public class AppIntegrationTest {
         assertTrue(f.exists());
         assertTrue(f.isFile());
         assertEquals(f.getName(), "single_continent_population_entry.md");
+    }
+
+    @Test //Output single population statistic to table test
+    void testOutputSinglePop(){
+
+    }
+
+    @Test //Extraction of population within a city test
+    void testGetCityPop() throws SQLException {
+        Stats stats = app.getCityPop("Rotterdam");
+        assertEquals(stats.getPlacePop(), 593321);
+    }
+
+    @Test //Extraction of population within a district test
+    void testGetDistrictPop(){
+        Stats stats = app.getDistrictPop("Zuid-Holland");
+        assertEquals(stats.getPlacePop(), 1476710);
+    }
+
+    @Test //Extraction of population within a continent test
+    void testGetContPop(){
+        Stats stats = app.getContinentPop("Europe");
+        assertEquals(stats.getPlacePop(), 1);
+    }
+
+    @Test //Extraction of population within a country test
+    void testGetCountryPop(){
+        Stats stats = app.getCountryPop("Italy");
+        assertEquals(stats.getPlacePop(), 57680000);
+    }
+
+    @Test //Extraction of population within a region test
+    void testGetRegPop(){
+        Stats stats = app.getRegionPop("Southern Europe");
+        assertEquals(stats.getPlacePop(), 2);
+    }
+
+    @Test //Extraction of world population test
+    void testGetWorldPop(){
+        Stats stats = app.getWorldPop();
+        assertEquals(stats.getPlacePop(), 3);
+    }
+
+    @Test //Extraction of all countries within a continent test
+    void testGetAllCountriesCont(){
+        List<Country> countries = app.getAllCountriesCont("Europe");
+        assertEquals(countries.size(), 44);
+    }
+
+    @Test //Extraction of all countries within a region test
+    void testGetAllCountriesRegion(){
+        List<Country> countries = app.getAllCountriesRegion("Southern Europe");
+        assertEquals(countries.size(), 15);
+    }
+
+    @Test //Extraction of all countries within a region and limited results test
+    void testGetAllCountriesRegionAndLimit(){
+        List<Country> countries = app.getAllCountriesRegion("Southern Europe", 10);
+        assertEquals(countries.size(), 10);
+        assertTrue(countries.contains("Italy"));
+        assertTrue(countries.contains("Croatia"));
+        assertTrue(countries.contains("Greece"));
+    }
+
+    @Test //Extraction of all cities within a country test
+    void testGetAllCitiesCountry(){
+        List<City> cities = app.getAllCitiesCountry("Italy");
+        assertEquals(cities.size(), 58);
+    }
+
+    @Test //Extraction of all cities within a country and limited result test
+    void testGetAllCitiesCountryAndLimit(){
+        List<City> cities = app.getAllCitiesCountry("Italy", 20);
+        assertEquals(cities.size(), 20);
+        assertTrue(cities.contains("Roma"));
+        assertTrue(cities.contains("Napoli"));
+        assertTrue(cities.contains("Torino"));
+        assertTrue(cities.contains("Palermo"));
     }
 
 }
