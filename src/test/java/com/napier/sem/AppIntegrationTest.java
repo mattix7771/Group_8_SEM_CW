@@ -351,9 +351,8 @@ public class AppIntegrationTest {
     void testGetAllCountriesRegionAndLimit(){
         List<Country> countries = app.getAllCountriesRegion("Southern Europe", 10);
         assertEquals(countries.size(), 10);
-        assertEquals(countries.contains("Italy"), true);
-        assertEquals(countries.contains("Croatia"), true);
-        assertEquals(countries.contains("Greece"), true);
+        assertEquals(countries.get(0).getName(), "Italy");
+        assertEquals(countries.get(1).getName(), "Spain");
     }
 
     @Test //Extraction of all cities within a country test
@@ -366,10 +365,9 @@ public class AppIntegrationTest {
     void testGetAllCitiesCountryAndLimit(){
         List<City> cities = app.getAllCitiesCountry("Italy", 20);
         assertEquals(cities.size(), 20);
-        assertEquals(cities.contains("Roma"), true);
-        assertEquals(cities.contains("Napoli"), true);
-        assertEquals(cities.contains("Torino"), true);
-        assertEquals(cities.contains("Palermo"), true);
+        assertEquals(cities.get(0).getName(), "Roma");
+        assertEquals(cities.get(1).getName(), "Milano");
+        assertEquals(cities.get(2).getName(), "Napoli");
     }
 
 }
