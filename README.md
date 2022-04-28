@@ -9,35 +9,35 @@
   
      32 requirements of 32 have been implemented, which is 100%.
 
-- [x] 1.All the countries in the world organised by largest population to smallest.
-- [x] 2.All the countries in a continent organised by largest population to smallest.
-- [x] 3.All the countries in a region organised by largest population to smallest.
-- [x] 4.The top N populated countries in the world where N is provided by the user.
-- [x] 5.The top N populated countries in a continent where N is provided by the user.
-- [x] 6.The top N populated countries in a region where N is provided by the user.
-- [x] 7.All the cities in the world organised by largest population to smallest.
-- [x] 8.All the cities in a continent organised by largest population to smallest.
-- [x] 9.All the cities in a region organised by largest population to smallest.
-- [x] 10.All the cities in a country organised by largest population to smallest.
-- [x] 11.All the cities in a district organised by largest population to smallest.
-- [x] 12.The top N populated cities in the world where N is provided by the user.
-- [x] 13.The top N populated cities in a continent where N is provided by the user.
-- [x] 14.The top N populated cities in a region where N is provided by the user.
-- [x] 15.The top N populated cities in a country where N is provided by the user.
-- [x] 16.The top N populated cities in a district where N is provided by the user.
-- [x] 17.All the capital cities in the world organised by largest population to smallest.
-- [x] 18.All the capital cities in a continent organised by largest population to smallest.
-- [x] 19.All the capital cities in a region organised by largest to smallest.
-- [x] 20.The top N populated capital cities in the world where N is provided by the user.
-- [x] 21.The top N populated capital cities in a continent where N is provided by the user.
-- [x] 22.The top N populated capital cities in a region where N is provided by the user.
-- [x] 23.The population of people, people living in cities, and people not living in cities in each continent.
-- [x] 24.The population of people, people living in cities, and people not living in cities in each region.
-- [x] 25.The population of people, people living in cities, and people not living in cities in each country.
-- [x] 26.The population of the world.
-- [x] 27.The population of a continent.
-- [x] 28.The population of a region.
-- [x] 29.The population of a country.
-- [x] 30.The population of a district.
-- [x] 31.The population of a city.
-- [x] 32.Number of people who speak certain language
+- [x] 1.All the countries in the world organised by largest population to smallest. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/AllWorldCountriesDescPop.md
+- [x] 2.All the countries in a continent organised by largest population to smallest. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/AllCountriesContDescPop.md
+- [x] 3.All the countries in a region organised by largest population to smallest. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/AllCountriesRegDescPop.md
+- [x] 4.The top N populated countries in the world where N is provided by the user. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/TopFiveWorldPopCountries.md
+- [x] 5.The top N populated countries in a continent where N is provided by the user. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/TopFivePopContCountries.md
+- [x] 6.The top N populated countries in a region where N is provided by the user. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/TopFivePopRegCountries.md
+- [x] 7.All the cities in the world organised by largest population to smallest. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/AllWorldCitiesDescPop.md
+- [x] 8.All the cities in a continent organised by largest population to smallest. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/AllCitiesContDescPop.md
+- [x] 9.All the cities in a region organised by largest population to smallest. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/AllCitiesRegDescPop.md
+- [x] 10.All the cities in a country organised by largest population to smallest. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/AllCitiesCountryDescPop.md
+- [x] 11.All the cities in a district organised by largest population to smallest. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/AllCitiesDisDescPop.md
+- [x] 12.The top N populated cities in the world where N is provided by the user. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/TopFivePopWorldCities.md
+- [x] 13.The top N populated cities in a continent where N is provided by the user. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/TopFivePopContinentCities.md
+- [x] 14.The top N populated cities in a region where N is provided by the user. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/TopFivePopRegionCities.md
+- [x] 15.The top N populated cities in a country where N is provided by the user. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/TopFivePopCountryCities.md
+- [x] 16.The top N populated cities in a district where N is provided by the user. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/TopFivePopDistrictCities.md
+- [x] 17.All the capital cities in the world organised by largest population to smallest. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/AllPopWorldCapitals.md
+- [x] 18.All the capital cities in a continent organised by largest population to smallest. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/AllPopContinentCapitals.md
+- [x] 19.All the capital cities in a region organised by largest to smallest. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/AllPopRegionCapitals.md
+- [x] 20.The top N populated capital cities in the world where N is provided by the user. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/TopFivePopWorldCapitals.md
+- [x] 21.The top N populated capital cities in a continent where N is provided by the user. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/TopFivePopContinentCapitals.md
+- [x] 22.The top N populated capital cities in a region where N is provided by the user. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/TopFivePopRegionCapitals.md
+- [x] 23.The population of people, people living in cities, and people not living in cities in each continent. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/UrbanAndRuralPopContinent.md
+- [x] 24.The population of people, people living in cities, and people not living in cities in each region. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/UrbanAndRuralPopRegion.md
+- [x] 25.The population of people, people living in cities, and people not living in cities in each country. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/UrbanAndRuralPopCountry.md
+- [x] 26.The population of the world. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/WorldPopulation.md
+- [x] 27.The population of a continent. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/ContinentPopulation.md
+- [x] 28.The population of a region. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/RegionPopulation.md
+- [x] 29.The population of a country. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/CountryPopulation.md
+- [x] 30.The population of a district. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/DistrictPopulation.md
+- [x] 31.The population of a city. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/CityPopulation.md
+- [x] 32.Number of people who speak certain language. https://github.com/mattix7771/Group_8_SEM_CW/blob/reports/language_stats.md
