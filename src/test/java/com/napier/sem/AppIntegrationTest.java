@@ -299,11 +299,6 @@ public class AppIntegrationTest {
         assertEquals(f.getName(), "single_continent_population_entry.md");
     }
 
-    @Test //Output single population statistic to table test
-    void testOutputSinglePop(){
-
-    }
-
     @Test //Extraction of population within a city test
     void testGetCityPop() throws SQLException {
         Stats stats = app.getCityPop("Rotterdam");
@@ -319,7 +314,7 @@ public class AppIntegrationTest {
     @Test //Extraction of population within a continent test
     void testGetContPop(){
         Stats stats = app.getContinentPop("Europe");
-        assertEquals(stats.getPlacePop(), 1);
+        assertEquals(stats.getPlacePop(), 730074600);
     }
 
     @Test //Extraction of population within a country test
@@ -331,19 +326,19 @@ public class AppIntegrationTest {
     @Test //Extraction of population within a region test
     void testGetRegPop(){
         Stats stats = app.getRegionPop("Southern Europe");
-        assertEquals(stats.getPlacePop(), 2);
+        assertEquals(stats.getPlacePop(), 144674200);
     }
 
     @Test //Extraction of world population test
     void testGetWorldPop(){
         Stats stats = app.getWorldPop();
-        assertEquals(stats.getPlacePop(), 3);
+        assertEquals(stats.getPlacePop(), 6078749450L);
     }
 
     @Test //Extraction of all countries within a continent test
     void testGetAllCountriesCont(){
         List<Country> countries = app.getAllCountriesCont("Europe");
-        assertEquals(countries.size(), 44);
+        assertEquals(countries.size(), 46);
     }
 
     @Test //Extraction of all countries within a region test
@@ -356,9 +351,9 @@ public class AppIntegrationTest {
     void testGetAllCountriesRegionAndLimit(){
         List<Country> countries = app.getAllCountriesRegion("Southern Europe", 10);
         assertEquals(countries.size(), 10);
-        assertTrue(countries.contains("Italy"));
-        assertTrue(countries.contains("Croatia"));
-        assertTrue(countries.contains("Greece"));
+        assertEquals(countries.contains("Italy"), true);
+        assertEquals(countries.contains("Croatia"), true);
+        assertEquals(countries.contains("Greece"), true);
     }
 
     @Test //Extraction of all cities within a country test
@@ -371,10 +366,10 @@ public class AppIntegrationTest {
     void testGetAllCitiesCountryAndLimit(){
         List<City> cities = app.getAllCitiesCountry("Italy", 20);
         assertEquals(cities.size(), 20);
-        assertTrue(cities.contains("Roma"));
-        assertTrue(cities.contains("Napoli"));
-        assertTrue(cities.contains("Torino"));
-        assertTrue(cities.contains("Palermo"));
+        assertEquals(cities.contains("Roma"), true);
+        assertEquals(cities.contains("Napoli"), true);
+        assertEquals(cities.contains("Torino"), true);
+        assertEquals(cities.contains("Palermo"), true);
     }
 
 }
