@@ -1347,7 +1347,7 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT world.city.Name, world.country.Name as Country, world.city.Population "
+                    "SELECT world.city.Name,world.city.District, world.country.Name as Country, world.city.Population "
                             + "FROM world.country, world.city "
                             + "WHERE world.city.ID = world.country.Capital "
                             + "ORDER BY 3 DESC ";
@@ -1360,6 +1360,7 @@ public class App
 
                 City c = new City();
                 c.setName(rset.getString("Name"));
+                c.setDistrict(rset.getString("District"));
                 c.setCountryCode(rset.getString("Country"));
                 c.setPopulation(rset.getInt("Population"));
                 cities.add(c);
@@ -1384,7 +1385,7 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT world.city.Name, world.country.Name as Country, world.city.Population "
+                    "SELECT world.city.Name,world.city.District, world.country.Name as Country, world.city.Population "
                             + "FROM world.country, world.city "
                             + "WHERE world.city.ID = world.country.Capital "
                             + "ORDER BY 3 DESC "
@@ -1398,6 +1399,7 @@ public class App
 
                 City c = new City();
                 c.setName(rset.getString("Name"));
+                c.setDistrict(rset.getString("District"));
                 c.setCountryCode(rset.getString("Country"));
                 c.setPopulation(rset.getInt("Population"));
                 cities.add(c);
@@ -1422,7 +1424,7 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT world.city.Name, world.country.Name as Country, world.city.Population "
+                    "SELECT world.city.Name,world.city.District, world.country.Name as Country, world.city.Population "
                             + "FROM world.country, world.city "
                             + "WHERE world.city.ID = world.country.Capital "
                             + "AND world.country.Region = '"+ Region +"' "
@@ -1437,6 +1439,7 @@ public class App
 
                 City c = new City();
                 c.setName(rset.getString("Name"));
+                c.setDistrict(rset.getString("District"));
                 c.setCountryCode(rset.getString("Country"));
                 c.setPopulation(rset.getInt("Population"));
                 cities.add(c);
@@ -1462,7 +1465,7 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT world.city.Name, world.country.Name as Country, world.city.Population "
+                    "SELECT world.city.Name,world.city.District, world.country.Name as Country, world.city.Population "
                             + "FROM world.country, world.city "
                             + "WHERE world.city.ID = world.country.Capital "
                             + "AND world.country.Region = '"+ Region +"' "
@@ -1477,6 +1480,7 @@ public class App
 
                 City c = new City();
                 c.setName(rset.getString("Name"));
+                c.setDistrict(rset.getString("District"));
                 c.setCountryCode(rset.getString("Country"));
                 c.setPopulation(rset.getInt("Population"));
                 cities.add(c);
@@ -1501,7 +1505,7 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT world.city.Name, world.country.Name as Country, world.city.Population "
+                    "SELECT world.city.Name,world.city.District, world.country.Name as Country, world.city.Population "
                             + "FROM world.country, world.city "
                             + "WHERE world.city.ID = world.country.Capital "
                             + "AND world.country.Continent = '"+ Continent +"' "
@@ -1516,6 +1520,7 @@ public class App
 
                 City c = new City();
                 c.setName(rset.getString("Name"));
+                c.setDistrict(rset.getString("District"));
                 c.setCountryCode(rset.getString("Country"));
                 c.setPopulation(rset.getInt("Population"));
                 cities.add(c);
@@ -1541,7 +1546,7 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT world.city.Name, world.country.Name as Country, world.city.Population "
+                    "SELECT world.city.Name, world.city.District, world.country.Name as Country, world.city.Population "
                             + "FROM world.country, world.city "
                             + "WHERE world.city.ID = world.country.Capital "
                             + "AND world.country.Continent = '"+ Continent +"' "
@@ -1556,6 +1561,7 @@ public class App
 
                 City c = new City();
                 c.setName(rset.getString("Name"));
+                c.setName(rset.getString("District"));
                 c.setCountryCode(rset.getString("Country"));
                 c.setPopulation(rset.getInt("Population"));
                 cities.add(c);
