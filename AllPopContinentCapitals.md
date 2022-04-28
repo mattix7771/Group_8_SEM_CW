@@ -1,48 +1,48 @@
 | Name| District | Country | Population | 
 | --- | --- | --- | --- |
-| Moscow | null | Russian Federation | 8389200 |
-| London | null | United Kingdom | 7285000 |
-| Berlin | null | Germany | 3386667 |
-| Madrid | null | Spain | 2879052 |
-| Roma | null | Italy | 2643581 |
-| Kyiv | null | Ukraine | 2624000 |
-| Paris | null | France | 2125246 |
-| Bucuresti | null | Romania | 2016131 |
-| Budapest | null | Hungary | 1811552 |
-| Minsk | null | Belarus | 1674000 |
-| Warszawa | null | Poland | 1615369 |
-| Wien | null | Austria | 1608144 |
-| Beograd | null | Yugoslavia | 1204000 |
-| Praha | null | Czech Republic | 1181126 |
-| Sofija | null | Bulgaria | 1122302 |
-| Athenai | null | Greece | 772072 |
-| Riga | null | Latvia | 764328 |
-| Stockholm | null | Sweden | 750348 |
-| Amsterdam | null | Netherlands | 731200 |
-| Chisinau | null | Moldova | 719900 |
-| Zagreb | null | Croatia | 706770 |
-| Vilnius | null | Lithuania | 577969 |
-| Lisboa | null | Portugal | 563210 |
-| Helsinki [Helsingfors] | null | Finland | 555474 |
-| Oslo | null | Norway | 508726 |
-| København | null | Denmark | 495699 |
-| Dublin | null | Ireland | 481854 |
-| Bratislava | null | Slovakia | 448292 |
-| Skopje | null | Macedonia | 444299 |
-| Tallinn | null | Estonia | 403981 |
-| Sarajevo | null | Bosnia and Herzegovina | 360000 |
-| Ljubljana | null | Slovenia | 270986 |
-| Tirana | null | Albania | 270000 |
-| Bruxelles [Brussel] | null | Belgium | 133859 |
-| Bern | null | Switzerland | 122700 |
-| Reykjavík | null | Iceland | 109184 |
-| Luxembourg [Luxemburg/Lëtzebuerg] | null | Luxembourg | 80700 |
-| Gibraltar | null | Gibraltar | 27025 |
-| Andorra la Vella | null | Andorra | 21189 |
-| Tórshavn | null | Faroe Islands | 14542 |
-| Valletta | null | Malta | 7073 |
-| Vaduz | null | Liechtenstein | 5043 |
-| San Marino | null | San Marino | 2294 |
-| Longyearbyen | null | Svalbard and Jan Mayen | 1438 |
-| Monaco-Ville | null | Monaco | 1234 |
-| Città del Vaticano | null | Holy See (Vatican City State) | 455 |
+| Beograd | Central Serbia | Yugoslavia | 1204000 |
+| London | England | United Kingdom | 7285000 |
+| Kyiv | Kiova | Ukraine | 2624000 |
+| Bern | Bern | Switzerland | 122700 |
+| Stockholm | Lisboa | Sweden | 750348 |
+| Longyearbyen | Länsimaa | Svalbard and Jan Mayen | 1438 |
+| Madrid | Madrid | Spain | 2879052 |
+| Ljubljana | Osrednjeslovenska | Slovenia | 270986 |
+| Bratislava | Bratislava | Slovakia | 448292 |
+| San Marino | San Marino | San Marino | 2294 |
+| Moscow | Moscow (City) | Russian Federation | 8389200 |
+| Bucuresti | Bukarest | Romania | 2016131 |
+| Lisboa | Lisboa | Portugal | 563210 |
+| Warszawa | Mazowieckie | Poland | 1615369 |
+| Oslo | Oslo | Norway | 508726 |
+| Amsterdam | Noord-Holland | Netherlands | 731200 |
+| Monaco-Ville | – | Monaco | 1234 |
+| Chisinau | Chisinau | Moldova | 719900 |
+| Valletta | Inner Harbour | Malta | 7073 |
+| Skopje | Skopje | Macedonia | 444299 |
+| Luxembourg [Luxemburg/Lëtzebuerg] | Luxembourg | Luxembourg | 80700 |
+| Vilnius | Vilna | Lithuania | 577969 |
+| Vaduz | Vaduz | Liechtenstein | 5043 |
+| Riga | Riika | Latvia | 764328 |
+| Roma | Latium | Italy | 2643581 |
+| Dublin | Leinster | Ireland | 481854 |
+| Reykjavík | Höfuðborgarsvæði | Iceland | 109184 |
+| Budapest | Budapest | Hungary | 1811552 |
+| Città del Vaticano | – | Holy See (Vatican City State) | 455 |
+| Athenai | Attika | Greece | 772072 |
+| Gibraltar | – | Gibraltar | 27025 |
+| Berlin | Berliini | Germany | 3386667 |
+| Paris | Île-de-France | France | 2125246 |
+| Helsinki [Helsingfors] | Newmaa | Finland | 555474 |
+| Tórshavn | Streymoyar | Faroe Islands | 14542 |
+| Tallinn | Harjumaa | Estonia | 403981 |
+| København | København | Denmark | 495699 |
+| Praha | Hlavní mesto Praha | Czech Republic | 1181126 |
+| Zagreb | Grad Zagreb | Croatia | 706770 |
+| Sofija | Grad Sofija | Bulgaria | 1122302 |
+| Sarajevo | Federaatio | Bosnia and Herzegovina | 360000 |
+| Bruxelles [Brussel] | Bryssel | Belgium | 133859 |
+| Minsk | Horad Minsk | Belarus | 1674000 |
+| Wien | Wien | Austria | 1608144 |
+| Andorra la Vella | Andorra la Vella | Andorra | 21189 |
+| Tirana | Tirana | Albania | 270000 |

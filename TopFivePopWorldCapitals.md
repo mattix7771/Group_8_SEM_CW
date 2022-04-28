@@ -1,7 +1,7 @@
 | Name| District | Country | Population | 
 | --- | --- | --- | --- |
-| Seoul | null | South Korea | 9981619 |
-| Jakarta | null | Indonesia | 9604900 |
-| Ciudad de México | null | Mexico | 8591309 |
-| Moscow | null | Russian Federation | 8389200 |
-| Tokyo | null | Japan | 7980230 |
+| Harare | Harare | Zimbabwe | 1410000 |
+| Lusaka | Lusaka | Zambia | 1317000 |
+| Beograd | Central Serbia | Yugoslavia | 1204000 |
+| Sanaa | Sanaa | Yemen | 503600 |
+| El-Aaiún | El-Aaiún | Western Sahara | 169000 |

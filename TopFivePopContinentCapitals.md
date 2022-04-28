@@ -1,7 +1,7 @@
 | Name| District | Country | Population | 
 | --- | --- | --- | --- |
-| Moscow | null | Russian Federation | 8389200 |
-| London | null | United Kingdom | 7285000 |
-| Berlin | null | Germany | 3386667 |
-| Madrid | null | Spain | 2879052 |
-| Roma | null | Italy | 2643581 |
+| Central Serbia | null | Yugoslavia | 1204000 |
+| England | null | United Kingdom | 7285000 |
+| Kiova | null | Ukraine | 2624000 |
+| Bern | null | Switzerland | 122700 |
+| Lisboa | null | Sweden | 750348 |
