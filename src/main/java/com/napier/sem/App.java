@@ -41,13 +41,13 @@ public class App
             // Load Database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            log.fine("Could not load SQL driver");
+            System.out.println("Could not load SQL driver");
             System.exit(-1);
         }
 
         int retries = 10;
         for (int i = 0; i < retries; ++i) {
-            log.fine("Connecting to database...");
+            System.out.println("Connecting to database...");
             try {
                 // Wait a bit for db to start
                 Thread.sleep(delay);
@@ -176,13 +176,13 @@ public class App
             return;
         }
         // Print header
-        log.fine(String.format("%-3s %-52s %-13s %-26s %-10s %-10s ", "Code", "Name", "Continent","Region", "Population", "Capital"));
+        log.fine(String.format("%-3s %-52s %-13s %-26s %-10s %-35s ", "Code", "Name", "Continent","Region", "Population", "Capital"));
         // Loop over all cities in the list
         for (Country c : countries) {
             if (c == null)
                 continue;
             String country_s =
-                    String.format("%-3s %-52s %-13s %-26s %-10s %-10s ",
+                    String.format("%-3s %-52s %-13s %-26s %-10s %-35s ",
                             c.getCode(), c.getName(), c.getContinent(),c.getRegion(), c.getPopulation(), c.getCapital() );
             log.fine(country_s);
         }
@@ -213,7 +213,7 @@ public class App
     }
 
     /**
-     *
+     *Printing language statistics data
      * @param stats
      */
     public void printStatsLanguage(List<Stats> stats) {
@@ -237,6 +237,7 @@ public class App
     }
 
     /**
+     *  Printing population of a single place
      *
      * @param s
      */
@@ -245,17 +246,17 @@ public class App
         // Check stats is not null
         if (s == null)
         {
-            log.fine("No population reports");
+            System.out.println("No population reports");
             return;
         }
         // Print header
-        log.fine(String.format("%-52s %-36s ", "Place", " Population" ));
+        System.out.println(String.format("%-52s %-36s ", "Place", " Population" ));
         // Loop over all stats in the list
 
             String stats_s =
-                    String.format("%-52s %-36s %-45s ",
+                    String.format("%-52s %-36s ",
                             s.getPlace(), s.getPlacePop() );
-            log.fine(stats_s);
+        System.out.println(stats_s);
 
     }
 
@@ -273,9 +274,10 @@ public class App
                     "SELECT world.country.Name, world.country.Code,world.country.Capital,world.country.Code2," +
                             "world.country.Continent, world.country.GNP,world.country.GNPOld,world.country.GovernmentForm," +
                             "world.country.HeadOfState, world.country.IndepYear,world.country.LifeExpectancy,world.country.LocalName," +
-                            "world.country.Population, world.country.Region,world.country.SurfaceArea "
-                            + "FROM  world.country "
-                            + "WHERE world.country.name = '"+ cName + "' ";
+                            "world.country.Population, world.country.Region,world.country.SurfaceArea,world.city.Name as CapitalName "
+                            + "FROM  world.country,world.city "
+                            + "WHERE world.country.name = '"+ cName + "' "
+                            + "AND world.city.ID = world.country.Capital ";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -286,7 +288,7 @@ public class App
                 Country country = new Country();
                 country.setName(rset.getString("Name"));
                 country.setPopulation(rset.getInt("Population"));
-                country.setCapital(rset.getString("Capital"));
+                country.setCapital(rset.getString("CapitalName"));
                 country.setCode(rset.getString("Code"));
                 country.setCode2(rset.getString("Code2"));
                 country.setGnp(rset.getInt("GNP"));
@@ -327,9 +329,10 @@ public class App
                     "SELECT world.country.Name, world.country.Code,world.country.Capital,world.country.Code2," +
                             "world.country.Continent, world.country.GNP,world.country.GNPOld,world.country.GovernmentForm," +
                             "world.country.HeadOfState, world.country.IndepYear,world.country.LifeExpectancy,world.country.LocalName," +
-                            "world.country.Population, world.country.Region,world.country.SurfaceArea "
-                            + "FROM  world.country "
-                            + "WHERE world.country.code = '"+ cCode + "' ";
+                            "world.country.Population, world.country.Region,world.country.SurfaceArea, world.city.Name as CapitalName "
+                            + "FROM  world.country,world.city "
+                            + "WHERE world.country.code = '"+ cCode + "' "
+                            + "AND world.city.ID = world.country.Capital ";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -340,7 +343,7 @@ public class App
                 Country country = new Country();
                 country.setName(rset.getString("Name"));
                 country.setPopulation(rset.getInt("Population"));
-                country.setCapital(rset.getString("Capital"));
+                country.setCapital(rset.getString("CapitalName"));
                 country.setCode(rset.getString("Code"));
                 country.setCode2(rset.getString("Code2"));
                 country.setGnp(rset.getInt("GNP"));
@@ -416,9 +419,11 @@ public class App
 
     /**
      * Population access methods
+     * City population
+     * @param City
+     * @return c - City statistics
      */
-    public Stats getCityPop(String City)
-    {
+    public Stats getCityPop(String City) throws SQLException {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -430,13 +435,20 @@ public class App
                    + "GROUP BY 1 ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-
-            // Extract stat information
+            if (rset.next())
+            {
                 Stats c = new Stats();
                 c.setPlace(rset.getString("Name"));
                 c.setPlacePop(rset.getLong("Population"));
+                return c;
+            }
+            else {
+                return null;
+            }
+            // Extract stat information
 
-            return c;
+
+
         } catch (Exception e) {
             log.fine(e.getMessage());
             log.fine("Failed to get population details");
@@ -445,9 +457,9 @@ public class App
     }
 
     /**
-     *
+     * District population
      * @param District
-     * @return
+     * @return c - district statistics
      */
     public Stats getDistrictPop(String District)
     {
@@ -456,7 +468,7 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT world.city.District, SUM(world.city.Population) as Population "
+                    "SELECT world.city.District as Name, SUM(world.city.Population) as Population "
                             + "FROM  world.city "
                             + "WHERE world.city.District like '" + District + "' "
                             + "GROUP BY 1 ";
@@ -464,11 +476,16 @@ public class App
             ResultSet rset = stmt.executeQuery(strSelect);
 
             // Extract stat information
-            Stats c = new Stats();
-            c.setPlace(rset.getString("Name"));
-            c.setPlacePop(rset.getLong("Population"));
-
-            return c;
+            if (rset.next())
+            {
+                Stats c = new Stats();
+                c.setPlace(rset.getString("Name"));
+                c.setPlacePop(rset.getLong("Population"));
+                return c;
+            }
+            else {
+                return null;
+            }
         } catch (Exception e) {
             log.fine(e.getMessage());
             log.fine("Failed to get population details");
@@ -477,9 +494,9 @@ public class App
     }
 
     /**
-     *
+     *  Continent population
      * @param Continent
-     * @return
+     * @return c - continent statistics
      */
     public Stats getContinentPop(String Continent)
     {
@@ -488,7 +505,7 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT world.country.Continent, SUM(world.city.Population) as Population "
+                    "SELECT world.country.Continent as Name, SUM(world.country.Population) as Population "
                             + "FROM  world.country "
                             + "WHERE world.country.Continent like '" + Continent + "' "
                             + "GROUP BY 1 ";
@@ -496,22 +513,64 @@ public class App
             ResultSet rset = stmt.executeQuery(strSelect);
 
             // Extract stat information
-            Stats c = new Stats();
-            c.setPlace(rset.getString("Name"));
-            c.setPlacePop(rset.getLong("Population"));
+            if (rset.next())
+            {
+                Stats c = new Stats();
+                c.setPlace(rset.getString("Name"));
+                c.setPlacePop(rset.getLong("Population"));
+                return c;
+            }
+            else {
+                return null;
+            }
 
-            return c;
+
         } catch (Exception e) {
             log.fine(e.getMessage());
             log.fine("Failed to get population details");
             return null;
         }
     }
-
     /**
-     *
+     *  Country population
+     * @param country
+     * @return c - country statistics
+     */
+    public Stats getCountryPop(String country)
+    {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.country.Name, world.country.Population as Population "
+                            + "FROM  world.country "
+                            + "WHERE world.country.Name = '" + country + "' ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Extract stat information
+            if (rset.next())
+            {
+                Stats c = new Stats();
+                c.setPlace(rset.getString("Name"));
+                c.setPlacePop(rset.getLong("Population"));
+                return c;
+            }
+            else {
+                return null;
+            }
+        } catch (Exception e) {
+            log.fine(e.getMessage());
+            log.fine("Failed to get population details");
+            return null;
+        }
+    }
+    /**
+     *  Region population
      * @param Region
-     * @return
+     * @return c - region statistics
      */
     public Stats getRegionPop(String Region)
     {
@@ -520,7 +579,7 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT world.country.Region, SUM(world.city.Population) as Population "
+                    "SELECT world.country.Region, SUM(world.country.Population) as Population "
                             + "FROM  world.country "
                             + "WHERE world.country.Region like '" + Region + "' "
                             + "GROUP BY 1 ";
@@ -528,11 +587,17 @@ public class App
             ResultSet rset = stmt.executeQuery(strSelect);
 
             // Extract stat information
-            Stats c = new Stats();
-            c.setPlace(rset.getString("Name"));
-            c.setPlacePop(rset.getLong("Population"));
+            if (rset.next())
+            {
+                Stats c = new Stats();
+                c.setPlace(rset.getString("Region"));
+                c.setPlacePop(rset.getLong("Population"));
 
-            return c;
+                return c;
+            }
+            else {
+                return null;
+            }
         } catch (Exception e) {
             log.fine(e.getMessage());
             log.fine("Failed to get population details");
@@ -541,8 +606,8 @@ public class App
     }
 
     /**
-     *
-     * @return
+     *    World population
+     * @return c - world statistics
      */
     public Stats getWorldPop()
     {
@@ -551,27 +616,36 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT  SUM(world.city.Population) as Population "
+                    "SELECT  SUM(world.country.Population) as Population "
                             + "FROM  world.country ";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
 
             // Extract stat information
-            Stats c = new Stats();
-            c.setPlace("World");
-            c.setPlacePop(rset.getLong("Population"));
 
-            return c;
+            if (rset.next())
+            {
+                Stats c = new Stats();
+                c.setPlace("World");
+                c.setPlacePop(rset.getLong("Population"));
+
+                return c;
+            }
+            else {
+                return null;
+            }
+
         } catch (Exception e) {
-            log.fine(e.getMessage());
-            log.fine("Failed to get population details");
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details");
             return null;
         }
     }
 
     /**
      *    POPULATION IN Countries of the world
+     *    @return countries
      */
     public List<Country> getAllCountries()
     {
@@ -583,9 +657,11 @@ public class App
                     "SELECT world.country.Name, world.country.Code,world.country.Capital,world.country.Code2," +
                             "world.country.Continent, world.country.GNP,world.country.GNPOld,world.country.GovernmentForm," +
                             "world.country.HeadOfState, world.country.IndepYear,world.country.LifeExpectancy,world.country.LocalName," +
-                            "world.country.Population, world.country.Region,world.country.SurfaceArea "
-                            + "FROM  world.country "
-                            + "ORDER BY world.country.Population DESC ";
+                            "world.country.Population, world.country.Region,world.country.SurfaceArea, world.city.Name as CapitalName "
+                            + "FROM  world.country, world.city "
+                            + "WHERE world.city.ID = world.country.Capital "
+                            + "ORDER BY world.country.Population DESC " ;
+
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract city information
@@ -594,7 +670,7 @@ public class App
                 Country country = new Country();
                 country.setName(rset.getString("Name"));
                 country.setPopulation(rset.getInt("Population"));
-                country.setCapital(rset.getString("Capital"));
+                country.setCapital(rset.getString("CapitalName"));
                 country.setCode(rset.getString("Code"));
                 country.setCode2(rset.getString("Code2"));
                 country.setGnp(rset.getInt("GNP"));
@@ -618,9 +694,9 @@ public class App
     }
 
     /**
-     *
+     *   POPULATION IN Top x amount of countries
      * @param limit
-     * @return
+     * @return countries
      */
     public List<Country> getAllCountries(int limit)
     {
@@ -632,8 +708,9 @@ public class App
                     "SELECT world.country.Name, world.country.Code,world.country.Capital,world.country.Code2," +
                             "world.country.Continent, world.country.GNP,world.country.GNPOld,world.country.GovernmentForm," +
                             "world.country.HeadOfState, world.country.IndepYear,world.country.LifeExpectancy,world.country.LocalName," +
-                            "world.country.Population, world.country.Region,world.country.SurfaceArea "
-                            + "FROM  world.country "
+                            "world.country.Population, world.country.Region,world.country.SurfaceArea, world.city.Name as CapitalName "
+                            + "FROM  world.country, world.city "
+                            + "WHERE world.city.ID = world.country.Capital "
                             + "ORDER BY world.country.Population DESC "
                             + "LIMIT " + limit +" ";
             // Execute SQL statement
@@ -644,7 +721,7 @@ public class App
                 Country country = new Country();
                 country.setName(rset.getString("Name"));
                 country.setPopulation(rset.getInt("Population"));
-                country.setCapital(rset.getString("Capital"));
+                country.setCapital(rset.getString("CapitalName"));
                 country.setCode(rset.getString("Code"));
                 country.setCode2(rset.getString("Code2"));
                 country.setGnp(rset.getInt("GNP"));
@@ -669,6 +746,9 @@ public class App
 
     /**
      *    POPULATION IN Countries of the continent
+     *
+     *     @param continentName
+     *     @return countries
      */
     public List<Country> getAllCountriesCont(String continentName)
     {
@@ -680,9 +760,10 @@ public class App
                     "SELECT world.country.Name, world.country.Code,world.country.Capital,world.country.Code2," +
                             "world.country.Continent, world.country.GNP,world.country.GNPOld,world.country.GovernmentForm," +
                             "world.country.HeadOfState, world.country.IndepYear,world.country.LifeExpectancy,world.country.LocalName," +
-                            "world.country.Population, world.country.Region,world.country.SurfaceArea "
-                            + "FROM  world.country "
+                            "world.country.Population, world.country.Region,world.country.SurfaceArea, world.city.Name as CapitalName "
+                            + "FROM  world.country, world.city "
                             + "WHERE world.country.Continent = '"+ continentName + "' "
+                            + "AND world.city.ID = world.country.Capital "
                             + "ORDER BY world.country.Population DESC ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -692,7 +773,7 @@ public class App
                 Country country = new Country();
                 country.setName(rset.getString("Name"));
                 country.setPopulation(rset.getInt("Population"));
-                country.setCapital(rset.getString("Capital"));
+                country.setCapital(rset.getString("CapitalName"));
                 country.setCode(rset.getString("Code"));
                 country.setCode2(rset.getString("Code2"));
                 country.setGnp(rset.getInt("GNP"));
@@ -719,7 +800,7 @@ public class App
      *
      * @param continentName
      * @param limit
-     * @return
+     * @return countries
      */
     public List<Country> getAllCountriesCont(String continentName, int limit)
     {
@@ -731,9 +812,10 @@ public class App
                     "SELECT world.country.Name, world.country.Code,world.country.Capital,world.country.Code2," +
                             "world.country.Continent, world.country.GNP,world.country.GNPOld,world.country.GovernmentForm," +
                             "world.country.HeadOfState, world.country.IndepYear,world.country.LifeExpectancy,world.country.LocalName," +
-                            "world.country.Population, world.country.Region,world.country.SurfaceArea "
-                            + "FROM  world.country "
+                            "world.country.Population, world.country.Region,world.country.SurfaceArea,world.city.Name as CapitalName "
+                            + "FROM  world.country, world.city "
                             + "WHERE world.country.Continent = '"+ continentName + "' "
+                            + "AND world.city.ID = world.country.Capital "
                             + "ORDER BY world.country.Population DESC "
                             + "LIMIT " + limit +" ";
 
@@ -770,6 +852,7 @@ public class App
 
     /**
      *    POPULATION IN Countries of the region
+     *     @return countries
      */
     public List<Country> getAllCountriesRegion(String regionName)
     {
@@ -781,9 +864,10 @@ public class App
                     "SELECT world.country.Name, world.country.Code,world.country.Capital,world.country.Code2," +
                             "world.country.Continent, world.country.GNP,world.country.GNPOld,world.country.GovernmentForm," +
                             "world.country.HeadOfState, world.country.IndepYear,world.country.LifeExpectancy,world.country.LocalName," +
-                            "world.country.Population, world.country.Region,world.country.SurfaceArea "
-                            + "FROM  world.country "
-                            + "WHERE world.country.Region = '"+ regionName + "' "
+                            "world.country.Population, world.country.Region,world.country.SurfaceArea, world.city.Name as CapitalName "
+                            + "FROM  world.country , world.city "
+                            + "WHERE world.country.Region = '"+ regionName + "'"
+                            + "AND world.city.ID = world.country.Capital "
                             + "ORDER BY world.country.Population DESC ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -793,7 +877,7 @@ public class App
                 Country country = new Country();
                 country.setName(rset.getString("Name"));
                 country.setPopulation(rset.getInt("Population"));
-                country.setCapital(rset.getString("Capital"));
+                country.setCapital(rset.getString("CapitalName"));
                 country.setCode(rset.getString("Code"));
                 country.setCode2(rset.getString("Code2"));
                 country.setGnp(rset.getInt("GNP"));
@@ -820,7 +904,7 @@ public class App
      *
      * @param regionName
      * @param limit
-     * @return
+     * @return countries
      */
     public List<Country> getAllCountriesRegion(String regionName, int limit)
     {
@@ -870,6 +954,7 @@ public class App
 
     /**
      *    POPULATION IN CITIES of the world
+     *    @return cities
      */
     public List<City> getAllCities()
     {
@@ -905,7 +990,7 @@ public class App
     /**
      * Overloaded method to include limit selected by the user
      * @param limit
-     * @return
+     * @return cities
      */
     public List<City> getAllCities(int limit)
     {
@@ -941,6 +1026,8 @@ public class App
 
     /**
      *    POPULATION IN CITIES for the continent
+     * @param continent
+     * @return cities
      */
     public List<City> getAllCitiesC(String continent)
     {
@@ -979,7 +1066,7 @@ public class App
      * Overloaded method to include limit selected by the user
      * @param continent
      * @param limit
-     * @return
+     * @return cities
      */
     public List<City> getAllCitiesC(String continent, int limit)
     {
@@ -1017,6 +1104,8 @@ public class App
 
     /**
      *    POPULATION IN CITIES for the region
+     * @param region
+     * @return cities
      */
     public List<City> getAllCitiesR(String region)
     {
@@ -1055,7 +1144,7 @@ public class App
      * Overloaded method to include limit selected by the user
      * @param region
      * @param limit
-     * @return
+     * @return cities
      */
     public List<City> getAllCitiesR(String region, int limit)
     {
@@ -1092,7 +1181,87 @@ public class App
     }
 
     /**
+     *    POPULATION IN CITIES for the country
+     *     @param country
+     *     @return cities
+     */
+    public List<City> getAllCitiesCountry(String country)
+    {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.city.CountryCode, world.city.District, world.city.Name, world.city.Population "
+                            + "FROM world.city, world.country "
+                            + "WHERE world.city.CountryCode = world.country.Code "
+                            + "AND world.country.Name  = '" + country +"' "
+                            + "ORDER BY world.city.Population DESC ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+
+                City c = new City();
+                c.setCountryCode(rset.getString("CountryCode"));
+                c.setName(rset.getString("Name"));
+                c.setDistrict(rset.getString("District"));
+                c.setPopulation(rset.getInt("Population"));
+                cities.add(c);
+            }
+            return cities;
+        } catch (Exception e) {
+            log.fine(e.getMessage());
+            log.fine("Failed to get city population details");
+            return null;
+        }
+    }
+
+    /**
+     * Overloaded method to include limit selected by the user
+     * @param country
+     * @param limit
+     * @return cities
+     */
+    public List<City> getAllCitiesCountry(String country, int limit)
+    {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT world.city.CountryCode, world.city.District, world.city.Name, world.city.Population "
+                            + "FROM world.city, world.country "
+                            + "WHERE world.city.CountryCode = world.country.Code "
+                            + "AND world.country.Name = '" + country +"' "
+                            + "ORDER BY world.city.Population DESC "
+                            + "LIMIT "+ limit  +" ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+
+                City c = new City();
+                c.setCountryCode(rset.getString("CountryCode"));
+                c.setName(rset.getString("Name"));
+                c.setDistrict(rset.getString("District"));
+                c.setPopulation(rset.getInt("Population"));
+                cities.add(c);
+            }
+            return cities;
+        } catch (Exception e) {
+            log.fine(e.getMessage());
+            log.fine("Failed to get city population details");
+            return null;
+        }
+    }
+
+    /**
      *    POPULATION IN CITIES for the district
+     *    @param district
+     *    @return cities
      */
     public List<City> getAllCitiesD(String district)
     {
@@ -1131,7 +1300,7 @@ public class App
      * Overloaded method to include limit selected by the user
      * @param district
      * @param limit
-     * @return
+     * @return cities
      */
     public List<City> getAllCitiesD(String district, int limit)
     {
@@ -1169,6 +1338,7 @@ public class App
 
     /**
      *   Capitals reports
+     *    @return cities
      */
     public List<City> getAllCapitals()
     {
@@ -1205,7 +1375,7 @@ public class App
     /**
      * Overloaded
      * @param limit
-     * @return
+     * @return cities
      */
     public List<City> getAllCapitals( int limit)
     {
@@ -1243,7 +1413,7 @@ public class App
     /**
      * By region
      * @param Region
-     * @return
+     * @return cities
      */
     public List<City> getAllCapitalsRegion(  String Region)
     {
@@ -1283,7 +1453,7 @@ public class App
      * Overloaded
      * @param limit
      * @param Region
-     * @return
+     * @return cities
      */
     public List<City> getAllCapitalsRegion( int limit , String Region)
     {
@@ -1322,7 +1492,7 @@ public class App
     /**
      * By region
      * @param Continent
-     * @return
+     * @return cities
      */
     public List<City> getAllCapitalsContinent(  String Continent )
     {
@@ -1362,7 +1532,7 @@ public class App
      * Overloaded
      * @param limit
      * @param Continent
-     * @return
+     * @return cities
      */
     public List<City> getAllCapitalsContinent( int limit , String Continent)
     {
@@ -1400,7 +1570,7 @@ public class App
 
     /**
      * Urban and Rural population reports
-     * @return
+     * @return stats
      */
     public List<Stats> getPopStatsByRegion()
     {
@@ -1442,7 +1612,7 @@ public class App
 
     /**
      * Continents report
-     * @return
+     * @return stats
      */
     public List<Stats> getPopStatsByContinent()
     {
@@ -1484,7 +1654,7 @@ public class App
 
     /**
      * Countries report
-     * @return
+     * @return stats
      */
     public List<Stats> getPopStatsByCountry()
     {
@@ -1523,6 +1693,7 @@ public class App
 
     /**
      *   Languages report
+     *    @return stats
      */
     public List<Stats> getLanguageSpeakers()
     {
@@ -1569,8 +1740,7 @@ public class App
     /**
      * Main
      */
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) throws SQLException {
         //create new application
         App a = new App();
 
@@ -1582,10 +1752,114 @@ public class App
 
         // ArrayLists
         List<Stats> all = new ArrayList<Stats>( );
+        List<Stats> worldPop = new ArrayList<>();
+        List<Stats> contPop = new ArrayList<>();
+        List<Stats> countryPop = new ArrayList<>();
+        List<Stats> regionPop = new ArrayList<>();
+        List<Stats> districtPop = new ArrayList<>();
+        List<Stats> cityPop = new ArrayList<>();
+        List<Country> wCountries = new ArrayList<Country>( );
+        List<Country> cCountries = new ArrayList<Country>( );
+        List<Country> rCountries = new ArrayList<Country>( );
+        List<Country> woCountries = new ArrayList<Country>( );
+        List<Country> coCountries = new ArrayList<Country>( );
+        List<Country> reCountries = new ArrayList<Country>( );
+        List<City> wCities = new ArrayList<City>( );
+        List<City> cCities = new ArrayList<City>( );
+        List<City> rCities = new ArrayList<City>( );
+        List<City> coCities = new ArrayList<City>( );
+        List<City> dCities = new ArrayList<City>( );
+        List<City> topPopWorldCities = new ArrayList<City>();
+        List<City> topPopContCities = new ArrayList<City>();
+        List<City> topPopRegCities = new ArrayList<City>();
+        List<City> topPopCountCities = new ArrayList<City>();
+        List<City> topPopDisCities = new ArrayList<City>();
+        List<City> wCapitals = new ArrayList<City>();
+        List<City> cCapitals = new ArrayList<City>();
+        List<City> rCapitals = new ArrayList<City>();
+        List<City> topPopWorldCapitals = new ArrayList<City>();
+        List<City> topPopContCapitals = new ArrayList<City>();
+        List<City> topPopRegCapitals = new ArrayList<City>();
+
+        //adding to stats
+        worldPop.add(a.getWorldPop());
+        contPop.add(a.getContinentPop("Europe"));
+
+        countryPop.add(a.getCountryPop("France"));
+        regionPop.add(a.getRegionPop("Eastern Europe"));
+        districtPop.add(a.getDistrictPop("Lombardia"));
+        cityPop.add(a.getCityPop("Berlin"));
+
+
+
+
+        // Extracting information
+        wCountries = a.getAllCountries();
+        woCountries = a.getAllCountries(5);
+        cCountries = a.getAllCountriesCont("Europe");
+        rCountries = a.getAllCountriesRegion("North America");
+        coCountries = a.getAllCountriesCont("Asia", 5);
+        reCountries = a.getAllCountriesRegion("North America", 5);
+        wCities = a.getAllCities();
+        cCities = a.getAllCitiesC("Europe");
+        rCities = a.getAllCitiesR("North America");
+        dCities = a.getAllCitiesD("Scotland");
+        coCities = a.getAllCitiesCountry("France");
 
         all = a.getLanguageSpeakers();
 
+        topPopWorldCities = a.getAllCities(5);
+        topPopContCities = a.getAllCitiesC("Europe", 5);
+        topPopRegCities = a.getAllCitiesR("South America", 5);
+        topPopCountCities = a.getAllCitiesCountry("France", 5);
+        topPopDisCities = a.getAllCitiesD("Lombardia", 5);
+        wCapitals = a.getAllCapitals();
+        cCapitals = a.getAllCapitalsContinent("Europe");
+        rCapitals = a.getAllCapitalsRegion("South America");
+        topPopWorldCapitals = a.getAllCapitals(5);
+        topPopContCapitals = a.getAllCapitalsContinent(5, "Europe");
+        topPopRegCapitals = a.getAllCapitalsRegion(5, "South America");
+
+
+        // Write search results to md file
+        a.outputCountries(wCountries, "AllWorldCountriesDescPop.md");
+        a.outputCountries(rCountries, "AllCountriesRegDescPop.md");
+        a.outputCountries(cCountries, "AllCountriesContDescPop.md");
+        a.outputCountries(woCountries, "TopFiveWorldPopCountries.md"); // <----- DOESNT GENERATE REPORT !!!!!
+        a.outputCountries(coCountries, "TopFivePopContCountries.md");
+        a.outputCountries(reCountries, "TopFivePopRegCountries.md");
+        a.outputCities(wCities, "AllWorldCitiesDescPop.md");
+        a.outputCities(cCities, "AllCitiesContDescPop.md");
+        a.outputCities(rCities, "AllCitiesRegDescPop.md");
+        a.outputCities(dCities, "AllCitiesDisDescPop.md");
+        a.outputCities(coCities, "AllCitiesCountryDescPop.md");
+
         a.outputLanguageStats(all, "LanguageSpeakers.md");
+
+        a.outputCities(topPopWorldCities, "TopFivePopWorldCities.md");
+        a.outputCities(topPopContCities, "TopFivePopContinentCities.md");
+        a.outputCities(topPopRegCities, "TopFivePopRegionCities.md");
+        a.outputCities(topPopCountCities, "TopFivePopCountryCities.md");
+        a.outputCities(topPopDisCities, "TopFivePopDistrictCities.md");
+        a.outputCities(wCapitals, "AllPopWorldCapitals.md");
+        a.outputCities(cCapitals, "AllPopContinentCapitals.md");
+        a.outputCities(rCapitals, "AllPopRegionCapitals.md");
+        a.outputCities(topPopWorldCapitals, "TopFivePopWorldCapitals.md");
+        a.outputCities(topPopContCapitals, "TopFivePopContinentCapitals.md");
+        a.outputCities(topPopRegCapitals, "TopFivePopRegionCapitals.md");
+
+
+
+        a.outputStats(a.getPopStatsByRegion(), "UrbanAndRuralPopRegion.md" );
+        a.outputStats(a.getPopStatsByContinent(), "UrbanAndRuralPopContinent.md" );
+        a.outputStats(a.getPopStatsByCountry(), "UrbanAndRuralPopCountry.md" );
+
+        a.outputSinglePopStats( worldPop,"WorldPopulation.md");
+        a.outputSinglePopStats( contPop,"ContinentPopulation.md");
+        a.outputSinglePopStats( regionPop,"RegionPopulation.md");
+        a.outputSinglePopStats( countryPop,"CountryPopulation.md");
+        a.outputSinglePopStats( districtPop,"DistrictPopulation.md");
+        a.outputSinglePopStats( cityPop,"CityPopulation.md");
         // Disconnect from database
         a.disconnect();
     }
@@ -1667,7 +1941,7 @@ public class App
 
         StringBuilder sb = new StringBuilder();
         // Print header
-        sb.append("| Code| Name | Population | Region | Population | Capital | \r\n");
+        sb.append("| Code| Name | Continent | Region | Population | Capital | \r\n");
         sb.append("| --- | --- | --- | --- | --- | --- |\r\n");
         // Loop over all cities in the list
         for (Country c : countries) {
@@ -1750,7 +2024,7 @@ public class App
     }
 
     /**
-     *
+     *  Output method for stats
      * @param stats
      * @param filename
      */
